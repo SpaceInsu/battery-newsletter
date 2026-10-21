@@ -1,6 +1,6 @@
 # 우체부 근무표
 # - 뉴스레터 발송: issues/latest.json 이 바뀌면(=Claude가 새 호를 넣으면) 자동 발송
-# - 연결 유지: 매월 15일, 메시지 없이 토큰만 갱신 (60일 만료 방지)
+# - 연결 유지: 매월 15일, 메시지 없이 토큰만 갱신 (주간 발송이 멈춰도 60일 만료 방지)
 # - 수동 실행: Actions 탭 → Run workflow (test / send / keepalive 선택)
 
 name: Kakao newsletter
