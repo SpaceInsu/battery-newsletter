@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>C2 Q&amp;A + 원본 Figure</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1E6B52}a:hover{color:#134636}
+</style>
+</helmet>
+<div style="position: relative; width: 3616px; height: 1000px; box-sizing: border-box; padding: 48px; display: flex; gap: 32px; background: #DDE5E0; font-family: 'Noto Sans KR', sans-serif; color: #1D2A24">
+
+<!-- 1 · Cover -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 40px; background: #F4F7F5; border-radius: 24px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: {{accent}}"><span>이달의 논문 · LIB 전해액</span><span style="font-family: 'IBM Plex Mono', monospace; color: #4F6159">1/6</span></div>
+<h1 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 40px; line-height: 1.35; font-weight: 400">전해액 속 Li⁺,<br>정말 혼자 이동할까?</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33443C">교과서의 "Li⁺ 하나 + EC 네 개(LiEC₄)"라는 1인 택시 그림. 이 논문은 상용 농도 LiPF₆/EC에서 여러 Li⁺가 EC를 공유하며 <b>합승</b>하는 클러스터가 흔하다고 보고합니다.</p>
+<div style="display: flex; gap: 14px; align-items: center; padding: 22px; background: #FFFFFF; border-radius: 18px">
+<div style="width: 56px; height: 56px; border-radius: 50%; background: #FFFFFF; border: 2px solid #9BB0A6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">Li⁺</div>
+<span style="font-size: 24px; color: #6E7F77">→</span>
+<div style="display: flex; align-items: center; padding: 6px 10px; border-radius: 40px; border: 2px solid {{accent}}">
+<div style="width: 46px; height: 46px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px">Li⁺</div>
+<span style="padding: 0 8px; font-size: 13px; font-weight: 700; color: #B4561A">EC</span>
+<div style="width: 46px; height: 46px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px">Li⁺</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="background: #FFFFFF; border-radius: 14px; padding: 14px; text-align: center"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; color: {{accent}}">40%</div><div style="font-size: 12px; line-height: 1.4; color: #4F6159">1.2 M에서<br>다중-Li⁺ 소속</div></div>
+<div style="background: #FFFFFF; border-radius: 14px; padding: 14px; text-align: center"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; color: {{accent}}">~3 Å</div><div style="font-size: 12px; line-height: 1.4; color: #4F6159">Li–Li<br>최근접 거리</div></div>
+<div style="background: #FFFFFF; border-radius: 14px; padding: 14px; text-align: center"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; color: {{accent}}">0.7 V</div><div style="font-size: 12px; line-height: 1.4; color: #4F6159">Li₂ 클러스터<br>환원 전위대</div></div>
+</div>
+<div style="margin-top: auto; font-size: 13px; line-height: 1.6; color: #4F6159">Stevenson, J. M., …, Friesner, R. A. <i>Nature</i> 658, 636–642 (2026)<br>Columbia · Schrödinger · NYSBC · DOI 10.1038/s41586-026-11138-7</div>
+</div>
+
+<!-- 2 · Fig 1 -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 36px; background: #F4F7F5; border-radius: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: {{accent}}"><span>Q2 · Fig. 1</span><span style="font-family: 'IBM Plex Mono', monospace; color: #4F6159">2/6 · 그림을 누르면 확대</span></div>
+<h2 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 30px; line-height: 1.35; font-weight: 400">얼마나 자주 합승하나?</h2>
+<figure style="margin: 0; background: #FFFFFF; border-radius: 12px; padding: 10px">
+<button type="button" aria-label="그림 크게 보기" onClick="{{open_f1}}" style="display: block; padding: 0; border: 0; background: none; cursor: zoom-in"><img src="/_blob/8dc6a90514af16c543858bdaf755cf55" alt="Fig. 1: QRNN predicts multi-Li+ clusters" style="width: 468px; height: 185px; display: block"></button>
+<figcaption style="margin-top: 6px; font-size: 11px; color: #4F6159">Fig. 1 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">c</span><p style="margin: 0; font-size: 14px; line-height: 1.6"><b>Li–Li RDF</b>: QRNN은 ~3 Å에 g(r)≈13의 날카로운 피크. OPLS4는 이 피크가 없고 ~5.5 Å에만 완만. <b>Li–PF₆</b>은 반대로 OPLS4가 g(r)≈47의 강한 접촉쌍, QRNN은 ~1.2.</p></div>
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">d</span><p style="margin: 0; font-size: 14px; line-height: 1.6"><b>클러스터 통계</b>(4.5 Å 컷오프): OPLS4는 전 농도에서 Li₁ ~100%. QRNN은 아래 표처럼 농도에 따라 다중-Li⁺ 비율이 증가.</p></div>
+</div>
+<div style="background: #FFFFFF; border-radius: 12px; padding: 12px 16px">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font-size: 13px; text-align: center">
+<b style="text-align: left; color: #4F6159">LiPF₆/EC</b><b>0.5 M</b><b>1.2 M</b><b>2.0 M</b>
+<span style="text-align: left">다중-Li⁺ 소속</span><span style="font-family: 'IBM Plex Mono', monospace">~23%</span><span style="font-family: 'IBM Plex Mono', monospace">40%</span><span style="font-family: 'IBM Plex Mono', monospace; color: {{accent}}; font-weight: 600">&gt;68%</span>
+<span style="text-align: left">Li≥4 클러스터</span><span style="font-family: 'IBM Plex Mono', monospace">~8%</span><span style="font-family: 'IBM Plex Mono', monospace">~4%</span><span style="font-family: 'IBM Plex Mono', monospace">~32%</span>
+</div>
+</div>
+<div style="margin-top: auto; font-size: 12px; line-height: 1.5; color: #4F6159">비율은 본문 수치, Li≥4 값은 Fig. 1d 막대를 눈으로 읽은 근사치</div>
+</div>
+
+<!-- 3 · Fig 2 -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 36px; background: #F4F7F5; border-radius: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: {{accent}}"><span>Q3 · Fig. 2</span><span style="font-family: 'IBM Plex Mono', monospace; color: #4F6159">3/6</span></div>
+<h2 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 30px; line-height: 1.35; font-weight: 400">계산은 믿을 만한가?</h2>
+<figure style="margin: 0; background: #FFFFFF; border-radius: 12px; padding: 10px">
+<button type="button" aria-label="그림 크게 보기" onClick="{{open_f2}}" style="display: block; padding: 0; border: 0; background: none; cursor: zoom-in"><img src="/_blob/a8f3fdfcb185e6e13caf5d99d59e0a27" alt="Fig. 2: QRNN validation results" style="width: 468px; height: 236px; display: block"></button>
+<figcaption style="margin-top: 6px; font-size: 11px; color: #4F6159">Fig. 2 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0</figcaption>
+</figure>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #33443C">QRNN은 <b>기상 클러스터 양자화학(ωB97X-D3BJ/def2-TZVPD)만으로 학습</b>, 실험값 입력 없음. 그래도 응축상 물성을 맞췄다는 게 핵심.</p>
+<div style="background: #FFFFFF; border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px">
+<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px"><b style="color: #4F6159">결합에너지 MAE (b)</b><b style="text-align: center">QRNN</b><b style="text-align: center">OPLS4</b></div>
+<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px"><span>QRNN MD 구조</span><span style="text-align: center; font-family: 'IBM Plex Mono', monospace; color: {{accent}}; font-weight: 600">0.45</span><span style="text-align: center; font-family: 'IBM Plex Mono', monospace">57.08</span></div>
+<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px"><span>OPLS4 MD 구조</span><span style="text-align: center; font-family: 'IBM Plex Mono', monospace; color: {{accent}}; font-weight: 600">0.86</span><span style="text-align: center; font-family: 'IBM Plex Mono', monospace">8.34</span></div>
+<div style="font-size: 11px; color: #4F6159">단위 kcal/mol · DFT 대비</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">c</span><p style="margin: 0; font-size: 14px; line-height: 1.55">점도 오차(EC/DMC 3:7): 2.0 mol/kg에서 QRNN ~18% vs OPLS4·QRNN 2022 ~99%. 밀도 오차는 7개 용매 모두 &lt;1.5%.</p></div>
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">d</span><p style="margin: 0; font-size: 14px; line-height: 1.55">Li–Li 거리 스캔: 2.4–3.0 Å에서 에너지 최소. "가까이 붙는 게 안정"함을 DFT와 함께 재현.</p></div>
+</div>
+</div>
+
+<!-- 4 · Fig 3 -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 36px; background: #F4F7F5; border-radius: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: {{accent}}"><span>Q4 · Fig. 3</span><span style="font-family: 'IBM Plex Mono', monospace; color: #4F6159">4/6</span></div>
+<h2 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 30px; line-height: 1.35; font-weight: 400">실험으로도 보이나?</h2>
+<div style="display: flex; gap: 14px">
+<figure style="margin: 0; background: #FFFFFF; border-radius: 12px; padding: 8px; flex: none">
+<button type="button" aria-label="그림 크게 보기" onClick="{{open_f3}}" style="display: block; padding: 0; border: 0; background: none; cursor: zoom-in"><img src="/_blob/ae9e590f935b7a6df5109b9dc6d1b7e2" alt="Fig. 3: Solid-state NMR characterization" style="width: 260px; height: 293px; display: block"></button>
+<figcaption style="margin-top: 4px; font-size: 10px; line-height: 1.4; color: #4F6159; width: 260px">Fig. 3 원본 · Nature (2026)<br>CC BY-NC-ND 4.0</figcaption>
+</figure>
+<div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; line-height: 1.55">
+<div><b style="color: {{accent}}">조건</b><br>급속동결 후 MAS 20 kHz · ⁷Li 9.32 T/210 K · ¹³C 14.1 T/116 K</div>
+<div><b style="color: {{accent}}">a–c ⁷Li</b><br>¹⁹F→⁷Li CP는 ×5 증폭해도 거의 평탄 → PF₆⁻와 붙은 Li⁺가 적음</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">d</span><p style="margin: 0; font-size: 14px; line-height: 1.6"><b>¹³C 카보닐</b>: 순수 EC 157.6 ppm. 농도가 오르면 <b>~160 ppm 숄더</b>가 자라는데, QRNN 시뮬레이션(녹색 점선)은 세 농도 모두 이를 따라감. OPLS4(주황)는 2 M에서 ~162 ppm에 실험에 없는 피크를 만듦.</p></div>
+<div style="display: flex; gap: 10px; align-items: flex-start"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">e</span><p style="margin: 0; font-size: 14px; line-height: 1.6"><b>성분 분해</b>: 2 M에서 숄더의 큰 몫이 <span style="color: #B4561A; font-weight: 700">다중-Li⁺ 클러스터</span>(주황 영역) 기여. 0.5 M에서는 단일-Li 위주.</p></div>
+</div>
+<div style="margin-top: auto; padding: 12px 14px; background: #FFFFFF; border-radius: 12px; font-size: 13px; line-height: 1.55"><b style="color: #B4561A">읽을 때 주의</b> · 동결 시료는 상온 동적 구조의 "스냅샷"이며, 클러스터를 직접 보는 측정이 아니라 시뮬레이션과의 일치로 뒷받침하는 간접 증거.</div>
+</div>
+
+<!-- 5 · Fig 4 -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 36px; background: #F4F7F5; border-radius: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: {{accent}}"><span>Q5 · Fig. 4</span><span style="font-family: 'IBM Plex Mono', monospace; color: #4F6159">5/6</span></div>
+<h2 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 30px; line-height: 1.35; font-weight: 400">SEI는 누가 먼저 만드나?</h2>
+<figure style="margin: 0; background: #FFFFFF; border-radius: 12px; padding: 10px">
+<button type="button" aria-label="그림 크게 보기" onClick="{{open_f4}}" style="display: block; padding: 0; border: 0; background: none; cursor: zoom-in"><img src="/_blob/2616bce429304fe3643cf596bd177f70" alt="Fig. 4: Multi-Li+ cluster redox potentials match SEI onset" style="width: 468px; height: 319px; display: block"></button>
+<figcaption style="margin-top: 6px; font-size: 11px; color: #4F6159">Fig. 4 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0</figcaption>
+</figure>
+<div style="background: #FFFFFF; border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; gap: 7px; font-size: 13px">
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1.6fr; gap: 6px"><b style="color: #4F6159">착물</b><b>1e⁻ 환원 전위</b><b style="color: #4F6159">해석</b></div>
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1.6fr; gap: 6px"><span>Li₃EC₉₋₁₀</span><span style="font-family: 'IBM Plex Mono', monospace">~0.81–0.89 V</span><span>개시선 위</span></div>
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1.6fr; gap: 6px; color: {{accent}}; font-weight: 700"><span>Li₂EC₄₋₇</span><span style="font-family: 'IBM Plex Mono', monospace">~0.69–0.77 V</span><span>SEI 개시 0.8 V 바로 아래</span></div>
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1.6fr; gap: 6px"><span>LiEC₃</span><span style="font-family: 'IBM Plex Mono', monospace">~0.37 V</span><span>훨씬 늦게</span></div>
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1.6fr; gap: 6px"><span>LiEC₄</span><span style="font-family: 'IBM Plex Mono', monospace">~0.25 V</span><span>가장 흔한 단일 착물</span></div>
+<div style="font-size: 11px; color: #4F6159">vs Li/Li⁺, ωB97X-D3BJ · 값은 그림에서 읽은 근사치</div>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #33443C">스핀 밀도(노란색)는 두 Li⁺가 공유한 <b>EC 하나의 카보네이트</b>에 국재화. Li₂ 착물은 두 번째 환원도 더 유리해 연쇄 환원 가능성.</p>
+</div>
+
+<!-- 6 · So what -->
+<div style="width: 560px; height: 904px; box-sizing: border-box; padding: 40px; background: {{accent}}; border-radius: 24px; display: flex; flex-direction: column; gap: 18px; color: #FFFFFF">
+<div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #CDE6DB"><span>Q6</span><span style="font-family: 'IBM Plex Mono', monospace">6/6</span></div>
+<h2 style="margin: 0; font-family: 'Gowun Dodum', sans-serif; font-size: 32px; line-height: 1.35; font-weight: 400">그래서, 우리 셀에는?</h2>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="background: rgba(255,255,255,0.1); border-radius: 14px; padding: 16px"><b style="font-size: 15px">Si-흑연 초기 SEI 해석</b><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: #E4F1EB">0.8 V 부근 개시 반응의 전구체가 LiEC₄가 아니라 Li₂EC₇일 수 있음 → 포메이션 초기 dQ/dV 피크 해석 기준이 달라질 여지.</p></div>
+<div style="background: rgba(255,255,255,0.1); border-radius: 14px; padding: 16px"><b style="font-size: 15px">농도·첨가제 설계 변수</b><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: #E4F1EB">염 농도와 공용매(DMC 등) 비율이 "합승률"을 바꾸고, 그것이 SEI 조성에 연결될 수 있음.</p></div>
+<div style="background: rgba(255,255,255,0.1); border-radius: 14px; padding: 16px"><b style="font-size: 15px">시뮬레이션 도구 선택</b><p style="margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: #E4F1EB">고전 FF(OPLS류)는 용매화 구조를 정성적으로 틀릴 수 있음. 전해액 MD는 MLFF 검증 여부를 확인할 것.</p></div>
+</div>
+<div style="font-size: 13px; line-height: 1.6; color: #CDE6DB"><b style="color: #FFFFFF">한계</b> · 단일 용매 EC 중심(혼합 용매·첨가제·전극 계면 미포함), 환원 전위는 기상 클러스터 계산.</div>
+<a href="https://www.nature.com/articles/s41586-026-11138-7" style="margin-top: auto; align-self: flex-start; padding: 14px 22px; border-radius: 28px; background: #FFFFFF; color: #134636; font-size: 15px; font-weight: 700; text-decoration: none">원문 읽기 (Open Access)</a>
+<div style="font-size: 11px; line-height: 1.5; color: #CDE6DB">Figure는 CC BY-NC-ND 4.0에 따라 수정 없이 비상업적으로 인용 · creativecommons.org/licenses/by-nc-nd/4.0</div>
+</div>
+
+<sc-if value="{{zoomOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0; top: 0; width: 3616px; height: 1000px; background: rgba(12,20,16,0.82); display: flex; align-items: center; justify-content: center; gap: 24px">
+<div style="background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<img src="{{zoomSrc}}" alt="확대한 Figure" style="max-width: 1600px; max-height: 860px; display: block">
+<span style="font-size: 13px; color: #4F6159">원본 그대로 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0</span>
+</div>
+<button type="button" aria-label="닫기" onClick="{{close}}" style="align-self: flex-start; margin-top: 70px; width: 56px; height: 56px; border-radius: 50%; border: 0; background: #FFFFFF; color: #1D2A24; font-size: 22px; font-weight: 700; cursor: pointer">✕</button>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1E6B52","options":["#1E6B52","#2D4F8A","#8A3B5C"]},"$preview":{"width":3616,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+const z = (this.state && this.state.zoom) || '';
+const open = (src) => () => this.setState({ zoom: src });
+return {
+accent: this.props.accent ?? '#1E6B52',
+zoomOn: z !== '',
+zoomSrc: z,
+open_f1: open('/_blob/8dc6a90514af16c543858bdaf755cf55'),
+open_f2: open('/_blob/a8f3fdfcb185e6e13caf5d99d59e0a27'),
+open_f3: open('/_blob/ae9e590f935b7a6df5109b9dc6d1b7e2'),
+open_f4: open('/_blob/2616bce429304fe3643cf596bd177f70'),
+close: () => this.setState({ zoom: '' })
+};
+}
+}
+</script>
+</body>
+</html>
