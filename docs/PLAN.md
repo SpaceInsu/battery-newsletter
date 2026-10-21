@@ -24,6 +24,7 @@
 | 실리콘-흑연 복합 음극 | Si/graphite composite anode, SiOx, Si-C, volume expansion, prelithiation |
 | 리튬 메탈 전해액 | lithium metal electrolyte, LHCE, weakly solvating, anode-free, SEI |
 | 소듐 전해액 | sodium-ion electrolyte, Na metal, hard carbon SEI, NaPF6/NaFSI |
+| ML 기반 LIB 수명예측 (2026-10-22 추가) | machine learning, battery lifetime/RUL prediction, degradation, early prediction, physics-informed |
 
 ※ 분야별 키워드는 STEP 2에서 같이 다듬음.
 
@@ -67,10 +68,11 @@
 > 🔑 열쇠 비유: 액세스 토큰 = **6시간짜리 임시 출입증**, 리프레시 토큰 = **60일짜리 출입증 재발급권**.
 > 한 달에 한 번 쓰면 60일 안에 재발급권을 계속 갱신해야 함 → STEP 4에서 자동화.
 
-### STEP 2. 큐레이션 규칙 정하기 — 🤝 같이
-- 분야별 키워드·제외어 확정
-- 저널 우선순위 리스트 확정
-- 발송일 (예: 매월 1일 오전 8시) 확정
+### STEP 2. 큐레이션 규칙 정하기 — ✅ 1차 확정 (2026-10-22)
+- 발송: **매월 마지막 금요일 오후** (Claude 예약 작업은 매주 금요일 실행 → 그달 마지막 금요일일 때만 진행)
+- 분량: **총 8편** — 중점 분야(전고체, Si-흑연 복합 음극, ML 기반 LIB 수명예측) 각 2편 + Li 메탈 전해액 1편 + Na 전해액 1편
+- 리뷰 논문: 제한 없음 (원저와 동등하게 선정)
+- 남은 것: 분야별 제외어, 저널 우선순위 다듬기 (STEP 3 시안 보면서)
 
 ### STEP 3. 뉴스레터 시안 1호 만들기 — 🤖 Claude
 - 지금(2026년 10월분) 기준으로 실제 뉴스레터 1호를 수동으로 만들어 봄
