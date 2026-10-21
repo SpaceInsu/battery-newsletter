@@ -1,0 +1,76 @@
+# 우체부 근무표
+# - 뉴스레터 발송: issues/latest.json 이 바뀌면(=Claude가 새 호를 넣으면) 자동 발송
+# - 연결 유지: 매월 15일, 메시지 없이 토큰만 갱신 (60일 만료 방지)
+# - 수동 실행: Actions 탭 → Run workflow (test / send / keepalive 선택)
+
+name: Kakao newsletter
+
+on:
+  push:
+    branches: [main]
+    paths: ["issues/latest.json"]
+  schedule:
+    - cron: "17 0 15 * *"   # 매월 15일 09:17 KST
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = 테스트 문구 / send = 최신 뉴스레터 / keepalive = 토큰만 갱신"
+        type: choice
+        options: [test, send, keepalive]
+        default: test
+
+concurrency:
+  group: kakao-send
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Decide mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "mode=keepalive" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=send" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deliver via Kakao
+        env:
+          KAKAO_REST_KEY: ${{ secrets.KAKAO_REST_KEY }}
+          KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
+          KAKAO_REFRESH_TOKEN: ${{ secrets.KAKAO_REFRESH_TOKEN }}
+        run: |
+          case "${{ steps.mode.outputs.mode }}" in
+            test)      python scripts/send_kakao.py --test ;;
+            keepalive) python scripts/send_kakao.py --keepalive ;;
+            *)         python scripts/send_kakao.py --issue issues/latest.json ;;
+          esac
+
+      # 카카오가 새 재발급권을 주면 금고(Secrets) 값을 자동 교체.
+      # GH_PAT(이 저장소 Secrets 쓰기 권한 토큰)이 있어야 동작한다.
+      - name: Rotate refresh token
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ ! -f new_refresh_token.txt ]; then
+            echo "교체할 토큰 없음"; exit 0
+          fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::새 refresh_token을 받았지만 GH_PAT이 없어 자동 교체하지 못했습니다. 30일 안에 수동 재발급이 필요합니다."
+            rm -f new_refresh_token.txt
+            exit 0
+          fi
+          gh secret set KAKAO_REFRESH_TOKEN --repo "${{ github.repository }}" < new_refresh_token.txt
+          rm -f new_refresh_token.txt
+          echo "KAKAO_REFRESH_TOKEN 교체 완료"
