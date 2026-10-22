@@ -40,5 +40,10 @@
 | Science / AAAS | Science Advances aat5383 | CC BY-NC | ✅ 1050px |
 | ACS | JACS Au 2026 (generative electrolyte) | CC BY-NC-ND | ✅ 520px (CDN 경유) |
 | ACS | Chem. Mater. 2026 perspective | 구독 | ⚠ 그래픽 초록만 |
-| Wiley | AEM / Batteries & Supercaps 2026 | 구독 | ⚠ 그래픽 초록만 (394px) · OA 논문은 미검증 |
+| Wiley | AEM / Batteries & Supercaps 2026 | 구독 | ⚠ 그래픽 초록만 (394px) |
+| Wiley | Batteries & Supercaps batt.70409 (OA) | CC BY | ✅ 892–1096px |
 - Wiley 사이트 검색은 봇 확인 화면이 떠서 사용 불가 → DOI로 직접 접속
+
+## 운영 메모
+- Nature 계열은 페이지에 조회수(Accesses)가 표시됨 → 표지에 "조회" 수로 활용
+- Nature Communications "Article in Press"는 HTML에 그림이 없음 → PDF에서 Figure 전체를 잘라 사용 (ND 라이선스: Figure 단위로 통째로만)
