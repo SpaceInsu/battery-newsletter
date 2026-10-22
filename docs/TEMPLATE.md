@@ -23,6 +23,10 @@
 - 제목 Gowun Dodum, 본문 Noto Sans KR, 숫자 IBM Plex Mono
 - 그림을 누르면 확대 (원본 그대로 표시)
 
+## 설명 수준 (Insu 피드백 2026-10-23)
+- 독자는 배터리 박사급: Nyquist plot, dQ/dV, CE, ICE, n/p 같은 **기본 정의는 생략**
+- 설명은 **논문 고유·고급 개념**에 집중 (예: redox mediation, 과리튬화 계산, NMR 피크 귀속, MLFF 등)
+
 ## 데이터 규칙
 - 수치는 본문 문장을 우선 사용. 그래프에서 읽은 값은 "근사치"라고 표시
 - 한계(Limitations)는 반드시 1줄 이상
