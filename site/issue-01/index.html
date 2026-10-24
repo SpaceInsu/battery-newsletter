@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battery Paper Weekly No.1</title>
+<meta name="description" content="이번 주의 배터리 논문 3편 — Li⁺ 클러스터, 요오드 매개 전고체 Li–S, 황화물 전고체 Si–C 음극">
+<meta property="og:title" content="🔋 Battery Paper Weekly No.1">
+<meta property="og:description" content="Li⁺ 합승 클러스터 · 요오드 매개 전고체 Li–S · 전고체 Si–C n/p 0.83">
+<meta property="og:image" content="img/thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DDE5E0;--card:#F4F7F5;--ink:#1D2A24;--sub:#33443C;--mute:#4F6159;--acc:#1E6B52;--acc2:#A44A12;--box:#FFFFFF;--read:#E7EFEA;--dark:#1D2A24}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--card:#18221D;--ink:#E6EEE9;--sub:#C4D2CA;--mute:#93A69C;--acc:#6CC3A0;--acc2:#F0A36B;--box:#202C26;--read:#1F3029;--dark:#0B110E}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 64px}
+header.cover{background:var(--dark);color:#fff;border-radius:22px;padding:28px 22px;margin-bottom:22px}
+.kicker{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC;letter-spacing:.02em}
+h1{font-family:'Gowun Dodum',serif;font-weight:400;font-size:34px;line-height:1.3;margin:14px 0 8px}
+.cover p{color:#C9DDD3;font-size:15px;margin:0 0 16px}
+.toc{display:flex;flex-direction:column;gap:10px}
+.toc a{display:block;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none}
+.toc .row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC}
+.toc b{display:block;font-size:16px;margin-top:4px;line-height:1.45}
+.toc span.s{display:block;font-size:13px;color:#C9DDD3;margin-top:4px;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+section.paper{margin-top:30px}
+.ptag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:4px 12px}
+.ptitle{font-family:'Gowun Dodum',serif;font-weight:400;font-size:27px;line-height:1.35;margin:10px 0 4px}
+.cite{font-size:13px;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border-radius:20px;padding:22px 20px;margin-top:14px}
+.card h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;line-height:1.4;margin:4px 0 10px}
+.step-label{font-size:12px;font-weight:700;color:var(--acc)}
+.card p{margin:0 0 10px;color:var(--sub);font-size:15.5px}
+.box{background:var(--box);border-radius:12px;padding:14px 16px;margin:12px 0}
+.box .lab{display:block;font-size:12.5px;font-weight:700;color:var(--acc);margin-bottom:4px}
+.box .warn{display:block;font-size:12.5px;font-weight:700;color:var(--acc2);margin-bottom:4px}
+.box p:last-child{margin-bottom:0}
+.read{background:var(--read);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;line-height:1.65}
+ol.steps{margin:6px 0 0;padding-left:20px}
+ol.steps li{margin-bottom:8px;color:var(--sub);font-size:15px}
+figure{margin:12px 0;background:#fff;border-radius:12px;padding:8px}
+figure button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;color:#4F6159;margin-top:6px;line-height:1.45}
+.tap{font-size:11.5px;color:#4F6159}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:300px}
+th,td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(127,140,133,.25)}
+th:first-child,td:first-child{text-align:left}
+td.mono,th.mono{font-family:'IBM Plex Mono',monospace}
+.hl{color:var(--acc);font-weight:700}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.so{background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;margin-top:14px}
+.so h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;margin:4px 0 10px}
+.so p,.so li{color:#E4F1EB;font-size:15px}
+.so ul{padding-left:18px;margin:6px 0}
+.so .lim{font-size:13px;color:#CDE6DB}
+.btn{display:inline-block;margin-top:10px;background:#fff;color:#134636;font-weight:700;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700;margin:10px 0}
+.flow span.c{padding:7px 10px;border-radius:8px;background:#F6E3D3;color:#8A3C0C}
+.flow span.k{padding:7px 10px;border-radius:8px;background:#3A3F3C;color:#fff}
+.flow span.y{padding:7px 10px;border-radius:8px;background:#F2D06B;color:#5A4A0A}
+.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.bar .t{width:62px;flex:none;font-weight:700}
+.bar .g{flex:1;height:14px;background:rgba(127,140,133,.25);border-radius:7px;overflow:hidden}
+.bar .g i{display:block;height:100%;background:var(--acc)}
+.bar .v{width:52px;text-align:right;font-family:'IBM Plex Mono',monospace}
+footer{margin-top:36px;font-size:12px;color:var(--mute);line-height:1.6}
+a{color:var(--acc)}
+#zoom{position:fixed;inset:0;background:rgba(10,16,13,.92);display:none;z-index:10;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoom.on{display:block}
+#zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
+#zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
+#zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+<div class="kicker"><span>BATTERY PAPER WEEKLY</span><span class="mono">No.1 · 2026.10.30</span></div>
+<h1>이번 주의 3편</h1>
+<p>각 논문은 배경 → 아이디어 → 그림 읽기 → 결론 순서입니다. 그림을 누르면 원본 크기로 확대돼요(두 손가락으로 확대 가능).</p>
+<nav class="toc">
+<a href="#p1"><div class="row"><span>1면 · 화제작 · LIB 전해액</span><span class="mono">23k 조회</span></div><b>전해액 속 Li⁺는 합승한다</b><span class="s">상용 농도에서 Li⁺의 ~40%가 EC를 공유하는 클러스터로 존재하고, 이 클러스터가 SEI 개시 전위(~0.8 V)에서 먼저 환원된다.</span></a>
+<a href="#p2"><div class="row"><span>2면 · 필독 · 전고체전지</span><span class="mono">6,024 조회</span></div><b>요오드 "중개인"을 황 안에 미리 심은 전고체 Li–S</b><span class="s">고체 황 반응의 병목(경계 부족)을 I₂/I⁻ 매개 반응으로 우회해 24C 충전과 수천 사이클을 확보.</span></a>
+<a href="#p3"><div class="row"><span>3면 · 필독 · Si-C 복합 음극</span><span class="mono">범위 밖 추천</span></div><b>황화물 전고체 Si–C 음극, n/p 0.83 vs 1.1</b><span class="s">탄소 껍질 과리튬화로 n/p &lt; 1을 만들어도 Li 석출은 없지만, 실제 성능은 n/p 1.1이 우세.</span></a>
+</nav>
+</header>
+
+<!-- ================= 1면 ================= -->
+<section class="paper" id="p1">
+<span class="ptag">1면 · 화제작</span>
+<h2 class="ptitle">전해액 속 Li⁺, 정말 혼자 이동할까?</h2>
+<p class="cite">Stevenson et al., <i>Nature</i> 658, 636–642 (2026) · Columbia · Schrödinger · NYSBC · Open Access</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>교과서 그림: "Li⁺ 하나 + EC 네 개"</h3>
+<p>용매화 구조는 전도도·점도·해리도뿐 아니라 <b>어떤 분자가 먼저 환원되어 SEI를 만드는지</b>까지 결정합니다. 지금까지는 Li⁺ 하나를 EC 네 개가 둘러싼 <b>LiEC₄</b>(1인 택시)가 주류라고 봤어요.</p>
+<p>그런데 이 그림은 대부분 <b>고전 분자동역학(OPLS 같은 쌍가법 force field)</b>에서 나왔습니다. 이런 모델은 분극·전하이동을 단순화해서 Li⁺끼리 가까이 붙는 구조를 잘 못 잡을 수 있어요.</p>
+<div class="box"><span class="lab">이 논문의 도구: QRNN 머신러닝 포텐셜(MLFF)</span><p>전하를 재귀적으로 다루는 신경망 포텐셜. <b>기상 클러스터 양자화학 계산(ωB97X-D3BJ/def2-TZVPD)만으로 학습</b>하고 실험값은 넣지 않았습니다. 비용은 OPLS4의 100~1000배지만 AIMD보다는 훨씬 저렴해서, 1 M급 전해액을 큰 상자로 오래 돌릴 수 있어요.</p></div>
+<div class="read"><b>핵심 질문</b> · 양자화학 수준으로 다시 계산하면 LiPF₆/EC의 용매화 구조가 달라지는가? 달라진다면 실험으로도 보이고, SEI에도 영향을 주는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 1</div>
+<h3>상용 농도에서 Li⁺의 40%가 "합승" 중</h3>
+<figure><button type="button" data-z="img/fig1.jpg" data-c="Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0"><img src="img/fig1.jpg" width="1200" height="475" alt="Fig. 1: QRNN predicts multi-Li+ clusters" loading="lazy"></button><figcaption>Fig. 1 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b><br><b>c</b> 1 M LiPF₆/EC의 RDF. 왼쪽 Li–Li에서 QRNN(청록)은 <b>~3 Å에 g(r)≈13의 날카로운 피크</b>, OPLS4(주황)는 피크 없이 ~5.5 Å에 완만. 오른쪽 Li–PF₆은 반대로 OPLS4가 g(r)≈47의 강한 접촉쌍, QRNN은 ~1.2로 미미.<br><b>d</b> 4.5 Å 반경으로 잘라낸 클러스터 안 Li⁺ 개수 분포. OPLS4는 전 농도에서 Li₁ ≈ 100%.</div>
+<div class="tbl"><table><tr><th>LiPF₆/EC</th><th>0.5 M</th><th>1.2 M</th><th>2.0 M</th></tr>
+<tr><td>다중-Li⁺ 클러스터 소속 Li⁺</td><td class="mono">~23%</td><td class="mono">40%</td><td class="mono hl">&gt;68%</td></tr>
+<tr><td>Li≥4 클러스터</td><td class="mono">~8%</td><td class="mono">~4%</td><td class="mono">~32%</td></tr></table></div>
+<p class="note">비율은 본문 수치, Li≥4 값은 Fig. 1d 막대에서 읽은 근사치.</p>
+<p><b>해석</b> · PF₆⁻가 붙어서 생기는 "이온쌍 응집"이 아니라, <b>EC가 두 Li⁺ 사이에 다리를 놓은 음이온 없는 클러스터</b>(Li–Li ≈ 3 Å)입니다. 고전 FF로는 보이지 않던 구조예요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 2</div>
+<h3>그 계산, 믿을 만한가?</h3>
+<figure><button type="button" data-z="img/fig2.jpg" data-c="Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0"><img src="img/fig2.jpg" width="1200" height="605" alt="Fig. 2: QRNN validation results" loading="lazy"></button><figcaption>Fig. 2 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b><br><b>b</b> DFT 결합에너지 vs 포텐셜 결합에너지 패리티 플롯. 왼쪽은 QRNN MD에서 뽑은 구조, 오른쪽은 OPLS4 MD 구조. 대각선에 붙을수록 정확.<br><b>c</b> 순수 용매 7종 밀도 오차와 EC/DMC(3:7) 전해액 점도 오차(낮을수록 좋음).<br><b>d</b> Li–Li 거리를 바꿔가며 계산한 에너지(점선 QRNN, 실선 DFT).</div>
+<div class="tbl"><table><tr><th>결합에너지 MAE (kcal/mol)</th><th>QRNN</th><th>OPLS4</th></tr>
+<tr><td>QRNN MD 구조</td><td class="mono hl">0.45</td><td class="mono">57.08</td></tr>
+<tr><td>OPLS4 MD 구조</td><td class="mono hl">0.86</td><td class="mono">8.34</td></tr></table></div>
+<p><b>해석</b> · QRNN은 자기가 만든 구조든 OPLS4가 만든 구조든 DFT와 1 kcal/mol 이내로 맞습니다. 점도는 2.0 mol/kg에서 QRNN 오차 ~18%(OPLS4·구버전 QRNN ~99%), 밀도는 7종 모두 1.5% 이내. Li–Li 거리 스캔에서는 <b>2.4–3.0 Å에서 에너지 최소</b>가 나타나, "두 Li⁺가 EC를 공유하며 가까이 붙는 것이 실제로 안정"하다는 걸 DFT로도 확인했어요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 3</div>
+<h3>실험에서도 보이나? — 급속동결 ssNMR</h3>
+<figure><button type="button" data-z="img/fig3.jpg" data-c="Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0"><img src="img/fig3.jpg" width="1200" height="1350" alt="Fig. 3: Solid-state NMR characterization" loading="lazy"></button><figcaption>Fig. 3 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="box"><span class="lab">왜 "급속동결"인가</span><p>상온 액체에서는 용매화 껍질이 피코초 단위로 바뀌어 NMR 신호가 평균화됩니다. 시료를 급속동결(⁷Li 210 K, ¹³C 116 K, MAS 20 kHz)해 <b>순간 구조를 사진처럼 고정</b>한 뒤 측정했어요.</p></div>
+<div class="read"><b>이 그림 읽는 법</b><br><b>a–c</b> 농도별 ⁷Li 스펙트럼. 진한 선 = 직접 편극(전체 Li), 중간 = ¹H→⁷Li CP(EC와 가까운 Li), 연한 선 = ¹⁹F→⁷Li CP(PF₆⁻와 가까운 Li). ¹⁹F→⁷Li는 ×5 증폭해도 거의 평탄.<br><b>d</b> ¹³C 카보닐(~157.6 ppm)과 에테르(~68 ppm) 영역. 보라 = 실험, 녹색 점선 = QRNN 시뮬레이션, 주황 점선 = OPLS4.<br><b>e</b> QRNN 시뮬레이션 스펙트럼을 자유 EC(회색) · 단일-Li(파랑) · <b>다중-Li(주황)</b> 성분으로 분해.</div>
+<p><b>해석</b> · PF₆⁻ 근처 Li⁺가 거의 없으니 접촉 이온쌍이 아닌 <b>용매 분리형</b> 구조입니다. 농도가 오르면 ~160 ppm 숄더가 자라는데, QRNN은 세 농도 모두 이를 재현하고 2 M에서 이 숄더의 큰 몫이 <b>다중-Li 클러스터</b> 기여로 분해돼요. OPLS4는 2 M에서 실험에 없는 ~162 ppm 피크를 만듭니다.</p>
+<div class="box"><span class="warn">읽을 때 주의</span><p>클러스터를 직접 "보는" 측정이 아니라, 시뮬레이션 스펙트럼과의 일치로 뒷받침하는 간접 증거예요. 동결 시료가 상온 구조를 얼마나 대표하는지도 가정입니다.</p></div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ④ · Fig. 4</div>
+<h3>SEI는 누가 먼저 만드나?</h3>
+<figure><button type="button" data-z="img/fig4.jpg" data-c="Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0"><img src="img/fig4.jpg" width="1200" height="818" alt="Fig. 4: Multi-Li+ cluster redox potentials" loading="lazy"></button><figcaption>Fig. 4 원본 · Stevenson et al., Nature (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · MD에서 자주 나온 Li/EC 착물의 1전자 환원 전위(DFT, vs Li/Li⁺). 점선 0.8 V = 흑연·Si 음극에서 실험적으로 SEI가 시작되는 전위. 오른쪽 원 안 노란 구름 = 받아들인 전자가 머무는 위치(스핀 밀도).</div>
+<div class="tbl"><table><tr><th>착물</th><th>환원 전위</th><th>의미</th></tr>
+<tr><td>Li₃EC₉₋₁₀</td><td class="mono">~0.81–0.89 V</td><td>개시선 위</td></tr>
+<tr class="hl"><td>Li₂EC₄₋₇</td><td class="mono">~0.69–0.77 V</td><td>0.8 V 바로 아래</td></tr>
+<tr><td>LiEC₃</td><td class="mono">~0.37 V</td><td>훨씬 늦게</td></tr>
+<tr><td>LiEC₄</td><td class="mono">~0.25 V</td><td>가장 흔한 단일 착물</td></tr></table></div>
+<p class="note">값은 그림에서 읽은 근사치. 가장 흔한 Li₂ 착물은 Li₂EC₇.</p>
+<p><b>해석</b> · 교과서의 LiEC₄는 0.25 V 근처라 실험 SEI 개시(0.8 V)를 설명하기 어렵습니다. 반면 <b>Li₂ 클러스터는 0.8 V에서 0.1 V 이내</b>로 맞아요. 여분 전자는 두 Li⁺가 공유한 EC 하나의 카보네이트에 국재화되고, Li₂ 착물은 두 번째 환원도 더 유리해 연쇄 분해로 이어질 수 있습니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>양자화학급 포텐셜 → 음이온 없는 다중-Li⁺ 클러스터 발견(Fig. 1) → 계산 검증(Fig. 2) + 동결 NMR 일치(Fig. 3) → 이 클러스터가 SEI 개시 전위와 맞음(Fig. 4)</p>
+<ul>
+<li><b>Si-흑연 포메이션 해석</b>: 0.8 V 부근 첫 환원 반응의 전구체가 LiEC₄가 아니라 Li₂EC₇일 수 있음 → 초기 dQ/dV 피크 귀속이 달라질 여지</li>
+<li><b>설계 변수</b>: 염 농도·공용매 비율이 "합승률"을 바꾸고, 그것이 SEI 조성으로 이어질 수 있음</li>
+<li><b>시뮬레이션 도구</b>: 전해액 MD를 볼 때 고전 FF인지, 검증된 MLFF인지 확인할 것</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 단일 용매 EC 중심(혼합 용매·첨가제·전극 계면 미포함), 환원 전위는 기상 클러스터 계산, 상온 동적 구조는 추론.</p>
+<a class="btn" href="https://www.nature.com/articles/s41586-026-11138-7">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 2면 ================= -->
+<section class="paper" id="p2">
+<span class="ptag">2면 · 필독 · 전고체전지</span>
+<h2 class="ptitle">요오드 "중개인"을 황 안에 미리 심은 전고체 Li–S</h2>
+<p class="cite">Song et al., <i>Nature Communications</i> (2026, Article in Press) · Peking Univ. · KIT · Open Access</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>왜 전고체 Li–S는 느리고 금방 지칠까?</h3>
+<p>고체 전해질(SE)을 쓰면 액체 Li–S의 폴리설파이드 셔틀은 원천적으로 사라지고, 황 양극은 고전압 산화물처럼 산소를 내놓지도 않습니다. 남는 문제는 <b>속도와 수명</b>이에요.</p>
+<div class="box"><span class="lab">병목: "세 갈래 길목"이 너무 적다</span><p>S₈와 Li₂S는 전자·이온 모두 거의 통하지 않습니다. 그래서 반응은 <b>탄소(전자) · SE(Li⁺) · 황</b> 세 상이 동시에 맞닿은 다상 경계에서만 일어나요. 전해액이 표면을 다 적시는 액체 전지에 비해 이런 경계의 밀도가 훨씬 낮고, 반응은 표면에서 입자 안쪽까지 퍼져야 합니다. 충·방전 때 황의 큰 부피 변화로 접촉도 끊겨요.</p></div>
+<p>기존 해법(도전재·SE 미세 혼합, LiI 첨가, 전도성 S₉.₃I 등)은 <b>전도도</b>는 올렸지만 속도·수명은 여전히 삽입형 양극에 못 미쳤습니다. 그래서 저자들은 질문을 바꿉니다. <b>"전도도를 더 올릴까?"가 아니라 "반응이 일어나는 길목 자체를 늘릴 수 없을까?"</b></p>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어</div>
+<h3>중개인을 처음부터 황 속에 심어 둔다</h3>
+<p>Li–공기 전지에서는 전해액에 녹은 <b>산화환원 매개체(redox mediator)</b>가 전자를 날라 부도체 Li₂O₂를 분해합니다. 하지만 고체 속 매개체는 돌아다닐 수 없고, 별도 고체상으로 넣으면 황-매개체 접촉면이 제한돼요. 저자들의 답은 <b>매개체를 황과 nm 수준으로 미리 섞어 넣는 것(pre-embedded)</b>입니다.</p>
+<ol class="steps">
+<li><b>섞기</b> · S₈I₂ 조성(공정점)의 비정질 황-요오드를 케첸블랙(KB) 메조기공에 가둬 요오드와 황을 nm 수준으로 균일화</li>
+<li><b>그물 만들기</b> · 황화물 catholyte(Li₅.₅PS₄.₅Cl₁.₅)와 볼밀링하면 경계에서 I₂가 반응해 <b>LiI</b> 생성(XRD·XANES로 확인) → 입자 표면과 기공 곳곳에 LiI/I₂ 그물</li>
+<li><b>릴레이</b> · 충·방전 중 I₂ ⇄ I⁻가 빠르게 오가며 탄소에서 먼 황까지 전자를 넘겨줌 → 반응이 경계에 묶이지 않고 전극 전체로</li>
+</ol>
+<div class="flow"><span class="k">탄소 e⁻</span>→<span class="c">I₂/I⁻</span>→<span class="c">I₂/I⁻</span>→<span class="y">먼 곳의 황</span></div>
+<div class="read"><b>비유</b> · 길목을 새로 뚫는 대신, 요오드라는 "릴레이 주자"를 전극 곳곳에 배치해 전자를 손에서 손으로 넘겨주는 셈입니다.</div>
+<p class="note">기준: 1 C = 945 mA g⁻¹(S₈I₂ 질량 기준). 대조군 순수 황(S/KB)은 1 C = 1672 mA g⁻¹.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>빨리 충전해도 용량이 버틴다</h3>
+<figure><button type="button" data-z="img/lis2.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/lis2.jpg" width="1400" height="1003" alt="Fig. 2: fast-charging performance" loading="lazy"></button><figcaption>Fig. 2 원본 · Song et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b><br><b>a</b> 충전 속도 1C → 24C (빨강 S₈I₂, 파랑 순수 황). 방전은 S₈I₂ 2C, 순수 황 1C로 고정.<br><b>b·c</b> 속도를 올려도 충전 곡선이 덜 치솟을수록 반응 저항이 작은 것.<br><b>d·e</b> 고속에서도 산화·환원 피크가 뚜렷하게 남는지 확인 — 용량성 기여가 아닌 진짜 황 반응이라는 근거.<br><b>f–i</b> 다른 황화물 SE(Li₇P₃S₁₁, Li₃PS₄)에서도 같은 경향.</div>
+<div class="tbl"><table><tr><th>충전 속도</th><th>1 C</th><th>10 C</th><th>24 C</th></tr>
+<tr><td>S₈I₂/KB</td><td class="mono">1132.5</td><td class="mono hl">851.9</td><td class="mono hl">474.7</td></tr>
+<tr><td>S/KB (대조)</td><td class="mono">1318.5</td><td class="mono">341.0</td><td class="mono">128.2</td></tr></table></div>
+<p class="note">mAh g⁻¹ · 24 C = 24.9 mA cm⁻² · 25 °C · 로딩 ~1 mg cm⁻²</p>
+<p><b>해석</b> · 저속에선 순수 황이 오히려 용량이 크지만, 10C에서 1/4로 무너집니다. S₈I₂는 24C에서도 1C 대비 ~42% 유지 — <b>속도의 병목이 풀렸다</b>는 증거예요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 5</div>
+<h3>빨리 충전해도 오래 간다</h3>
+<figure><button type="button" data-z="img/lis5.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/lis5.jpg" width="1400" height="1168" alt="Fig. 5: long-term cycling" loading="lazy"></button><figcaption>Fig. 5 원본 · Song et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> 0.5C, <b>b</b> 5C/5C, <b>c</b> 10C 충전/2C 방전 장기 사이클. <b>d·e</b> 1000번째부터 수천 번째까지 전압 곡선이 거의 겹치면 분극 증가가 작다는 뜻.</div>
+<div class="tbl"><table><tr><th>조건</th><th>사이클</th><th>용량 유지</th></tr>
+<tr><td>a · 0.5 C (17개월)</td><td class="mono">2,800</td><td class="mono">81.4%</td></tr>
+<tr><td>b · 5 C / 5 C</td><td class="mono">3,400</td><td class="mono hl">92.0%</td></tr>
+<tr><td>c · 10 C 충전 / 2 C 방전</td><td class="mono">5,000</td><td class="mono">80.6%</td></tr></table></div>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>부도체 황 → 반응 경계 부족 → 요오드 매개로 반응 자리 확장 → 빠른 충전(Fig. 2) + 가역성 유지(Fig. 5)</p>
+<ul>
+<li>전환형 고체 전극 전반(황 외에도)에 적용 가능한 설계 원리: <b>"전도체 추가"가 아니라 "매개체 내장"</b></li>
+<li>황화물 SE와 반응해 LiI를 만드는 점이 핵심 → 사용하는 SE 조성에 따라 효과가 달라질 수 있음</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 장기 수명은 저로딩(S₈I₂ 1.0–1.1 mg cm⁻², 양극 내 30 wt%)과 과량 In/InLi 음극(n/p ~4:1) 조건. 10 mg cm⁻² 고로딩은 100사이클 87.9%로 아직 짧고, Li 금속 음극과의 조합은 과제.</p>
+<a class="btn" href="https://www.nature.com/articles/s41467-026-78042-6">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 3면 ================= -->
+<section class="paper" id="p3">
+<span class="ptag">3면 · 필독 · Si-C 복합 음극</span>
+<h2 class="ptitle">황화물 전고체 Si–C 음극, n/p 0.83 vs 1.1</h2>
+<p class="cite">Mörseburg et al., <i>Batteries &amp; Supercaps</i> (2026.07.14) · Open Access · 최근 2주 내 Si-흑연 논문이 없어 범위 밖에서 선정</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>전고체에서 실리콘이 까다로운 이유</h3>
+<p>Si(1857 mAh g⁻¹, 탈리튬 0.4 V)는 Li 금속의 대안이지만 부피가 약 300% 변합니다. 고체 전지는 입자끼리 맞닿아야 이온이 흐르므로, 팽창·수축에 따른 <b>내부 압력 변화가 액체 대비 약 100배</b> 커지고 접촉 손실과 균열이 생겨요. 흔히 높은 스택 압력으로 눌러 두지만, 가압 장치 무게가 에너지 밀도를 깎습니다.</p>
+<div class="box"><span class="lab">이 논문의 소재: void 구조 Si–C (Si30@C)</span><p>탄소 껍질 안 빈 공간(void)에 Si 나노입자 30 wt%. Si가 부풀어도 껍질 안의 빈자리로 팽창해 <b>바깥 부피 변화를 최소화</b>합니다. 2차 입자 D50 22.3 µm.</p></div>
+<div class="read"><b>도전 과제</b> · 보통은 Li 석출을 막으려 n/p &gt; 1로 설계하는데, 이 논문은 <b>n/p &lt; 1</b>에 도전합니다. 근거는 탄소 껍질이 여분의 Li을 담는 그릇이 될 수 있다는 점이에요.</div>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어</div>
+<h3>탄소 껍질도 "그릇"이다 — 과리튬화 계산</h3>
+<p>반쪽 셀(대 Li, Li₆PS₅Cl)에서 첫 리튬화 용량은 <b>1473 mAh g⁻¹</b>인데, Si 나노입자만으로는 ~1070밖에 설명이 안 됩니다. 나머지는 <b>비정질 탄소 껍질의 Li 저장</b>(탄소 g당 566 mAh). 0 V 아래까지 밀어 넣으면 0 V 근처에 새 평탄부가 나타나 추가 저장(가역 ~200 mAh g⁻¹)도 확인됐어요.</p>
+<div class="bar"><span class="t">실측</span><span class="g"><i style="width:83%"></i></span><span class="v">1473</span></div>
+<div class="bar"><span class="t">과리튬화</span><span class="g"><i style="width:100%;background:#D9711C"></i></span><span class="v">1776</span></div>
+<p>탄소 저장량을 566 → <b>1000 mAh g⁻¹(탄소 기준)</b>으로 가정(첫 사이클 손실 보상분 포함)하면 복합체 용량은 1776. 양극을 여기에 맞춰 늘리면, 실측 기준 n/p는 1473 ÷ 1776 = <b>0.83</b>입니다.</p>
+<div class="box"><span class="lab">비교 실험</span><p>NCM | Li₆PS₅Cl | Si–C 풀셀, 음극 로딩 7.4 mAh cm⁻², 음극 활물질 70 wt%. <b>n/p 1.1</b>(일반 설계) vs <b>n/p 0.83</b>(과리튬화 설계).</p></div>
+<div class="read"><b>핵심 질문</b> · n/p &lt; 1이면 ① Li 금속이 석출되는가? ② 이론 에너지는 커지는데 실제 성능도 좋아지는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Figure 8</div>
+<h3>실제 성능은 n/p 1.1이 낫다</h3>
+<figure><button type="button" data-z="img/sic8.jpg" data-c="Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0"><img src="img/sic8.jpg" width="892" height="387" alt="Figure 8: cycle tests and impedance" loading="lazy"></button><figcaption>Figure 8 · Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> 녹색 계열 = n/p 1.1, 파랑 계열 = n/p 0.83. 1·22·53번째(점선)는 저전류 체크업 사이클. <b>b</b> 저자들의 등가회로 해석상 큰 반원은 주로 NCM 양극 전하이동(R<sub>ct,c</sub>), Si–C 음극 성분(~2910 Hz)은 그 안에 겹쳐 작게 나타남.</div>
+<div class="tbl"><table><tr><th>Table 1 (대표 셀)</th><th>n/p 0.83</th><th>n/p 1.1</th></tr>
+<tr><td>ICE</td><td class="mono">70.8%</td><td class="mono">75.2%</td></tr>
+<tr><td>용량 유지 (52 vs 2)</td><td class="mono">42.8%</td><td class="mono hl">51.9%</td></tr>
+<tr><td>미세단락 시작 전류 (mA cm⁻²)</td><td class="mono">1.5</td><td class="mono">2.0</td></tr></table></div>
+<p><b>해석</b> · n/p 0.83은 이론 에너지는 크지만 방전 용량·유지율·단락 내성이 모두 낮습니다. SE 벌크 저항과 음극 계면 저항은 거의 그대로여서, <b>열화의 주원인은 NCM 양극</b>(고전압 구간에서의 구조·부피 변화)으로 해석돼요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Figure 9</div>
+<h3>그래도 Li 금속은 석출되지 않았다</h3>
+<figure><button type="button" data-z="img/sic9.jpg" data-c="Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0"><img src="img/sic9.jpg" width="961" height="422" alt="Figure 9: 7Li MAS NMR spectra" loading="lazy"></button><figcaption>Figure 9 · Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 한 번 충전한 음극의 ex-situ ⁷Li MAS NMR(검정 충전 전, 녹색 n/p 1.1, 파랑 n/p 0.83). Li 금속은 Knight shift 때문에 <b>~265 ppm</b>에 나타나므로 그 자리를 봅니다.</div>
+<ol class="steps">
+<li><b>265 ppm 신호 없음</b> → 두 조건 모두 금속 Li 석출 없음 (분해 관찰·전압 곡선도 동일 결론)</li>
+<li><b>~1 ppm 큰 피크</b> = SE(Li₆PS₅Cl) 속 이온성 Li, 별표(*)는 측대역</li>
+<li><b>11–12 ppm 숄더</b> = c-Li₁₅Si₄ 유사 구조. n/p 0.83에서만 보이는 ~11.5 ppm 작은 피크(화살표)는 <b>탄소층 사이 Li 삽입</b>의 흔적일 수 있음</li>
+</ol>
+<p><b>해석</b> · 과리튬화로 더 넣은 Li은 금속이 아니라 <b>탄소 껍질에 이온 형태로 저장</b>됐습니다. 저자들은 클러스터 형태 저장 등으로 더 높은 과리튬화도 가능할 것으로 봐요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Figure 10</div>
+<h3>파우치셀, 5 MPa에서 숨은 덜 쉬지만 용량은 준다</h3>
+<figure><button type="button" data-z="img/sic10.jpg" data-c="Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0"><img src="img/sic10.jpg" width="1096" height="426" alt="Figure 10: pouch cells under stack pressure" loading="lazy"></button><figcaption>Figure 10 · Mörseburg et al., Batteries &amp; Supercaps (2026) · CC BY 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · n/p 1.1 시트형 파우치셀(건식 양극·SE 필름)을 25·15·5 MPa로 비교. <b>a</b> 채운 사각형 = 용량, 빈 사각형 = CE. <b>b</b> 사이클당 셀 스택 두께 변화 Δh.</div>
+<div class="tbl"><table><tr><th>스택 압력</th><th>25</th><th>15</th><th>5 MPa</th></tr>
+<tr><td>ICE</td><td class="mono">56.5%</td><td class="mono">66.9%</td><td class="mono">62.5%</td></tr>
+<tr><td>용량 활용률*</td><td class="mono">85.0%</td><td class="mono">82.2%</td><td class="mono">58.8%</td></tr></table></div>
+<p class="note">*논문 표현 "utilized capacity", 율속 + 3 mA cm⁻² 100사이클 기준</p>
+<p><b>해석</b> · 두께 변화는 압력과 무관하게 <b>사이클당 대부분 2 µm 미만</b> — void 구조가 팽창을 내부에서 흡수합니다. 하지만 5 MPa에서는 입자 간 접촉 부족으로 용량 활용률이 크게 떨어져요.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>Si 팽창 → void Si–C로 흡수 → 탄소 껍질 과리튬화로 n/p 0.83 → 석출은 없음(Fig. 9), 성능은 n/p 1.1 우세(Fig. 8) → 남은 병목은 저압 접촉(Fig. 10)</p>
+<ul>
+<li>n/p &lt; 1이 곧바로 석출을 뜻하진 않는다는 근거 — 단, 성능 이득은 없음</li>
+<li>부피는 소재로 잡았고, 남은 과제는 <b>저압에서의 계면 접촉</b> → 가압 공정(예: 등방가압)으로 초기 계면을 확보하는 전략과 맞닿음</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 52사이클 유지율 ~50%, 조건당 셀 1~2개, 파우치는 n/p 1.1만 평가.</p>
+<a class="btn" href="https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/batt.70409">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<footer>
+Battery Paper Weekly · 개인 열람용 비상업 뉴스레터. Figure는 각 논문의 Creative Commons 라이선스(CC BY / CC BY-NC-ND 4.0)에 따라 수정 없이 출처를 밝혀 인용했습니다. 조회수는 출판사 페이지 표시값(2026-10-22 기준). 그래프에서 읽은 값은 근사치로 표시했습니다.
+</footer>
+</div>
+
+<div id="zoom" role="dialog" aria-modal="true" aria-label="확대한 그림">
+<button class="x" type="button" aria-label="닫기">✕</button>
+<img alt="확대한 그림">
+<div class="zc"></div>
+</div>
+<script>
+(function(){
+  var z=document.getElementById('zoom'), zi=z.querySelector('img'), zc=z.querySelector('.zc');
+  document.querySelectorAll('figure button[data-z]').forEach(function(b){
+    b.addEventListener('click',function(){
+      zi.src=b.getAttribute('data-z'); zc.textContent=b.getAttribute('data-c')||'';
+      var w=Math.max(window.innerWidth*1.8, 900); zi.style.width=w+'px';
+      z.classList.add('on'); document.body.style.overflow='hidden';
+      zi.onload=function(){ z.scrollTop=0; z.scrollLeft=0; };
+    });
+  });
+  function close(){z.classList.remove('on'); document.body.style.overflow='';}
+  z.querySelector('.x').addEventListener('click',close);
+  z.addEventListener('click',function(e){ if(e.target===z) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+</body>
+</html>
