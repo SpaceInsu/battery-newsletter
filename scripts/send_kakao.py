@@ -158,7 +158,7 @@ def main():
     if args.test:
         send(token, {
             "object_type": "text",
-            "text": "🔋 GitHub 우체부 테스트 성공!\n매월 논문 뉴스레터가 이 방으로 배달됩니다.",
+            "text": "🔋 GitHub 우체부 테스트 성공!\n매주 금요일 Kakaotalk Battery Newsletter가 이 방으로 배달됩니다.",
             "link": {"web_url": "https://github.com", "mobile_web_url": "https://github.com"},
         })
         return

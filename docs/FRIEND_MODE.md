@@ -1,6 +1,6 @@
 # 친구 계정(B)에게서 받기 — 나중에 켜는 스위치
 
-지금은 **나와의 채팅**(memo 모드)으로 받습니다. 아래를 마치면 "🔋 배터리 위클리" 같은 다른 계정(B)이 Insu 계정으로 1:1 카톡을 보내는 방식(friends 모드)으로 바뀝니다. 코드는 이미 준비되어 있어 **설정만** 하면 됩니다.
+지금은 **나와의 채팅**(memo 모드)으로 받습니다. 아래를 마치면 "🔋 Kakaotalk Battery Newsletter" 같은 다른 계정(B)이 Insu 계정으로 1:1 카톡을 보내는 방식(friends 모드)으로 바뀝니다. 코드는 이미 준비되어 있어 **설정만** 하면 됩니다.
 
 ## 준비물
 1. 두 번째 카카오톡 계정 B (두 번째 전화번호 필요)
@@ -19,7 +19,7 @@
 ## GitHub 설정 (battery-newsletter 저장소)
 1. Secrets: `KAKAO_SENDER_REFRESH_TOKEN` = B의 refresh_token
 2. Variables: `KAKAO_SEND_TARGET` = `friends`
-3. Actions → Weekly newsletter → Run workflow → **list-friends** 실행 → 로그에서 Insu 계정의 uuid 확인
+3. Actions → Kakaotalk Battery Newsletter → Run workflow → **list-friends** 실행 → 로그에서 Insu 계정의 uuid 확인
 4. Variables: `KAKAO_RECEIVER_UUIDS` = 확인한 uuid
 5. Run workflow → **test** 로 발송 확인
 

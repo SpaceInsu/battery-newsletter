@@ -1,4 +1,4 @@
-# 주간 뉴스레터 — 한 공장, 두 공정
+# Kakaotalk Battery Newsletter — 한 공장, 두 공정 (매주 3편)
 #   1) 인쇄(publish): site/ 폴더를 GitHub Pages에 게시  → 카톡 버튼이 열 페이지
 #   2) 배달(deliver): 카카오톡으로 카드 발송           → 반드시 인쇄가 끝난 뒤
 #
@@ -12,7 +12,7 @@
 #   memo(기본) = 나와의 채팅 / friends = 다른 계정(B)이 1:1 발송 (docs/FRIEND_MODE.md)
 # 사전 설정: Settings → Pages → Source = "GitHub Actions"
 
-name: Weekly newsletter
+name: Kakaotalk Battery Newsletter
 
 on:
   push:
@@ -29,7 +29,7 @@ on:
         default: test
 
 concurrency:
-  group: weekly-newsletter
+  group: kakaotalk-battery-newsletter
   cancel-in-progress: false
 
 jobs:

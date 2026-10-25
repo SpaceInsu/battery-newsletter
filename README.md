@@ -1,5 +1,5 @@
 # battery-newsletter
-BPM (Battery Paper Manager) — 주간 배터리 논문 뉴스레터(매주 금요일 3편)를 카카오톡 "나에게 보내기"로 배달합니다.
+Kakaotalk Battery Newsletter — 주간 배터리 논문 뉴스레터(매주 금요일 3편)를 카카오톡 "나에게 보내기"로 배달합니다.
 
 ## 구조 (비유)
 | 파일 | 역할 |
@@ -15,7 +15,7 @@ BPM (Battery Paper Manager) — 주간 배터리 논문 뉴스레터(매주 금�
 - `GH_PAT` (선택) — 카카오가 새 refresh_token을 주면 자동으로 교체하는 데 사용
 
 ## 수동 테스트
-Actions 탭 → **Weekly newsletter** → Run workflow → mode = `test`
+Actions 탭 → **Kakaotalk Battery Newsletter** → Run workflow → mode = `test`
 
 ## 뉴스레터 JSON 형식
 `issues/example.json` 참고 (`title`, `description`, `url`, `image_url`, `button`).
