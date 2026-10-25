@@ -19,7 +19,7 @@
 ## GitHub 설정 (battery-newsletter 저장소)
 1. Secrets: `KAKAO_SENDER_REFRESH_TOKEN` = B의 refresh_token
 2. Variables: `KAKAO_SEND_TARGET` = `friends`
-3. Actions → Kakao newsletter → Run workflow → **list-friends** 실행 → 로그에서 Insu 계정의 uuid 확인
+3. Actions → Weekly newsletter → Run workflow → **list-friends** 실행 → 로그에서 Insu 계정의 uuid 확인
 4. Variables: `KAKAO_RECEIVER_UUIDS` = 확인한 uuid
 5. Run workflow → **test** 로 발송 확인
 

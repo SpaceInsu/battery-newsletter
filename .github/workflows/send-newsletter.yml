@@ -1,51 +1,97 @@
-# 우체부 근무표
-# - 뉴스레터 발송: issues/latest.json 이 바뀌면(=Claude가 새 호를 넣으면) 자동 발송
-# - 연결 유지: 매월 15일, 메시지 없이 토큰만 갱신 (주간 발송이 멈춰도 60일 만료 방지)
-# - 수동 실행: Actions 탭 → Run workflow (test / send / keepalive / list-friends 선택)
-# - 받는 방식 스위치: 저장소 Settings → Variables → KAKAO_SEND_TARGET
-#     memo(기본, 비워 둬도 됨) = 나와의 채팅 / friends = 다른 계정(B)이 나에게 1:1 발송
-#     friends 모드 준비물: Secrets KAKAO_SENDER_REFRESH_TOKEN(B 계정 토큰), Variables KAKAO_RECEIVER_UUIDS
+# 주간 뉴스레터 — 한 공장, 두 공정
+#   1) 인쇄(publish): site/ 폴더를 GitHub Pages에 게시  → 카톡 버튼이 열 페이지
+#   2) 배달(deliver): 카카오톡으로 카드 발송           → 반드시 인쇄가 끝난 뒤
+#
+# 언제 돌아가나
+#   - issues/latest.json 이 바뀌면(=새 호)        : 인쇄 → 배달
+#   - site/ 만 바뀌면(=페이지 수정)               : 인쇄만
+#   - 매월 15일                                  : 토큰만 갱신 (발송 없음)
+#   - 수동(Actions 탭 → Run workflow)            : 아래 mode 선택
+#
+# 받는 방식 스위치: Settings → Variables → KAKAO_SEND_TARGET
+#   memo(기본) = 나와의 채팅 / friends = 다른 계정(B)이 1:1 발송 (docs/FRIEND_MODE.md)
+# 사전 설정: Settings → Pages → Source = "GitHub Actions"
 
-name: Kakao newsletter
+name: Weekly newsletter
 
 on:
   push:
     branches: [main]
-    paths: ["issues/latest.json"]
+    paths: ["issues/latest.json", "site/**"]
   schedule:
     - cron: "17 0 15 * *"   # 매월 15일 09:17 KST
   workflow_dispatch:
     inputs:
       mode:
-        description: "test = 테스트 문구 / send = 최신 뉴스레터 / keepalive = 토큰만 갱신 / list-friends = 친구 uuid 확인"
+        description: "send = 게시+발송 / publish = 페이지만 게시 / test = 테스트 문구 / keepalive = 토큰 갱신 / list-friends = 친구 uuid 확인"
         type: choice
-        options: [test, send, keepalive, list-friends]
+        options: [send, publish, test, keepalive, list-friends]
         default: test
 
 concurrency:
-  group: kakao-send
+  group: weekly-newsletter
   cancel-in-progress: false
 
 jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.m.outputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - id: m
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            mode="${{ inputs.mode }}"
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            mode="keepalive"
+          elif git diff --name-only HEAD^ HEAD | grep -qx "issues/latest.json"; then
+            mode="send"
+          else
+            mode="publish"
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "이번 실행: $mode"
+
+  publish:
+    needs: decide
+    if: needs.decide.outputs.mode == 'send' || needs.decide.outputs.mode == 'publish'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
   deliver:
+    needs: [decide, publish]
+    # 인쇄가 성공했거나(send) 인쇄가 필요 없는 모드(test/keepalive/list-friends)일 때만
+    if: >-
+      always() && needs.decide.result == 'success' &&
+      needs.decide.outputs.mode != 'publish' &&
+      (needs.publish.result == 'success' || needs.publish.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Decide mode
-        id: mode
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "mode=keepalive" >> "$GITHUB_OUTPUT"
-          else
-            echo "mode=send" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Wait for Pages to refresh
+        if: needs.decide.outputs.mode == 'send'
+        run: sleep 30
 
       - name: Deliver via Kakao
         env:
@@ -53,18 +99,16 @@ jobs:
           KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
           KAKAO_SEND_TARGET: ${{ vars.KAKAO_SEND_TARGET || 'memo' }}
           KAKAO_RECEIVER_UUIDS: ${{ vars.KAKAO_RECEIVER_UUIDS }}
-          # friends 모드면 보내는 계정(B)의 토큰, 아니면 내 토큰
           KAKAO_REFRESH_TOKEN: ${{ vars.KAKAO_SEND_TARGET == 'friends' && secrets.KAKAO_SENDER_REFRESH_TOKEN || secrets.KAKAO_REFRESH_TOKEN }}
         run: |
-          case "${{ steps.mode.outputs.mode }}" in
+          case "${{ needs.decide.outputs.mode }}" in
             test)         python scripts/send_kakao.py --test ;;
             keepalive)    python scripts/send_kakao.py --keepalive ;;
             list-friends) python scripts/send_kakao.py --list-friends ;;
-            *)            python scripts/send_kakao.py --issue issues/latest.json ;;
+            send)         python scripts/send_kakao.py --issue issues/latest.json ;;
           esac
 
-      # 카카오가 새 재발급권을 주면 금고(Secrets) 값을 자동 교체.
-      # GH_PAT(이 저장소 Secrets 쓰기 권한 토큰)이 있어야 동작한다.
+      # 카카오가 새 재발급권을 주면 금고(Secrets) 값을 자동 교체 (GH_PAT 필요)
       - name: Rotate refresh token
         if: always()
         env:
@@ -75,9 +119,8 @@ jobs:
             echo "교체할 토큰 없음"; exit 0
           fi
           if [ -z "$GH_TOKEN" ]; then
-            echo "::warning::새 refresh_token을 받았지만 GH_PAT이 없어 자동 교체하지 못했습니다. 30일 안에 수동 재발급이 필요합니다."
-            rm -f new_refresh_token.txt
-            exit 0
+            echo "::warning::새 refresh_token을 받았지만 GH_PAT이 없어 자동 교체하지 못했습니다."
+            rm -f new_refresh_token.txt; exit 0
           fi
           gh secret set "$SECRET_NAME" --repo "${{ github.repository }}" < new_refresh_token.txt
           rm -f new_refresh_token.txt
