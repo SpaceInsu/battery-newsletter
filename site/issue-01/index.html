@@ -77,6 +77,25 @@ a{color:var(--acc)}
 #zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
 #zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
 #zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+/* ---- 좌우 스와이프 카드 ---- */
+html.deckmode,html.deckmode body{height:100%;overflow:hidden}
+.topbar,.botbar{position:fixed;left:0;right:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:0 12px}
+.topbar{top:0;height:44px;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--mute)}
+.topbar .lbl{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar .cnt{font-family:'IBM Plex Mono',monospace;flex:none}
+.prog{position:fixed;top:44px;left:0;height:3px;background:var(--acc);z-index:5;transition:width .25s}
+.botbar{bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom);justify-content:space-between}
+.nav{width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;font-weight:700;flex:none;cursor:pointer}
+.nav:disabled{opacity:.3}
+.ask{flex:1;max-width:320px;height:48px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.deck{position:fixed;top:47px;bottom:64px;left:0;right:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;overscroll-behavior-y:contain}
+.sin{max-width:680px;margin:0 auto;padding:12px 16px 28px}
+.sin header.cover{margin-bottom:0}
+.sin>.card:first-of-type,.sin>.so{margin-top:10px}
+.mini{font-size:12.5px;font-weight:700;color:var(--acc);margin:2px 0 0}
+.swipe{margin:16px 0 0;font-size:13px;color:#9FD2BC;text-align:center}
 </style>
 </head>
 <body>
@@ -333,6 +352,95 @@ Kakaotalk Battery Newsletter · 개인 열람용 비상업 뉴스레터. Figure�
   z.querySelector('.x').addEventListener('click',close);
   z.addEventListener('click',function(e){ if(e.target===z) close(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+/* 긴 페이지 → 카드 한 장씩 좌우로 넘기는 덱. 내용은 위 HTML 그대로 두고 여기서 재배치만 한다. */
+(function(){
+  var ISSUE='Kakaotalk Battery Newsletter No.1';
+  var wrap=document.querySelector('.wrap'); if(!wrap) return;
+  var slides=[];
+  function mk(d){var s=document.createElement('section');s.className='slide';var i=document.createElement('div');i.className='sin';s.appendChild(i);for(var k in d)s.dataset[k]=d[k];slides.push(s);return i;}
+
+  var cover=wrap.querySelector('header.cover');
+  mk({label:'표지'}).appendChild(cover);
+  var sw=document.createElement('p');sw.className='swipe';sw.textContent='← 옆으로 밀어서 한 장씩 넘겨요 →';cover.appendChild(sw);
+
+  wrap.querySelectorAll('section.paper').forEach(function(p){
+    var tag=p.querySelector('.ptag'),tt=p.querySelector('.ptitle'),ci=p.querySelector('.cite');
+    var a=p.querySelector('.so a.btn');
+    var info={paper:p.id,label:tag.textContent,title:tt.textContent,cite:ci.textContent,url:a?a.href:''};
+    var first=true;
+    Array.prototype.slice.call(p.children).forEach(function(card){
+      if(!card.matches('.card,.so')) return;
+      var sl=card.querySelector('.step-label'),h=card.querySelector('h3');
+      var d=Object.assign({},info,{card:(sl?sl.textContent:'')+' · '+(h?h.textContent:'')});
+      var inner=mk(d);
+      if(first){[tag,tt,ci].forEach(function(e){inner.appendChild(e)});first=false;}
+      else{var m=document.createElement('div');m.className='mini';m.textContent=info.label+' · '+info.title;inner.appendChild(m);}
+      inner.appendChild(card);
+    });
+  });
+  var ft=wrap.querySelector('footer'); if(ft) slides[slides.length-1].firstChild.appendChild(ft);
+
+  var deck=document.createElement('main');deck.className='deck';
+  slides.forEach(function(s){deck.appendChild(s)});
+  wrap.replaceWith(deck);
+  document.documentElement.classList.add('deckmode');
+
+  var top=document.createElement('div');top.className='topbar';
+  top.innerHTML='<span class="lbl"></span><span class="cnt"></span>';
+  var prog=document.createElement('div');prog.className='prog';
+  var bot=document.createElement('div');bot.className='botbar';
+  bot.innerHTML='<button class="nav prev" type="button" aria-label="이전 카드">‹</button><a class="ask" target="_blank" rel="noopener">💬 이 카드 Claude에게 질문</a><button class="nav next" type="button" aria-label="다음 카드">›</button>';
+  document.body.prepend(prog);document.body.prepend(top);document.body.appendChild(bot);
+  var lbl=top.querySelector('.lbl'),cnt=top.querySelector('.cnt'),prev=bot.querySelector('.prev'),next=bot.querySelector('.next'),ask=bot.querySelector('.ask');
+
+  var cur=-1;
+  function askUrl(s,i){
+    var page=location.href.split('#')[0]+'#s'+(i+1);
+    var q;
+    if(!s.dataset.paper){
+      q=ISSUE+'를 읽고 질문할게.\n뉴스레터: '+page+'\n\n질문: ';
+    }else{
+      q=ISSUE+'에서 읽은 논문에 대해 질문할게. 배터리공학 박사 수준으로 답해 줘.\n'+
+        '논문: '+s.dataset.title+'\n출처: '+s.dataset.cite+'\n원문: '+s.dataset.url+'\n'+
+        '보고 있던 카드: '+s.dataset.card+'\n뉴스레터: '+page+'\n\n질문: ';
+    }
+    return 'https://claude.ai/new?q='+encodeURIComponent(q);
+  }
+  function update(i){
+    if(i===cur) return; cur=i; var s=slides[i];
+    lbl.textContent=s.dataset.label+(s.dataset.card?' · '+s.dataset.card.split(' · ')[0]:'');
+    cnt.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    ask.href=askUrl(s,i);
+    ask.textContent=s.dataset.paper?'💬 이 카드 Claude에게 질문':'💬 Claude에게 질문';
+    try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:instant?'auto':'smooth'});
+    update(i);
+  }
+  var t;
+  deck.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){update(Math.round(deck.scrollLeft/deck.clientWidth));},60);});
+  prev.addEventListener('click',function(){go(cur-1)});
+  next.addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('zoom').classList.contains('on')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  cover.querySelectorAll('a[href^="#p"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); var id=a.getAttribute('href').slice(1);
+      for(var k=0;k<slides.length;k++){ if(slides[k].dataset.paper===id){go(k);break;} }
+    });
+  });
+  window.addEventListener('resize',function(){deck.scrollLeft=cur*deck.clientWidth;});
+  var m=/^#s(\d+)$/.exec(location.hash), start=m?parseInt(m[1],10)-1:0;
+  requestAnimationFrame(function(){go(start,true);});
 })();
 </script>
 </body>
