@@ -1,0 +1,29 @@
+{
+  "_note": "Kakaotalk Battery Newsletter 후보 저널 화이트리스트 (2026-10-28). 오픈액세스 논문은 이 목록 밖에서도 선정 가능. figure_policy: oa = 라이선스대로, subscription = 인용형(A안, 논문당 그림 최대 2개).",
+  "journals": [
+    {"name": "Nature", "publisher": "Springer Nature"},
+    {"name": "Science", "publisher": "AAAS"},
+    {"name": "Nature Energy", "publisher": "Springer Nature"},
+    {"name": "Nature Materials", "publisher": "Springer Nature"},
+    {"name": "Joule", "publisher": "Cell Press"},
+    {"name": "Nature Nanotechnology", "publisher": "Springer Nature"},
+    {"name": "Energy & Environmental Science", "publisher": "RSC"},
+    {"name": "Advanced Materials", "publisher": "Wiley"},
+    {"name": "Advanced Energy Materials", "publisher": "Wiley"},
+    {"name": "Nature Sustainability", "publisher": "Springer Nature"},
+    {"name": "Chem", "publisher": "Cell Press"},
+    {"name": "ACS Energy Letters", "publisher": "ACS"},
+    {"name": "Nature Chemistry", "publisher": "Springer Nature"},
+    {"name": "Advanced Functional Materials", "publisher": "Wiley"},
+    {"name": "Matter", "publisher": "Cell Press"},
+    {"name": "ACS Nano", "publisher": "ACS"},
+    {"name": "Angewandte Chemie International Edition", "publisher": "Wiley"},
+    {"name": "Advanced Science", "publisher": "Wiley", "note": "전부 오픈액세스"},
+    {"name": "Journal of the American Chemical Society", "publisher": "ACS"},
+    {"name": "Science Advances", "publisher": "AAAS", "note": "전부 오픈액세스"},
+    {"name": "Small", "publisher": "Wiley"},
+    {"name": "ACS Materials Letters", "publisher": "ACS"},
+    {"name": "PNAS", "publisher": "National Academy of Sciences"},
+    {"name": "Chemistry of Materials", "publisher": "ACS"}
+  ]
+}

@@ -37,7 +37,26 @@
 | CC BY | 원본 삽입, 출처 표기 (자르기 허용, 변경 사실 표시) |
 | CC BY-NC | 원본 삽입, 비상업, 출처 표기 |
 | CC BY-NC-ND | **원본 그대로만** (자르기·덧그리기 금지), 해설은 그림 밖 |
-| 구독 논문 | 원본 그림 사용 안 함 → Claude가 다시 그린 개념도 + 원문 Figure 링크 |
+| 구독 논문 | **인용형(A안)** — 아래 "구독 논문 인용 규칙" 적용 |
+
+## 구독 논문 인용 규칙 (A안 확정: 2026-10-28)
+근거: 저작권법 제28조(공표된 저작물의 인용) — 비평·연구 목적, 정당한 범위, 공정한 관행. 법률 자문 아님, 운영 판단은 Insu.
+비유: **해설이 주인공, 그림은 증거 사진 한 장.**
+
+| 항목 | 규칙 |
+|---|---|
+| 그림 수 | 논문당 **최대 2개** (화제작도 동일). 나머지 결과는 수치표·직접 그린 도식으로 |
+| 주종관계 | 그림 카드마다 "이 그림 읽는 법" + 수치표 + 해석이 그림보다 분량이 많아야 함 |
+| 변형 | 원본 그대로. 패널 일부만 쓸 때는 캡션에 "Fig. 3b 발췌"로 표기, 덧그리기 금지 |
+| 출처 표기 | 캡션: `Fig. N · 저자 et al., 저널 (연도) · DOI · 인용(저작권법 제28조)` |
+| 원문 버튼 | 결론 카드에 DOI 링크 "원문 읽기 (구독)" |
+| 그림 원본 | 출판사 논문 페이지·PDF(회사 구독으로 열람)에서 가져옴. 구글 이미지 등 2차 출처 사용 안 함 |
+| 가져오는 방법 | 공개 페이지에 그림이 보이면 Claude가 직접 / 안 보이면 Insu가 PDF 또는 그림 파일을 업로드 |
+| 삭제 요청 | 저자·출판사 요청이 오면 즉시 해당 그림 내리고 도식으로 교체 |
+
+## 대상 저널 (화이트리스트, 2026-10-28)
+목록 원본: `config/journals.json` — 후보는 이 저널 + 오픈액세스 논문에서만 선정.
+Nature · Science · Nature Energy · Nature Materials · Joule · Nature Nanotechnology · Energy & Environmental Science · Advanced Materials · Advanced Energy Materials · Nature Sustainability · Chem · ACS Energy Letters · Nature Chemistry · Advanced Functional Materials · Matter · ACS Nano · Angewandte Chemie International Edition · Advanced Science · Journal of the American Chemical Society · Science Advances · Small · ACS Materials Letters · PNAS · Chemistry of Materials
 
 ## 저널별 접근 테스트 (2026-10-22)
 | 출판사 | 테스트 논문 | 라이선스 | 그림 가져오기 |
