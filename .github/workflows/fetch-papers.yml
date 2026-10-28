@@ -1,5 +1,5 @@
 # 논문 가져오기 — Claude 작업 공간에서 출판사 사이트가 막혀 있을 때 GitHub 서버가 대신 받아 오는 심부름꾼.
-# 결과는 저장소에 커밋하지 않고 "실행 결과 파일(artifact)"로만 7일 보관 → 공개 저장소에 원문 PDF가 남지 않음.
+# 결과는 main에 커밋하지 않고 임시 브랜치 fetch/<run_id>로 넘긴 뒤, Claude가 받아 가면 삭제 → 저장소에 원문이 남지 않음.
 # 실행: Actions → Fetch papers → Run workflow → Nature 논문 ID를 쉼표로 (예: s41467-024-52766-9,s41467-026-78168-7)
 
 name: Fetch papers
@@ -10,6 +10,9 @@ on:
       ids:
         description: "Nature 논문 ID (쉼표 구분)"
         required: true
+
+permissions:
+  contents: write
 
 jobs:
   fetch:
@@ -42,8 +45,12 @@ jobs:
             echo "== $id"; ls -la "$d" "$d/fig"; file "$d/paper.pdf"
           done
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: papers
-          path: out
-          retention-days: 7
+      # Claude 작업 공간은 artifact 저장소에 접근할 수 없어 임시 브랜치로 전달. Claude가 받아 간 뒤 브랜치를 삭제한다.
+      - name: Hand over via temporary branch
+        run: |
+          cd out
+          git init -q -b "fetch/${{ github.run_id }}"
+          git config user.name "fetch-bot"; git config user.email "fetch-bot@users.noreply.github.com"
+          git add -A && git commit -q -m "fetched ${{ inputs.ids }}"
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "HEAD:refs/heads/fetch/${{ github.run_id }}"
+          echo "branch: fetch/${{ github.run_id }}"
