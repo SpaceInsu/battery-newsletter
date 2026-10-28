@@ -1,6 +1,7 @@
 # 논문 가져오기 — Claude 작업 공간에서 출판사 사이트가 막혀 있을 때 GitHub 서버가 대신 받아 오는 심부름꾼.
 # 결과는 main에 커밋하지 않고 임시 브랜치 fetch/<run_id>로 넘긴 뒤, Claude가 받아 가면 삭제 → 저장소에 원문이 남지 않음.
 # 실행: Actions → Fetch papers → Run workflow → Nature 논문 ID를 쉼표로 (예: s41467-024-52766-9,s41467-026-78168-7)
+# 정리: ids 칸에 cleanup 입력 → fetch/ 로 시작하는 임시 브랜치를 모두 삭제
 
 name: Fetch papers
 
@@ -18,7 +19,17 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
+      - name: Cleanup temporary branches
+        if: inputs.ids == 'cleanup'
+        run: |
+          git init -q tmp && cd tmp
+          R="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          for b in $(git ls-remote --heads "$R" 'fetch/*' | awk '{print $2}'); do
+            git push -q "$R" --delete "$b" && echo "deleted $b"
+          done
+
       - name: Download article page, PDF and figures
+        if: inputs.ids != 'cleanup'
         env:
           IDS: ${{ inputs.ids }}
         run: |
@@ -47,6 +58,7 @@ jobs:
 
       # Claude 작업 공간은 artifact 저장소에 접근할 수 없어 임시 브랜치로 전달. Claude가 받아 간 뒤 브랜치를 삭제한다.
       - name: Hand over via temporary branch
+        if: inputs.ids != 'cleanup'
         run: |
           cd out
           git init -q -b "fetch/${{ github.run_id }}"

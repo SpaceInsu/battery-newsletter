@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kakaotalk Battery Newsletter No.2</title>
+<meta name="description" content="이번 주의 배터리 논문 2편 — 비파괴 ARXPS로 본 Li 금속 SEI 깊이 분포, 열폭주를 막는 폴리싸이오펜 안전 강화층">
+<meta property="og:title" content="🔋 Kakaotalk Battery Newsletter No.2">
+<meta property="og:description" content="비파괴 ARXPS로 본 SEI 깊이 분포 · 열폭주 차단 안전 강화층(SRL)">
+<meta property="og:image" content="img/thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DDE5E0;--card:#F4F7F5;--ink:#1D2A24;--sub:#33443C;--mute:#4F6159;--acc:#1E6B52;--acc2:#A44A12;--box:#FFFFFF;--read:#E7EFEA;--dark:#1D2A24}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--card:#18221D;--ink:#E6EEE9;--sub:#C4D2CA;--mute:#93A69C;--acc:#6CC3A0;--acc2:#F0A36B;--box:#202C26;--read:#1F3029;--dark:#0B110E}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 64px}
+header.cover{background:var(--dark);color:#fff;border-radius:22px;padding:28px 22px;margin-bottom:22px}
+.kicker{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC;letter-spacing:.02em}
+.kicker span{white-space:nowrap}.kicker{flex-wrap:wrap;row-gap:2px}
+h1{font-family:'Gowun Dodum',serif;font-weight:400;font-size:34px;line-height:1.3;margin:14px 0 8px}
+.cover p{color:#C9DDD3;font-size:15px;margin:0 0 16px}
+.toc{display:flex;flex-direction:column;gap:10px}
+.toc a{display:block;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none}
+.toc .row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC}
+.toc b{display:block;font-size:16px;margin-top:4px;line-height:1.45}
+.toc span.s{display:block;font-size:13px;color:#C9DDD3;margin-top:4px;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+section.paper{margin-top:30px}
+.ptag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:4px 12px}
+.ptitle{font-family:'Gowun Dodum',serif;font-weight:400;font-size:27px;line-height:1.35;margin:10px 0 4px}
+.cite{font-size:13px;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border-radius:20px;padding:22px 20px;margin-top:14px}
+.card h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;line-height:1.4;margin:4px 0 10px}
+.step-label{font-size:12px;font-weight:700;color:var(--acc)}
+.card p{margin:0 0 10px;color:var(--sub);font-size:15.5px}
+.box{background:var(--box);border-radius:12px;padding:14px 16px;margin:12px 0}
+.box .lab{display:block;font-size:12.5px;font-weight:700;color:var(--acc);margin-bottom:4px}
+.box .warn{display:block;font-size:12.5px;font-weight:700;color:var(--acc2);margin-bottom:4px}
+.box p:last-child{margin-bottom:0}
+.read{background:var(--read);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;line-height:1.65}
+ol.steps{margin:6px 0 0;padding-left:20px}
+ol.steps li{margin-bottom:8px;color:var(--sub);font-size:15px}
+figure{margin:12px 0;background:#fff;border-radius:12px;padding:8px}
+figure button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;color:#4F6159;margin-top:6px;line-height:1.45}
+.tap{font-size:11.5px;color:#4F6159}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:300px}
+th,td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(127,140,133,.25)}
+th:first-child,td:first-child{text-align:left}
+td.mono,th.mono{font-family:'IBM Plex Mono',monospace}
+.hl{color:var(--acc);font-weight:700}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.so{background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;margin-top:14px}
+.so h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;margin:4px 0 10px}
+.so p,.so li{color:#E4F1EB;font-size:15px}
+.so ul{padding-left:18px;margin:6px 0}
+.so .lim{font-size:13px;color:#CDE6DB}
+.btn{display:inline-block;margin-top:10px;background:#fff;color:#134636;font-weight:700;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700;margin:10px 0}
+.flow span.c{padding:7px 10px;border-radius:8px;background:#F6E3D3;color:#8A3C0C}
+.flow span.k{padding:7px 10px;border-radius:8px;background:#3A3F3C;color:#fff}
+.flow span.y{padding:7px 10px;border-radius:8px;background:#F2D06B;color:#5A4A0A}
+.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.bar .t{width:62px;flex:none;font-weight:700}
+.bar .g{flex:1;height:14px;background:rgba(127,140,133,.25);border-radius:7px;overflow:hidden}
+.bar .g i{display:block;height:100%;background:var(--acc)}
+.bar .v{width:52px;text-align:right;font-family:'IBM Plex Mono',monospace}
+footer{margin-top:36px;font-size:12px;color:var(--mute);line-height:1.6}
+a{color:var(--acc)}
+#zoom{position:fixed;inset:0;background:rgba(10,16,13,.92);display:none;z-index:10;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoom.on{display:block}
+#zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
+#zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
+#zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+/* ---- 좌우 스와이프 카드 ---- */
+html.deckmode,html.deckmode body{height:100%;overflow:hidden}
+.topbar,.botbar{position:fixed;left:0;right:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:0 12px}
+.topbar{top:0;height:44px;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--mute)}
+.topbar .lbl{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar .cnt{font-family:'IBM Plex Mono',monospace;flex:none}
+.prog{position:fixed;top:44px;left:0;height:3px;background:var(--acc);z-index:5;transition:width .25s}
+.botbar{bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom);justify-content:space-between}
+.nav{width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;font-weight:700;flex:none;cursor:pointer}
+.nav:disabled{opacity:.3}
+.ask{flex:1;max-width:320px;height:48px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.deck{position:fixed;top:47px;bottom:64px;left:0;right:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;overscroll-behavior-y:contain}
+.sin{max-width:680px;margin:0 auto;padding:12px 16px 28px}
+.sin header.cover{margin-bottom:0}
+.sin>.card:first-of-type,.sin>.so{margin-top:10px}
+.mini{font-size:12.5px;font-weight:700;color:var(--acc);margin:2px 0 0}
+.swipe{margin:16px 0 0;font-size:13px;color:#9FD2BC;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+<div class="kicker"><span>KAKAOTALK BATTERY NEWSLETTER</span><span class="mono">No.2 · 2026.10.28</span></div>
+<h1>이번 주의 2편</h1>
+<p>각 논문은 배경 → 아이디어 → 그림 읽기 → 결론 순서입니다. 그림을 누르면 원본 크기로 확대돼요(두 손가락으로 확대 가능).</p>
+<nav class="toc">
+<a href="#p1"><div class="row"><span>1면 · 신작 · Li 금속 SEI 분석</span><span class="mono">2,460 조회</span></div><b>SEI를 깎지 않고 깊이별로 본다 — ARXPS</b><span class="s">Ar⁺ 스퍼터링 깊이 분석은 SEI 모델을 뒤집을 만큼 왜곡된다. 각도만 바꾼 XPS로 보니 F가 가장 많은 LP40이 가장 두껍고 성능이 낮았다.</span></a>
+<a href="#p2"><div class="row"><span>2면 · 다시 읽기 · LIB 안전·공정</span><span class="mono">43k 조회</span></div><b>집전체 위 600 nm 차단층이 열폭주를 막는다</b><span class="s">전압 강하와 온도 상승에 모두 반응해 절연체가 되는 폴리싸이오펜 층. 하루 3.6 km 롤투롤 생산, 3 Ah 셀 충격 시험 발화 12/19 → 2/19.</span></a>
+</nav>
+</header>
+
+<!-- ================= 1면 ================= -->
+<section class="paper" id="p1">
+<span class="ptag">1면 · 신작 · Li 금속 SEI 분석</span>
+<h2 class="ptitle">SEI를 깎지 않고 깊이별로 본다</h2>
+<p class="cite">D'Acunto, Shuchi, Cui &amp; Bent, <i>Nature Communications</i> (2026.10.22, Article in Press) · Stanford · SLAC · Open Access</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>10 nm짜리 층의 "깊이"를 어떻게 재나</h3>
+<p>Li 금속 SEI는 수 nm~10 nm입니다. 실험실 XPS(Al Kα)의 정상 방출(90°) 탐지 깊이가 약 3λ ≈ <b>8–10 nm</b>라서, 한 번 찍으면 SEI 전체가 <b>표면 가중 평균</b>으로 섞여 나와요. 그래서 깊이 정보를 얻으려고 지금까지는 <b>Ar⁺ 스퍼터링(0.5–10 keV)</b>으로 한 겹씩 깎아 왔습니다.</p>
+<div class="box"><span class="warn">스퍼터링의 문제</span><p>원소별 선택적 제거(preferential sputtering), 비정질화, 원자 혼합, 이온 주입이 함께 일어나요. 앞선 연구에서는 LiPF₆·LiFSI·LiTFSI 서로 다른 염이 스퍼터 후 <b>모두 LiF로 수렴</b>해 보이기도 했습니다. 게다가 SEI의 sputter yield를 모르니 SiO₂ 값으로 깊이를 환산하는데, 이것부터 오차가 커요.</p></div>
+<p>파장 가변 방사광 XPS(HAXPES 등)는 깊이 분해가 되지만 빔타임 경쟁 때문에 체계적 비교 연구에 쓰기 어렵습니다.</p>
+<div class="read"><b>핵심 질문</b> · 시료를 깎지 않고 실험실 XPS만으로 SEI의 깊이별 조성을 얻을 수 있는가? 그렇게 보면 기존 해석(스퍼터 결과, "LiF가 많을수록 좋은 SEI")은 그대로인가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어 · Fig. 1</div>
+<h3>깎는 대신 "기울인다" — 각도분해 XPS</h3>
+<figure><button type="button" data-z="img/ar1.jpg" data-c="원본 그대로 · D'Acunto et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/ar1.jpg" width="1400" height="419" alt="Fig. 1: normal emission, ARXPS and sputter geometry" loading="lazy"></button><figcaption>Fig. 1 원본 · D'Acunto et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="box"><span class="lab">원리: 탈출 경로가 길어지면 깊은 신호가 먼저 사라진다</span><p>I<sub>i</sub>(θ, z) ∝ SF<sub>i</sub> · exp[−z / (λ<sub>i</sub> sin θ)]. 시료를 기울여 take-off angle θ를 90° → 10°로 낮추면 유효 탐지 깊이가 sin θ배로 줄어 <b>약 6배 얕아집니다</b>(90°: 8–10 nm, 10°: 2–3 nm). X선원–분석기 각도는 고정, 시료만 돌려요.</p></div>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> 정상 방출: 깊이 ≈ 3λ. <b>b</b> 10° 기울이면 d ≈ 3λ·sin θ. <b>c</b> 스퍼터 깊이 분석: Ar⁺(보라)가 위층(초록)과 아래층(주황)을 함께 튕겨내고 섞는 모습. 구슬 색은 원소가 아니라 SEI 바깥/안쪽 영역을 뜻합니다.</div>
+<div class="box"><span class="warn">읽을 때 주의</span><p>모델은 평평한 표면을 가정합니다. SESSA 시뮬레이션상 거칠기가 커지면 각도에 따른 차이가 줄어들어, 저자들도 <b>절대 깊이는 제시하지 않고 상대 깊이</b>만 비교해요. 결합에너지는 흔히 쓰는 탄화수소 C 1s(284.8 eV)가 아니라 <b>Li⁰ Li 1s(55.0 eV)</b>로 보정했기 때문에 LiF F 1s가 687.0 eV로 문헌보다 조금 높게 보입니다.</p></div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>같은 SEI, 스퍼터는 층 순서를 뒤집었다</h3>
+<figure><button type="button" data-z="img/ar2.jpg" data-c="원본 그대로 · D'Acunto et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/ar2.jpg" width="1400" height="960" alt="Fig. 2: ARXPS versus sputter depth profiling" loading="lazy"></button><figcaption>Fig. 2 원본 · D'Acunto et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 시료: 1.2 M LiFSI/F5DEE(F5)에서 Cu 위에 Li를 1 mA cm⁻², 1 mAh cm⁻² 도금한 직후.<br><b>a·b</b> ARXPS. 검정 10°(표면), 회색 90°(전체). Li 1s는 Li⁰ 55.0 eV 날카로운 피크 + <b>SEI-Li 56–57 eV 숄더</b>로 분리(Li⁰ 피크로 규격화).<br><b>d·e</b> 같은 시료의 다른 지점을 1 kV Ar⁺로 9분 스퍼터(진한 파랑 전, 하늘색 후).<br><b>c·f</b> 원소 농도를 각도(sin α)와 스퍼터 시간에 따라. <b>g·h</b> 각 결과가 말해 주는 SEI 모델.</div>
+<div class="tbl"><table><tr><th>측정</th><th>SEI-Li 숄더</th><th>결론</th></tr>
+<tr><td>ARXPS (10° vs 90°)</td><td class="mono">표면에서 큼</td><td class="hl">SEI가 Li 위 ✓</td></tr>
+<tr><td>스퍼터 (9 min)</td><td class="mono">깎을수록 커짐</td><td>SEI가 Li 아래?! ✗</td></tr></table></div>
+<p><b>해석</b> · SEI는 정의상 Li와 전해질 사이에 있으므로, 깎을수록 SEI 성분이 늘어난다는 스퍼터 결과(h)는 모순입니다. 스퍼터 쪽에서는 <b>탄소 성분이 선택적으로 먼저 제거</b>되어(f의 검정선 급감) 조성 자체가 왜곡돼요. F 1s는 두 방법 모두 LiF 단일 성분이라 모양 변화가 거의 없어, F 신호만 보면 왜곡을 알아채기 어렵습니다.</p>
+<p class="note">LP40 SEI에서도 스퍼터 손상은 보이지만 양상이 달랐음(두 방법 모두 깊을수록 SEI-Li 감소, 원소 분포만 다름 · SI Note S4). 즉 왜곡 방향이 전해액마다 달라 보정이 불가능합니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 3</div>
+<h3>Cu 위 SEI와 Li 위 SEI는 F 분포가 반대</h3>
+<figure><button type="button" data-z="img/ar3.jpg" data-c="원본 그대로 · D'Acunto et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/ar3.jpg" width="1400" height="552" alt="Fig. 3: SEI on Cu versus SEI on plated Li" loading="lazy"></button><figcaption>Fig. 3 원본 · D'Acunto et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 전해액 LP40 + 10 vol% FEC. <b>a</b> Cu에 10 mV 전위 유지 → Li 석출 전, 전해액 분해만으로 생긴 SEI. <b>b</b> Li 1 mAh cm⁻² 도금 후 SEI. x축 sin α: 왼쪽 = 표면, 오른쪽 = 깊은 쪽. <b>c</b> 빨강 F/C(왼축), 파랑 "SEI 속 F %"(오른축). 네모 = Cu 위, 원 = Li 위.</div>
+<div class="tbl"><table><tr><th></th><th>SEI on Cu</th><th>SEI on Li</th></tr>
+<tr><td>추정 두께</td><td class="mono">~7–8 nm</td><td class="mono">~3–4 nm</td></tr>
+<tr><td>SEI 속 F % (표면 → 깊은 쪽)</td><td class="mono">~4 → ~10%</td><td class="mono">3 → &lt;1%</td></tr>
+<tr><td>F/C 깊이 경향</td><td>깊을수록 증가</td><td class="hl">깊을수록 감소</td></tr></table></div>
+<p class="note">두께: Cu 3p가 45°부터 보임 → 덮개층 7–8 nm / 도금 Li⁰는 전 각도에서 보임 → 3–4 nm. SEI 속 F %는 저자들이 새로 제안한 지표(F 1s를 Li 1s의 SEI 성분으로 규격화).</p>
+<p><b>해석</b> · 저자들은 기판의 <b>표면 산성도</b>(Cu 0.40 v.u. vs Li 0.22 v.u.)로 설명합니다. 산성이 강한 Cu 표면이 염(PF₆⁻) 분해를 가속해 기판 가까이에 F가 쌓인다는 것이에요. Cu 위 SEI가 더 두껍게 나온 점은 cryo-EM 결과(Huang et al.)와 다른데, XPS는 200 × 200 µm를 평균하고 cryo-EM은 국소를 본다는 차이로 해석합니다.</p>
+<div class="box"><span class="warn">읽을 때 주의</span><p>Cu SEI 형성 조건 표기가 본문(0.1 V), 캡션(10 mV, 3 h), 그래프 범례(1 h @ 10 mV)마다 조금씩 다릅니다. Article in Press 단계라 최종본에서 정리될 수 있어요.</p></div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 5 · Fig. 6</div>
+<h3>F가 가장 많은 SEI가 가장 두껍고, 성능은 가장 낮다</h3>
+<figure><button type="button" data-z="img/ar5.jpg" data-c="원본 그대로 · D'Acunto et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/ar5.jpg" width="1400" height="378" alt="Fig. 5: Li 1s spectra for three electrolytes" loading="lazy"></button><figcaption>Fig. 5 원본 · D'Acunto et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>Fig. 5 읽는 법</b> · 90°에서 찍은 Li 1s. 회색 = Li⁰ + 플라즈몬(63.1 eV), 색 = SEI-Li(~56.5 eV, FWHM ~2.7 eV). <b>SEI-Li가 전체 Li 1s에서 차지하는 비율</b>이 클수록 아래 Li⁰ 신호가 더 가려진 것 = SEI가 두꺼움.</div>
+<figure><button type="button" data-z="img/ar6.jpg" data-c="원본 그대로 · D'Acunto et al., Nature Communications (2026) · CC BY-NC-ND 4.0"><img src="img/ar6.jpg" width="1400" height="286" alt="Fig. 6: SEI composition schematics at two depths" loading="lazy"></button><figcaption>Fig. 6 원본 · D'Acunto et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>Fig. 6 읽는 법</b> · 막대 두 줄 = SEI의 두 깊이(위 = 표면 쪽, 아래 = 깊은 쪽), 막대 전체 높이 = 상대 두께. 이 그림만 라벨 색이 Fig. 4·5와 달라요(여기선 F5가 빨강).</div>
+<div class="tbl"><table><tr><th>전해액</th><th>SEI-Li 비율</th><th>F (표면/깊은 쪽)</th><th>특징</th></tr>
+<tr><td>1 M LiPF₆ EC/DEC (LP40)</td><td class="mono">56%</td><td class="mono">7 / 7%</td><td>LiₓPF<sub>y</sub>, 표면 C 최대</td></tr>
+<tr><td>1 M LiFSI DME</td><td class="mono">47%</td><td class="mono">4 / 4%</td><td>S 8 / 16% (SOₓ 잔존)</td></tr>
+<tr class="hl"><td>1.2 M LiFSI F5DEE (F5)</td><td class="mono">33%</td><td class="mono">3 / 3%</td><td>S·N 없음, Li₂O 안쪽</td></tr></table></div>
+<p class="note">성능 순서(F5 &gt; DME &gt; LP40)는 기존 문헌 기준이며 이 논문에서 사이클 성능을 다시 측정하지는 않음. 조성 %는 Fig. 6 막대 값(무기·유기 C 포함 상대 조성).</p>
+<p><b>해석</b> · 세 SEI 모두 표면에 LiF·탄소 성분이 더 많았지만, <b>F 함량은 성능과 반대 순서</b>였습니다. 가장 성능이 좋은 F5는 가장 얇고(33%), S·N 없이 용매 유래 성분(Li₂O, Li₂O₂, LiOH, 카보네이트)이 고르게 분포해요. 저자들은 표면과 깊은 쪽 F/C 차이 |a−b|/max(|a|,|b|)를 균일도 지표로 제안했고, 값은 <b>F5 0.0 &lt; LP40 0.1 &lt; DME 0.3</b>입니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>스퍼터 깊이 분석은 SEI 층 순서까지 왜곡(Fig. 2) → 각도만 바꾸는 ARXPS로 대체 → Cu/Li 기판에 따라 F 분포 반전(Fig. 3) → 좋은 SEI는 "F가 많은" SEI가 아니라 "얇고 균일한" SEI(Fig. 5·6)</p>
+<ul>
+<li><b>분석 보고서 재검토</b>: 사내 XPS 깊이 분석이 Ar⁺ 스퍼터 기반이라면 탄소 선택 제거와 층 순서 왜곡 가능성을 감안해 해석할 것</li>
+<li><b>지표 선택</b>: F/C나 LiF 비율만으로 전해액을 서열화하지 말 것. 두께(SEI-Li 비율)와 깊이 균일도를 함께 볼 것</li>
+<li><b>무음극(anode-free) 초기 계면</b>: 첫 도금 전 Cu 위 SEI와 도금 후 Li 위 SEI는 F 분포가 반대 → 형성 프로토콜에 따라 초기 계면 조성이 달라질 수 있음</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 평평한 표면 가정이라 상대 깊이만 제시하고, 거친 복합 전극에는 적용이 어려움. UHV 측정이라 휘발성 성분이 빠졌을 수 있음(F5에서 S·N 미검출의 원인 후보). 첫 도금 1회 조건만 다뤘고 사이클 데이터는 없음.</p>
+<a class="btn" href="https://www.nature.com/articles/s41467-026-78168-7">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 2면 ================= -->
+<section class="paper" id="p2">
+<span class="ptag">2면 · 다시 읽기 · LIB 안전·공정</span>
+<h2 class="ptitle">집전체 위 600 nm가 열폭주를 끊는다</h2>
+<p class="cite">Song et al., <i>Nature Communications</i> 15, 8294 (2024) · LG Chem · POSTECH · LG Energy Solution · Open Access</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>왜 셀 "안쪽"에 차단기가 필요한가</h3>
+<p>벤트, 셀 간 소화재, 단열재 같은 외부 안전장치는 내부 단락 초기의 <b>내부-외부 온도 차</b>를 따라가지 못해 늦게 반응합니다. 모듈을 없앤 cell-to-pack·cell-to-chassis 설계에서는 셀 하나하나가 스스로 멈추는 장치가 더 중요해졌어요.</p>
+<div class="box"><span class="lab">두 갈래 접근</span><p>① 열반응성 고분자로 전해액·분리막의 <b>이온 전도</b>를 끊기. ② PTC(positive temperature coefficient) 소재로 <b>전자 전도</b>를 끊기. PTC는 2010년대 초부터 개념 증명이 있었지만 슬러리 호환성, 에너지·출력 손실, Ah급 실증 부재로 양산에 들어가지 못했습니다.</p></div>
+<div class="box"><span class="lab">폴리싸이오펜(PTh) 스위치의 두 트리거</span><p>PTh는 음이온(PF₆⁻)으로 p-도핑되면(폴라론 → 바이폴라론) 도체입니다. <b>전압 트리거</b>: 단락으로 셀 전압이 PTh 환원 전위 아래로 떨어지면 탈도핑 → 절연. <b>온도 트리거</b>: 3번 위치 곁사슬의 진동이 커지면 음이온이 떨어져 나감 → 저항 상승(PTC).</p></div>
+<div class="read"><b>핵심 질문</b> · 정상 작동(LCO 3.7–4.5 V, ~50 °C)에서는 저항이 거의 없고, 단락·과열에서만 확실히 꺼지는 층을 <b>양산 공정</b>으로 만들 수 있는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어 · Fig. 1 · Table 1</div>
+<h3>곁사슬을 섞어 100 °C 스위치를 맞춘다</h3>
+<figure><button type="button" data-z="img/srl1.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2024) · CC BY-NC-ND 4.0"><img src="img/srl1.jpg" width="1400" height="689" alt="Fig. 1: SRL thermal runaway prevention mechanism" loading="lazy"></button><figcaption>Fig. 1 원본 · Song et al., Nat. Commun. (2024) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<p>안전 강화층(SRL)은 <b>Al 집전체와 양극 사이</b>에 들어갑니다. 슬러리에 섞지 않고 층으로 만든 이유는 슬러리 안정성과 물성을 건드리지 않기 위해서예요. 곁사슬 길이가 짧으면 전도도는 좋지만 PTC가 약하고, 길면 전환 온도가 너무 낮아집니다.</p>
+<div class="tbl"><table><tr><th>Table 1</th><th>P3HT</th><th>P3DDT</th><th>PDDHEO</th></tr>
+<tr><td>PTC 시작 온도 (°C)</td><td class="mono">120</td><td class="mono">70</td><td class="mono hl">95</td></tr>
+<tr><td>톨루엔 용해도 (wt%)</td><td class="mono">1.04</td><td class="mono">0.76</td><td class="mono hl">9.0</td></tr>
+<tr><td>3 wt% 점도 (cps)</td><td class="mono">15.1</td><td class="mono">401</td><td class="mono hl">4.5</td></tr>
+<tr><td>4 V 임피던스 (Ω)</td><td class="mono">215</td><td class="mono">178</td><td class="mono">192</td></tr>
+<tr><td>d(100) (nm)</td><td class="mono">1.7</td><td class="mono">2.7</td><td class="mono">2.3</td></tr></table></div>
+<p class="note">PDDHEO = 3-dodecyl : 3-hexyl : 3-triethylene glycol thiophene = 49.75 : 49.75 : 0.5 공중합체 (Mn 40k, PDI 3.4)</p>
+<p><b>설계 포인트</b> · 트리에틸렌글리콜 곁사슬 0.5%만 넣어 <b>클로로포름 대신 톨루엔</b>에 녹게 만든 게 양산의 열쇠입니다(노출 기준 2 → 100 ppm, 증기압 200 → 22 mmHg). 점도 4.5 cps는 마이크로 그라비어 코팅에 맞는 값이에요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>도전재가 "도핑 속도"까지 바꾼다</h3>
+<figure><button type="button" data-z="img/srl2.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2024) · CC BY-NC-ND 4.0"><img src="img/srl2.jpg" width="1400" height="1154" alt="Fig. 2: morphology and electrochemistry of PDDHEO/Super C layers" loading="lazy"></button><figcaption>Fig. 2 원본 · Song et al., Nat. Commun. (2024) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · SC0/SC20/SC40 = Super C 0/20/40 wt%.<br><b>a–c</b> 카본이 늘수록 표면이 거칠고 다공성으로. <b>d</b> 온도 vs 저항(점선 OCV). <b>e·f</b> 3 → 4.5 V 충전 모사, 4.5 → 3 V 방전 모사에서 저항 변화. 파란 선 = LCO 충방전 곡선(작동 창 확인용). <b>g</b> CV 0.4 mV s⁻¹. <b>h·i</b> SC0와 SC40의 주사 속도별 CV.</div>
+<div class="tbl"><table><tr><th></th><th>SC0</th><th>SC40</th></tr>
+<tr><td>PTC 시작 온도</td><td class="mono">95 °C*</td><td class="mono">105 °C</td></tr>
+<tr><td>저항 증가 속도 (Ω s⁻¹)</td><td class="mono">561</td><td class="mono hl">1135</td></tr>
+<tr><td>충전 시 도체 전환</td><td class="mono">3.6 V까지 절연</td><td class="mono">~3.1 V</td></tr>
+<tr><td>1차 산화 피크 (V)</td><td class="mono">3.74</td><td class="mono hl">3.41</td></tr></table></div>
+<p class="note">*SC0 = 카본 없는 PDDHEO, Table 1 값. SC20의 1차 산화 피크 3.56 V, 2차 피크는 세 조건 모두 3.83 V로 고정</p>
+<p><b>해석</b> · 카본을 넣으면 1차 산화(중성 → 폴라론, 이때부터 도체)가 0.3 V 낮아지고 역반응도 살아납니다. 그래서 LCO 작동 창(3.7–4.5 V) 전체에서 PTh가 <b>완전히 도핑된 상태</b>로 유지돼 성능 손실이 없고, 전압이 떨어지면 저항이 더 크게 오릅니다. PTh의 화학 상태와 층간 거리는 그대로라서, 저자들은 카본이 만든 <b>전자 경로 + 기공(음이온 이동)</b>이 도핑·탈도핑 속도를 높였다고 봐요. 단순 전도도 보강이 아니라는 점이 새로운 주장입니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4 (+ Fig. 3)</div>
+<h3>양산 속도로 만들어도 셀 성능은 그대로</h3>
+<figure><button type="button" data-z="img/srl4.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2024) · CC BY-NC-ND 4.0"><img src="img/srl4.jpg" width="1400" height="787" alt="Fig. 4: electrochemical performance with SRL" loading="lazy"></button><figcaption>Fig. 4 원본 · Song et al., Nat. Commun. (2024) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> SRL 단면(Al 위 얇은 층). <b>b–d</b> LCO 반쪽 셀 율속·충방전 곡선·에너지 유지율. <b>e·f</b> 3 Ah 파우치셀 율속과 1 C 수명(50사이클마다 0.5 C 회복 사이클).</div>
+<div class="tbl"><table><tr><th>항목</th><th>값</th></tr>
+<tr><td>SRL 두께 / 로딩</td><td class="mono">600 nm / &lt;0.14 mg cm⁻² (&lt;0.5 wt%)</td></tr>
+<tr><td>양극 두께 (압연 후)</td><td class="mono">61 µm = bare 61 µm</td></tr>
+<tr><td>2 C 용량 차 (vs bare)</td><td class="mono">SC40 &lt;4.5% · SC0 13%</td></tr>
+<tr><td>140사이클 에너지 유지</td><td class="mono">SC20 92% · SC40 95%</td></tr>
+<tr><td>3 Ah 파우치 0.1–2.5 C 용량 차</td><td class="mono hl">&lt;1.5%</td></tr>
+<tr><td>3 Ah 파우치 300사이클</td><td class="mono">97% (bare와 동일)</td></tr></table></div>
+<div class="box"><span class="lab">Fig. 3 · 롤투롤 라인 (그림 생략, 수치만)</span><p>500 L 반응기(용액 300 kg) → 마이크로 그라비어 코터, 폭 1700 mm, 최대 50 m min⁻¹ (운전 15 m min⁻¹), 140 °C 건조 구간 24 m. 폭 방향 두께 편차 <b>&lt;49 nm</b>, 양 끝 10 mm 무코팅. 양면 3.6 km/일 ≈ 3 Ah 파우치셀 약 6만 개 분량. 초록에는 "5 km/일"로 표기.</p></div>
+<p><b>해석</b> · 압연 뒤 SRL이 양극층 속으로 들어가 전체 두께가 변하지 않으므로 부피 에너지 밀도 손실이 없습니다. 카본이 없는 SC0는 2 C에서 13% 손해라, Fig. 2의 "카본이 도핑을 돕는다"가 실제 셀 성능 차이로 이어진다는 근거가 돼요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 5</div>
+<h3>3 Ah 셀 충격 시험: 발화 12/19 → 2/19</h3>
+<figure><button type="button" data-z="img/srl5.jpg" data-c="원본 그대로 · Song et al., Nature Communications (2024) · CC BY-NC-ND 4.0"><img src="img/srl5.jpg" width="1400" height="1147" alt="Fig. 5: nail penetration and impact tests on 3-Ah pouch cells" loading="lazy"></button><figcaption>Fig. 5 원본 · Song et al., Nat. Commun. (2024) · CC BY-NC-ND 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a–c</b> 못 관통(3 mm, 30° 팁, 150 mm s⁻¹) 시 전압·온도 곡선과 시험 후 셀 사진. <b>d–f</b> 충격 시험(9.1 kg, 610 mm 낙하), 발화 비율 파이 차트, 시간별 사진. <b>g</b> 발화하지 않은 셀의 분해 사진. <b>h</b> 셀 외부 열전대 온도.</div>
+<div class="tbl"><table><tr><th>시험</th><th>Bare</th><th>SRL</th></tr>
+<tr><td>못 관통 발화 (3 Ah)</td><td class="mono">5 / 6</td><td class="mono hl">0 / 6</td></tr>
+<tr><td>충격 발화 (3 Ah)</td><td class="mono">12 / 19</td><td class="mono hl">2 / 19</td></tr>
+<tr><td>니들 내부 최고 온도 (50 mAh)</td><td class="mono">92 °C</td><td class="mono">&lt;57 °C</td></tr>
+<tr><td>ARC 최고 온도 (1 Ah)</td><td class="mono">418 °C</td><td class="mono">354 °C</td></tr></table></div>
+<p class="note">ARC: bare 열폭주 시작 173 °C, SRL은 열폭주가 약 300분 늦게 시작(SI). 니들 시험 온도 상승률 154 vs 42 °C s⁻¹(SI). 본문의 "폭발률 53% 감소"는 63% → 10.5%의 %p 차이.</p>
+<p><b>해석</b> · 못 관통 직후 bare는 약 3초 안에 0 V로 떨어지지만, SRL 셀은 전압이 바로 <b>OCV로 회복</b>됩니다. 단락 지점 주변의 SRL이 국부적으로 꺼졌다는 뜻이에요. 충격 후 분해 분석에서 bare 셀은 음극 Cu가 양극 표면으로 이동(과방전의 흔적)했지만 SRL 셀에서는 Cu가 검출되지 않았습니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>전압·온도 이중 트리거 PTh(Fig. 1) → 곁사슬 설계로 95 °C 전환 + 톨루엔 공정(Table 1) → 카본이 도핑 속도까지 높여 손실 없음(Fig. 2·4) → 하루 3.6 km 생산(Fig. 3) → 3 Ah 셀 발화 대폭 감소(Fig. 5)</p>
+<ul>
+<li><b>셀 레벨 내부 안전</b>: CTP 구조에서 "셀이 스스로 멈추는" 기능을 집전체 코팅 한 공정으로 추가할 수 있다는 실증</li>
+<li><b>양극 계열 확장 시 확인할 점</b>: 도핑 창이 LCO(3.7–4.5 V) 기준. 작동 전압이 낮은 LFP나 고Ni NCM에서는 PTh가 완전히 도핑된 상태인지 다시 봐야 함</li>
+<li><b>전고체 적용은 열린 질문</b>: 탈도핑에는 음이온(PF₆⁻)의 출입이 필요함. 황화물 고체 전해질 계면에서도 같은 스위치가 작동할지는 이 논문 범위 밖</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · LCO/흑연 단일 화학계. 충격 시험은 한 조건에서 각 19셀. 고온 저장 시 도핑 상태 안정성은 다루지 않았고, 극한 남용 조건에서의 접착력·열안정성은 저자들도 개선 과제로 언급. 카본의 도핑 촉진 메커니즘은 가설 단계.</p>
+<a class="btn" href="https://www.nature.com/articles/s41467-024-52766-9">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<footer>
+Kakaotalk Battery Newsletter · 개인 열람용 비상업 뉴스레터. Figure는 각 논문의 Creative Commons 라이선스(CC BY-NC-ND 4.0)에 따라 수정 없이 출처를 밝혀 인용했습니다. 조회·인용 수는 출판사 페이지 표시값(2026-10-28 기준). 그래프에서 읽은 값은 근사치로 표시했습니다.
+</footer>
+
+</div>
+
+<div id="zoom" role="dialog" aria-modal="true" aria-label="확대한 그림">
+<button class="x" type="button" aria-label="닫기">✕</button>
+<img alt="확대한 그림">
+<div class="zc"></div>
+</div>
+<script>
+(function(){
+  var z=document.getElementById('zoom'), zi=z.querySelector('img'), zc=z.querySelector('.zc');
+  document.querySelectorAll('figure button[data-z]').forEach(function(b){
+    b.addEventListener('click',function(){
+      zi.src=b.getAttribute('data-z'); zc.textContent=b.getAttribute('data-c')||'';
+      var w=Math.max(window.innerWidth*1.8, 900); zi.style.width=w+'px';
+      z.classList.add('on'); document.body.style.overflow='hidden';
+      zi.onload=function(){ z.scrollTop=0; z.scrollLeft=0; };
+    });
+  });
+  function close(){z.classList.remove('on'); document.body.style.overflow='';}
+  z.querySelector('.x').addEventListener('click',close);
+  z.addEventListener('click',function(e){ if(e.target===z) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+/* 긴 페이지 → 카드 한 장씩 좌우로 넘기는 덱. 내용은 위 HTML 그대로 두고 여기서 재배치만 한다. */
+(function(){
+  var ISSUE='Kakaotalk Battery Newsletter No.2';
+  var wrap=document.querySelector('.wrap'); if(!wrap) return;
+  var slides=[];
+  function mk(d){var s=document.createElement('section');s.className='slide';var i=document.createElement('div');i.className='sin';s.appendChild(i);for(var k in d)s.dataset[k]=d[k];slides.push(s);return i;}
+
+  var cover=wrap.querySelector('header.cover');
+  mk({label:'표지'}).appendChild(cover);
+  var sw=document.createElement('p');sw.className='swipe';sw.textContent='← 옆으로 밀어서 한 장씩 넘겨요 →';cover.appendChild(sw);
+
+  wrap.querySelectorAll('section.paper').forEach(function(p){
+    var tag=p.querySelector('.ptag'),tt=p.querySelector('.ptitle'),ci=p.querySelector('.cite');
+    var a=p.querySelector('.so a.btn');
+    var info={paper:p.id,label:tag.textContent,title:tt.textContent,cite:ci.textContent,url:a?a.href:''};
+    var first=true;
+    Array.prototype.slice.call(p.children).forEach(function(card){
+      if(!card.matches('.card,.so')) return;
+      var sl=card.querySelector('.step-label'),h=card.querySelector('h3');
+      var d=Object.assign({},info,{card:(sl?sl.textContent:'')+' · '+(h?h.textContent:'')});
+      var inner=mk(d);
+      if(first){[tag,tt,ci].forEach(function(e){inner.appendChild(e)});first=false;}
+      else{var m=document.createElement('div');m.className='mini';m.textContent=info.label+' · '+info.title;inner.appendChild(m);}
+      inner.appendChild(card);
+    });
+  });
+  var ft=wrap.querySelector('footer'); if(ft) slides[slides.length-1].firstChild.appendChild(ft);
+
+  var deck=document.createElement('main');deck.className='deck';
+  slides.forEach(function(s){deck.appendChild(s)});
+  wrap.replaceWith(deck);
+  document.documentElement.classList.add('deckmode');
+
+  var top=document.createElement('div');top.className='topbar';
+  top.innerHTML='<span class="lbl"></span><span class="cnt"></span>';
+  var prog=document.createElement('div');prog.className='prog';
+  var bot=document.createElement('div');bot.className='botbar';
+  bot.innerHTML='<button class="nav prev" type="button" aria-label="이전 카드">‹</button><a class="ask" target="_blank" rel="noopener">💬 이 카드 Claude에게 질문</a><button class="nav next" type="button" aria-label="다음 카드">›</button>';
+  document.body.prepend(prog);document.body.prepend(top);document.body.appendChild(bot);
+  var lbl=top.querySelector('.lbl'),cnt=top.querySelector('.cnt'),prev=bot.querySelector('.prev'),next=bot.querySelector('.next'),ask=bot.querySelector('.ask');
+
+  var cur=-1;
+  function askUrl(s,i){
+    var page=location.href.split('#')[0]+'#s'+(i+1);
+    var q;
+    if(!s.dataset.paper){
+      q=ISSUE+'를 읽고 질문할게.\n뉴스레터: '+page+'\n\n질문: ';
+    }else{
+      q=ISSUE+'에서 읽은 논문에 대해 질문할게. 배터리공학 박사 수준으로 답해 줘.\n'+
+        '논문: '+s.dataset.title+'\n출처: '+s.dataset.cite+'\n원문: '+s.dataset.url+'\n'+
+        '보고 있던 카드: '+s.dataset.card+'\n뉴스레터: '+page+'\n\n질문: ';
+    }
+    return 'https://claude.ai/new?q='+encodeURIComponent(q);
+  }
+  function update(i){
+    if(i===cur) return; cur=i; var s=slides[i];
+    lbl.textContent=s.dataset.label+(s.dataset.card?' · '+s.dataset.card.split(' · ')[0]:'');
+    cnt.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    ask.href=askUrl(s,i);
+    ask.textContent=s.dataset.paper?'💬 이 카드 Claude에게 질문':'💬 Claude에게 질문';
+    try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:instant?'auto':'smooth'});
+    update(i);
+  }
+  var t;
+  deck.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){update(Math.round(deck.scrollLeft/deck.clientWidth));},60);});
+  prev.addEventListener('click',function(){go(cur-1)});
+  next.addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('zoom').classList.contains('on')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  cover.querySelectorAll('a[href^="#p"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); var id=a.getAttribute('href').slice(1);
+      for(var k=0;k<slides.length;k++){ if(slides[k].dataset.paper===id){go(k);break;} }
+    });
+  });
+  window.addEventListener('resize',function(){deck.scrollLeft=cur*deck.clientWidth;});
+  var m=/^#s(\d+)$/.exec(location.hash), start=m?parseInt(m[1],10)-1:0;
+  requestAnimationFrame(function(){go(start,true);});
+})();
+</script>
+</body>
+</html>

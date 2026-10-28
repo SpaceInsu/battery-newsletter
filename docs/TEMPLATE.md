@@ -79,3 +79,8 @@ Nature · Science · Nature Energy · Nature Materials · Joule · Nature Nanote
 - 카드 한 장 = 화면 한 장, 좌우 스와이프로 넘김 (표지 → 논문별 배경·아이디어·결과·결론 카드)
 - HTML은 기존처럼 `section.paper` 안에 `.card` / `.so`를 순서대로 쓰면 되고, 페이지 하단 스크립트가 자동으로 카드 덱으로 재배치
 - 하단 "💬 이 카드 Claude에게 질문" 버튼: 논문 제목·출처·원문 링크·보고 있던 카드를 채운 채 claude.ai 새 대화를 엶
+
+## 논문 원문 가져오기 (2026-10-28 추가)
+- Claude 작업 공간에서 nature.com 등이 막히면 **Actions → Fetch papers** 사용: GitHub 서버가 논문 페이지·PDF·Figure를 받아 임시 브랜치 `fetch/<run_id>`로 전달
+- 다 쓴 뒤 같은 워크플로를 ids = `cleanup`으로 실행하면 임시 브랜치 전부 삭제
+- Article in Press(웹에 Figure 없음)는 PDF 페이지를 300 dpi로 렌더링해 Figure 전체를 잘라 사용
