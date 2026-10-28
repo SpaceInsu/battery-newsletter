@@ -1,5 +1,5 @@
 # battery-newsletter
-Kakaotalk Battery Newsletter — 주간 배터리 논문 뉴스레터(매주 금요일 3편)를 카카오톡 "나에게 보내기"로 배달합니다.
+Battery Newsletter — 주간 배터리 논문 뉴스레터(매주 금요일 3편)를 카카오톡 "나에게 보내기"로 배달합니다.
 
 ## 구조 (비유)
 | 파일 | 역할 |
