@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battery Newsletter No.3</title>
+<meta name="description" content="이번 주의 배터리 논문 3편 — 전해액 의존 계면 반응과 LIB 수명 예측, W 도핑·표면 스피넬 Li-rich 전고체 양극, Li–Si 껍질 µSi 전고체 음극">
+<meta property="og:title" content="🔋 Battery Newsletter No.3">
+<meta property="og:description" content="전해액은 계면으로 수명을 바꾼다 · Li-rich 산소 붙잡기 · µSi Li–Si 저장고">
+<meta property="og:image" content="img/thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DDE5E0;--card:#F4F7F5;--ink:#1D2A24;--sub:#33443C;--mute:#4F6159;--acc:#1E6B52;--acc2:#A44A12;--box:#FFFFFF;--read:#E7EFEA;--dark:#1D2A24}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--card:#18221D;--ink:#E6EEE9;--sub:#C4D2CA;--mute:#93A69C;--acc:#6CC3A0;--acc2:#F0A36B;--box:#202C26;--read:#1F3029;--dark:#0B110E}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 64px}
+header.cover{background:var(--dark);color:#fff;border-radius:22px;padding:28px 22px;margin-bottom:22px}
+.kicker{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC;letter-spacing:.02em}
+.kicker span{white-space:nowrap}.kicker{flex-wrap:wrap;row-gap:2px}
+h1{font-family:'Gowun Dodum',serif;font-weight:400;font-size:34px;line-height:1.3;margin:14px 0 8px}
+.cover p{color:#C9DDD3;font-size:15px;margin:0 0 16px}
+.toc{display:flex;flex-direction:column;gap:10px}
+.toc a{display:block;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none}
+.toc .row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC}
+.toc b{display:block;font-size:16px;margin-top:4px;line-height:1.45}
+.toc span.s{display:block;font-size:13px;color:#C9DDD3;margin-top:4px;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+section.paper{margin-top:30px}
+.ptag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:4px 12px}
+.ptitle{font-family:'Gowun Dodum',serif;font-weight:400;font-size:27px;line-height:1.35;margin:10px 0 4px}
+.cite{font-size:13px;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border-radius:20px;padding:22px 20px;margin-top:14px}
+.card h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;line-height:1.4;margin:4px 0 10px}
+.step-label{font-size:12px;font-weight:700;color:var(--acc)}
+.card p{margin:0 0 10px;color:var(--sub);font-size:15.5px}
+.box{background:var(--box);border-radius:12px;padding:14px 16px;margin:12px 0}
+.box .lab{display:block;font-size:12.5px;font-weight:700;color:var(--acc);margin-bottom:4px}
+.box .warn{display:block;font-size:12.5px;font-weight:700;color:var(--acc2);margin-bottom:4px}
+.box p:last-child{margin-bottom:0}
+.read{background:var(--read);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;line-height:1.65}
+ol.steps{margin:6px 0 0;padding-left:20px}
+ol.steps li{margin-bottom:8px;color:var(--sub);font-size:15px}
+figure{margin:12px 0;background:#fff;border-radius:12px;padding:8px}
+figure button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;color:#4F6159;margin-top:6px;line-height:1.45}
+.tap{font-size:11.5px;color:#4F6159}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:300px}
+th,td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(127,140,133,.25)}
+th:first-child,td:first-child{text-align:left}
+td.mono,th.mono{font-family:'IBM Plex Mono',monospace}
+.hl{color:var(--acc);font-weight:700}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.so{background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;margin-top:14px}
+.so h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;margin:4px 0 10px}
+.so p,.so li{color:#E4F1EB;font-size:15px}
+.so ul{padding-left:18px;margin:6px 0}
+.so .lim{font-size:13px;color:#CDE6DB}
+.btn{display:inline-block;margin-top:10px;background:#fff;color:#134636;font-weight:700;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700;margin:10px 0}
+.flow span.c{padding:7px 10px;border-radius:8px;background:#F6E3D3;color:#8A3C0C}
+.flow span.k{padding:7px 10px;border-radius:8px;background:#3A3F3C;color:#fff}
+.flow span.y{padding:7px 10px;border-radius:8px;background:#F2D06B;color:#5A4A0A}
+.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.bar .t{width:62px;flex:none;font-weight:700}
+.bar .g{flex:1;height:14px;background:rgba(127,140,133,.25);border-radius:7px;overflow:hidden}
+.bar .g i{display:block;height:100%;background:var(--acc)}
+.bar .v{width:52px;text-align:right;font-family:'IBM Plex Mono',monospace}
+footer{margin-top:36px;font-size:12px;color:var(--mute);line-height:1.6}
+a{color:var(--acc)}
+#zoom{position:fixed;inset:0;background:rgba(10,16,13,.92);display:none;z-index:10;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoom.on{display:block}
+#zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
+#zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
+#zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+/* ---- 좌우 스와이프 카드 ---- */
+html.deckmode,html.deckmode body{height:100%;overflow:hidden}
+.topbar,.botbar{position:fixed;left:0;right:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:0 12px}
+.topbar{top:0;height:44px;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--mute)}
+.topbar .lbl{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar .cnt{font-family:'IBM Plex Mono',monospace;flex:none}
+.prog{position:fixed;top:44px;left:0;height:3px;background:var(--acc);z-index:5;transition:width .25s}
+.botbar{bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom);justify-content:space-between}
+.nav{width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;font-weight:700;flex:none;cursor:pointer}
+.nav:disabled{opacity:.3}
+.ask{flex:1;max-width:320px;height:48px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.deck{position:fixed;top:47px;bottom:64px;left:0;right:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;overscroll-behavior-y:contain}
+.sin{max-width:680px;margin:0 auto;padding:12px 16px 28px}
+.sin header.cover{margin-bottom:0}
+.sin>.card:first-of-type,.sin>.so{margin-top:10px}
+.mini{font-size:12.5px;font-weight:700;color:var(--acc);margin:2px 0 0}
+.swipe{margin:16px 0 0;font-size:13px;color:#9FD2BC;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+<div class="kicker"><span>BATTERY NEWSLETTER</span><span class="mono">No.3 · 2026.11.10</span></div>
+<h1>이번 주의 3편</h1>
+<p>각 논문은 배경 → 아이디어 → 그림 읽기 → 결론 순서입니다. 그림을 누르면 원본 크기로 확대돼요(두 손가락으로 확대 가능).</p>
+<nav class="toc">
+<a href="#p1"><div class="row"><span>1면 · 화제작 · LIB 수명 예측</span><span class="mono">1,840 조회</span></div><b>전해액은 "수송"이 아니라 "계면"으로 수명을 바꾼다</b><span class="s">EC:DMC 비만 바꾼 432 mAh 파우치셀에서 SoH 차이 최대 7%. σ·D·t⁺만 넣은 P2D는 이 차이를 못 그리고, SEI 확산계수를 전해액 의존으로 바꾸자 맞았다.</span></a>
+<a href="#p2"><div class="row"><span>2면 · 필독 · 전고체 양극</span><span class="mono">Sci. Adv.</span></div><b>W "화학 리벳" + 표면 스피넬로 Li-rich 산소 산화환원 잡기</b><span class="s">코팅-소성-수세 한 흐름으로 벌크 W 도핑과 in-situ 스피넬을 동시에. 할라이드 ASSB 0.5 C 500사이클 80%, Si 음극 파우치 543 Wh kg⁻¹(활물질 기준).</span></a>
+<a href="#p3"><div class="row"><span>3면 · 필독 · Si 음극 전고체</span><span class="mono">Adv. Sci.</span></div><b>µSi 겉에 5 nm Li–Si 껍질 — 압력만으로 만든 리튬 저장고</b><span class="s">Li 박과 µSi를 100 MPa로 냉간 압착. 전자전도도 4.10×10⁻⁵ → 4.39 S cm⁻¹, NCM83 풀셀 ICE 76.9 → 82.1%, 200사이클 89.2%.</span></a>
+</nav>
+</header>
+
+<!-- ================= 1면 ================= -->
+<section class="paper" id="p1">
+<span class="ptag">1면 · 화제작 · LIB 수명 예측</span>
+<h2 class="ptitle">전해액은 계면으로 수명을 바꾼다</h2>
+<p class="cite">Weng, Gao, Garcia, Li, Gering, Pena, Yang, Stephens &amp; Offer, <i>Nature Communications</i> (2026.11.05, Article in Press) · Imperial College · Faraday Institution · Idaho National Lab · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>P2D 모델 속 전해액은 왜 "균일한 매질"인가</h3>
+<p>DFN/P2D 수명 모델에서 전해액은 보통 전도도 σ, 확산계수 Dₑ, 전달수 t⁺, 열역학 인자(TDF)로만 들어갑니다. SEI 성장은 조성과 무관한 inner/outer 층 모델로 처리하고요. 그래서 전해액 배합이 달라 수명이 갈라지면 보통 <b>파라미터를 다시 맞추는 것(fitting)</b>으로 넘어갑니다.</p>
+<div class="box"><span class="lab">이 연구의 실험 설계</span><p>NMC811 | 흑연 다층 파우치셀(공칭 <b>432 mAh</b>, LI-FUN 맞춤 제작)에서 전해액 변수만 하나씩 바꿈.<br>· 용매비 EC:DMC = 3:7(기준) / 1:1 / 6:4<br>· LiPF₆ 0.8 / 1.0 / 1.2 M<br>· 주액량 100%(2.0 g) / 55%(1.1 g)<br>모두 VC 첨가제 고정. 45 °C, 1 C 충전 / 2 C 방전, 50사이클마다 RPT(C/10 충방전 + GITT 10 펄스).</p></div>
+<div class="read"><b>핵심 질문</b> · 전해액 배합에 따른 수명 차이가 벌크 수송 물성만으로 설명되는가, 아니면 계면 반응 속도(SEI/CEI 형성·재생)를 모델에 명시적으로 넣어야 하는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 1</div>
+<h3>세 변수 중 용매비가 수명을 가장 크게 가른다</h3>
+<figure><button type="button" data-z="img/el1.jpg" data-c="Fig. 1 전체 · Weng et al., Nature Communications (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 사용"><img src="img/el1.jpg" width="1400" height="707" alt="Fig. 1: ageing protocol, SoH, capacity loss rate, resistance, ICA, DVA" loading="lazy"></button><figcaption>Fig. 1 · Weng et al., Nat. Commun. (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>A</b> RPT 프로토콜(C/10 충방전 → ICA/DVA, GITT → 저항). <b>B</b> RPT 단계별 SoH. 가운데가 용매비, 노란 삼각형 = 기준(3:7). <b>C</b> RPT 구간별 용량 손실 속도. <b>D</b> GITT로 얻은 SOC별 옴 저항(노랑 → 빨강 = 초기 → 후기). <b>E·F</b> 같은 셀의 ICA·DVA(진할수록 후기).</div>
+<div class="tbl"><table><tr><th>변수 (범위)</th><th>최대 SoH 차</th><th>손실 양상</th></tr>
+<tr><td>LiPF₆ 0.8 → 1.2 M</td><td class="mono">2%</td><td>고르게 누적</td></tr>
+<tr><td>주액량 100 → 55%</td><td class="mono">5%</td><td>고르게 누적</td></tr>
+<tr class="hl"><td>EC:DMC 3:7 → 6:4</td><td class="mono">7%</td><td>초기 집중 (RPT02 최대)</td></tr></table></div>
+<p class="note">RPT06 SoH(그래프 근사치): 3:7 ≈ 0.95, 1:1 ≈ 0.90, 6:4 ≈ 0.88. 6:4의 손실 속도는 RPT02에서 약 3.6%로 최대 후 감소(근사치).</p>
+<p><b>해석</b> · EC가 많으면 Li⁺ 용매화 껍질이 EC 중심이 되어 초기 사이클에 환원 분해가 쉬워지고, 그만큼 초기 비가역 용량과 SEI 성장이 커진다는 설명입니다. 저항 증가는 특히 <b>고SOC</b>에서 6:4가 크고, ICA에서는 피크 우측 이동(LLI)·수축에 더해 6:4에서만 <b>피크 붕괴(peak collapse)</b>가, DVA에서는 평탄부 이동·피크 평탄화가 보여요. 저자들은 이를 반응 불균일과 kinetic limitation으로의 전이로 읽습니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 2 · Fig. 3</div>
+<h3>EC-rich: 가스 → "흰 고리" → 국부 실패</h3>
+<figure><button type="button" data-z="img/el3.jpg" data-c="Fig. 3 전체 · Weng et al., Nature Communications (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 사용"><img src="img/el3.jpg" width="1400" height="789" alt="Fig. 3: tear-down, SEM-EDS of NMC811, SEI regeneration schematic" loading="lazy"></button><figcaption>Fig. 3 · Weng et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>A</b> 45 °C 노화 후 분해 사진. 위에서부터 6:4 / 1:1 / 3:7(주액 55%) 분리막과 전극. 6:4에서 검은 흑연 덩어리 둘레의 <b>흰 고리(white ring)</b>, 수지상 흑연 침착, 음극 "dead spot". <b>B</b> NMC811 단면 EDS(노화 전·후, Mn 맵에 입자 균열). <b>C</b> EC-rich에서 LEDC → Li₂CO₃·Li₂O·가스로 SEI가 재생되는 도식. <b>D</b> 단기(SEI로 Li 손실) → 장기(LAM에 따른 LLI) 소모 도식.</div>
+<div class="tbl"><table><tr><th>근거 (Fig. 2)</th><th>EC:DMC 6:4</th><th>EC:DMC 3:7</th></tr>
+<tr><td>GC–MS 가스</td><td>CO₂ 우세 + CH₄·C₂H₆·C₂H₄·C₃H₈·불소 조각, O₂ 검출</td><td>CH₄·C₂H₆ 소량 (단순)</td></tr>
+<tr><td>흑연 SEI (XPS Li 1s)</td><td>Li₂CO₃ 위주, LEDC 소량</td><td>ROCO₂Li형 유기 성분 많음</td></tr>
+<tr><td>분해 경로</td><td>EC 환원 → LEDC + C₂H₄ + CO₂</td><td>DMC 메틸 라디칼 → CH₄·C₂H₆</td></tr></table></div>
+<p><b>해석</b> · 흰 고리는 국부 가스 버블이 전해액을 밀어내 착색 분해물 침착을 막은 자리로 해석됩니다. 즉 EC-rich의 실패는 <b>가스가 만든 국부적·이질적 실패</b>예요. 1:1·3:7은 고리 없이 분리막에 흑연 얼룩이 고르게 퍼지고(완만한 입자 이동), 주액 55%는 표면이 비교적 균일하고 흑연 탈리가 적었습니다. 모든 용매비에서 45 °C 노화 후 SEI의 LiF 상대 비율은 줄고 탄산염·C–O 성분(Li₂CO₃, ROCO₂Li, LiOH)이 늘었어요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 4</div>
+<h3>세 가지 열화 체제: 계면 재구성 · 산소 손실 · 수송 제한</h3>
+<figure><button type="button" data-z="img/el4.jpg" data-c="Fig. 4 전체 · Weng et al., Nature Communications (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 사용"><img src="img/el4.jpg" width="1400" height="882" alt="Fig. 4: cross-section SEM and XRD of graphite and NMC811 electrodes" loading="lazy"></button><figcaption>Fig. 4 · Weng et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>A</b> 흑연 음극 단면 SEM(노란 숫자 = µm)·EDS, XRD (002)와 inset 확대, 아래 왼쪽은 염 농도·주액량별 XRD, 오른쪽은 주액 55% 단면(집전체와 활물질 사이 틈). <b>B</b> NMC811 단면과 XRD (003)·(101) 확대. <b>C</b> 용매 주도형 vs 전해액 부족형 열화 도식.</div>
+<div class="tbl"><table><tr><th>지표</th><th>3:7 (DMC-rich)</th><th>6:4 (EC-rich)</th></tr>
+<tr><td>흑연 전극 두께 (평균)</td><td class="mono">114.97 µm</td><td class="mono hl">120.14 µm</td></tr>
+<tr><td>흑연 결정자 크기</td><td class="mono">35.91 nm</td><td class="mono hl">25.15 nm</td></tr>
+<tr><td>흑연 (002) 위치</td><td colspan="2">거의 변화 없음 → 격자 왜곡보다 <b>파편화</b></td></tr>
+<tr><td>NMC811 (003)·(101)</td><td>—</td><td>피크 넓어짐·세기 감소</td></tr></table></div>
+<p class="note">주액 55% 흑연 전극 단면은 125.99 / 126.13 / 130.86 µm(그림 표기값).</p>
+<p><b>해석</b> · 저자들이 정리한 체제는 셋입니다. ① EC-rich: 계면 재구성(SEI/CEI 두꺼워짐, 기공·박리 증가, LLI 우세). ② DMC-rich: 산소 손실과 연관된 양극 열화. ③ 전해액 부족: 불완전 젖음 → 바인더 실패·국부 dry-out(LAM 우세). <b>같은 SoH 감소라도 원인이 서로 다르다</b>는 것이 다음 모델링 파트의 출발점이에요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ④ · Fig. 6 · Fig. 7</div>
+<h3>σ·D·t⁺만 바꾼 P2D는 틀리고, D<sub>Li,SEI</sub>를 바꾸자 맞았다</h3>
+<figure><button type="button" data-z="img/el6.jpg" data-c="Fig. 6 전체 · Weng et al., Nature Communications (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 사용"><img src="img/el6.jpg" width="1400" height="1822" alt="Fig. 6: transport-only simulation versus experiment" loading="lazy"></button><figcaption>Fig. 6 · Weng et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>Fig. 6 읽는 법</b> · <b>A</b> 수송 물성만 용매비에 맞춰 바꾼 PyBaMM(DFN) 하위 모델 출력: 전해액 농도 분포, SEI 두께, 저항, 균열 속도·길이, 용량 손실 분해(SEI/도금/부반응), LAM·LLI. 3:7과 6:4 선이 거의 겹침. <b>B</b> SoH 시뮬레이션(속 빈 기호) vs 실험(채운 기호). 빨간 음영 = 6:4의 오차.</div>
+<figure><button type="button" data-z="img/el7.jpg" data-c="Fig. 7 전체 · Weng et al., Nature Communications (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 사용"><img src="img/el7.jpg" width="1400" height="1254" alt="Fig. 7: AFM modulus, ToF-SIMS and improved model" loading="lazy"></button><figcaption>Fig. 7 · Weng et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>Fig. 7 읽는 법</b> · <b>A–D</b> AFM 높이 + 영률 분포(3:7·6:4, break-in 후·노화 후). <b>E·F</b> ToF-SIMS 3D(PO₂F₂⁻ 등). <b>G</b> 전해액 민감 유효 SEI 수송 기술자 도식. <b>H</b> 개선 모델(6:4 Sim. kinetic)과 실험 비교.</div>
+<div class="box"><span class="lab">모델 수정: 단 하나의 파라미터</span><p>Li-interstitial 확산 제한 SEI 모델에서 SEI 성장 플럭스 j<sub>SEI</sub> ∝ −D<sup>eff</sup><sub>Li,SEI</sub>·c<sub>Li,0</sub>/L<sub>SEI</sub>·exp(−FΔφ/RT).<br>D<sup>eff</sup><sub>Li,SEI</sub>(X<sub>ely</sub>) = D<sup>ref</sup><sub>Li,SEI</sub> · f<sub>SEI</sub>(X<sub>ely</sub>). f는 용매비 자체가 아니라 SEI 조성·수송-반응 속도를 묶은 무차원 배율입니다.</p></div>
+<div class="tbl"><table><tr><th>RPT06 SoH (근사치)</th><th>3:7</th><th>6:4</th></tr>
+<tr><td>실험</td><td class="mono">≈0.95</td><td class="mono">≈0.88</td></tr>
+<tr><td>수송만 반영 (Fig. 6B)</td><td class="mono">≈0.95</td><td class="mono">≈0.95 ✗</td></tr>
+<tr><td>+ 전해액 민감 D<sup>eff</sup><sub>Li,SEI</sub> (Fig. 7H)</td><td class="mono">≈0.95</td><td class="mono hl">≈0.88 ✓</td></tr></table></div>
+<p><b>해석</b> · AFM에서 6:4 계면은 <b>더 단단하고 공간적으로 불균일</b>, 3:7은 더 부드럽고 균일했습니다. 저자들은 AFM·ToF-SIMS가 D<sup>eff</sup><sub>Li,SEI</sub>를 직접 잰 것은 아니라고 분명히 하며, "조성에 둔감한 단일 SEI 수송 파라미터로는 부족하다"는 가설의 독립 근거로만 씁니다. 같은 불일치는 LiPF₆ 농도를 바꿨을 때도 나타났어요.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>용매비가 수명을 가장 크게 가름(Fig. 1) → 원인은 가스·SEI 화학·국부 실패 같은 계면 현상(Fig. 2–4) → 벌크 수송만 반영한 P2D는 재현 실패 → 전해액 의존 SEI 확산계수 하나로 6:4 궤적 회복(Fig. 6·7)</p>
+<ul>
+<li><b>수명 모델링</b>: 전해액 배합 비교에 PyBaMM 계열 모델을 쓴다면, σ·Dₑ·t⁺ 갱신만으로 SoH 순위를 예측하면 안 됨. SEI 파라미터를 배합별로 따로 두고, 그 근거를 AFM·ToF-SIMS 같은 계면 데이터로 남길 것 (코드·파라미터 Zenodo 공개)</li>
+<li><b>열화 진단</b>: 같은 SoH 손실이라도 EC-rich(LLI·가스·흰 고리), 주액 부족(LAM·dry-out)은 체제가 다름. ICA 피크 붕괴·분리막 흰 고리를 체제 구분 신호로 활용할 수 있음</li>
+<li><b>전고체로의 연결</b>: 액체가 없어도 "벌크 이온 전도도만으로 계면 열화를 설명할 수 없다"는 구조는 같음. 고체 전해질–양극 계면 분해 속도를 조성 의존 파라미터로 두는 모델 설계에 참고할 만함</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 셀 하나의 화학계(NMC811/흑연)와 45 °C 가속 조건 하나, EC:DMC 범위 안의 결과. D<sup>eff</sup><sub>Li,SEI</sub> 보정은 6:4에만 적용했고 저자들도 보편 법칙이 아니라고 명시. f<sub>SEI</sub> 값을 독립적으로 측정하지 않았음. Article in Press 단계라 최종본에서 수치·그림이 바뀔 수 있음.</p>
+<a class="btn" href="https://doi.org/10.1038/s41467-026-79025-3">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 2면 ================= -->
+<section class="paper" id="p2">
+<span class="ptag">2면 · 필독 · 전고체 양극</span>
+<h2 class="ptitle">W "화학 리벳"과 표면 스피넬로 Li-rich 산소를 붙잡다</h2>
+<p class="cite">Ying, Liu, Wang, Yang, … Wang Y., <i>Science Advances</i> 12, eaei9538 (2026.10.30) · Fudan · UNSW · KAIST · Open Access (CC BY-NC 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>전고체에서 Li-rich의 문제는 Mn 용출이 아니라 O₂</h3>
+<p>Li-rich Mn계 층상 산화물(LRMO, Li<sub>1.2</sub>Mn<sub>0.54</sub>Co<sub>0.13</sub>Ni<sub>0.13</sub>O₂)은 4.4 V 이상 Li₂MnO₃의 음이온 산화환원(O²⁻/O₂²⁻)으로 ~300 mAh g⁻¹에 접근합니다. 전고체에서는 액체가 없어 Mn 용출은 줄지만, 과산화된 산소가 <b>O₂로 빠져나가며</b> TM 이동·전압 강하를 만들고, 그 O₂가 양극–고체 전해질 계면으로 가서 전해질 분해와 접촉 손실을 일으킵니다.</p>
+<div class="box"><span class="warn">액체계 해법이 그대로 안 되는 이유</span><p>· 입자 키우기: 고체–고체 접촉에서는 큰 입자가 이온 수송에 불리 → ASSB는 오히려 나노·단결정 방향<br>· 도핑: 균일 도핑을 위해 전구체 단계 고온 소성 → 입자 조대화<br>· 표면 코팅: 전극 혼합·가압 중 코팅층이 깨짐<br>그래서 ASSB용 LRMO 보고치는 0.1 C에서 250 mAh g⁻¹을 넘기 어렵고 수명도 대개 500사이클 미만이었습니다.</p></div>
+<div class="read"><b>핵심 질문</b> · 입자 크기를 키우지 않고, 벌크 산소 산화환원의 가역성과 표면 O₂ 방출 억제를 <b>한 번의 후처리</b>로 동시에 얻을 수 있는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어 · Fig. 1</div>
+<h3>코팅 → 소성 → 수세, 세 단계가 각각 하는 일</h3>
+<ol class="steps">
+<li><b>코팅</b>: 암모늄 텅스테이트 (NH₄)₁₀H₂(W₂O₇)₆ 6 wt%를 입자 표면에.</li>
+<li><b>소성(700 °C)</b>: 벌크의 Li⁺가 밖으로 나와 WO₃와 반응해 Li₂WO₄ 생성 → 동시에 W⁶⁺가 TM 자리로 확산. 전하 중성은 Mn 가수(XANES 6558.6 eV, ≈ +4 유지)가 아니라 <b>Li 결손</b>으로 맞춤.</li>
+<li><b>수세</b>: Li₂WO₄를 녹여내면 Li가 모자란 표면이 <b>스스로 스피넬(Fd-3m)로 재구성</b>.</li>
+</ol>
+<div class="box"><span class="lab">비유: 리벳과 방수막</span><p>W–O 공유결합이 강해 산화된 산소를 격자에 박아 두는 <b>리벳</b> 역할(PDOS에서 Mn–O 겹침은 약간 줄고 W–O 겹침이 큼). 표면 스피넬은 산소 산화환원에 덜 참여하는 <b>방수막</b>으로, 벌크 산소가 빠져나갈 표면 결함 경로를 막습니다. 외부에서 붙인 코팅과 달리 벌크와 격자가 이어져 있어(coherent) 가압·부피 변화에 덜 깨진다는 주장이에요.</p></div>
+<div class="tbl"><table><tr><th>ICP (몰비)</th><th>Li</th><th>W</th></tr>
+<tr><td>코팅·소성, 수세 전 (C-LRMO)</td><td class="mono">1.196</td><td class="mono">0.0171</td></tr>
+<tr><td>수세 후 (W-LRMO@Spinel)</td><td class="mono hl">1.175</td><td class="mono hl">0.0125</td></tr></table></div>
+<p class="note">입자 300–500 nm 유지(조대화 없음). c축 ≈0.02 Å 증가(W⁶⁺ 0.60 Å가 Mn⁴⁺ 0.53 Å 치환). XPS 30·60 nm 깊이와 FIB 단면 EDS에서 W 균일. 수세만 한 LRMO는 Li⁺/H⁺ 교환으로 용량 급감 → 코팅이 있어야 수세가 "재구성"이 됨.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>첫 충전: 고전압 평탄부가 길어지고, 저항 상승은 늦게</h3>
+<figure><button type="button" data-z="img/lr2.jpg" data-c="원본 그대로 · Ying et al., Science Advances (2026) · CC BY-NC 4.0"><img src="img/lr2.jpg" width="1400" height="1676" alt="Fig. 2: first-cycle curves, O-/O2 2- ratio, in situ EIS and DRT" loading="lazy"></button><figcaption>Fig. 2 원본 · Ying et al., Sci. Adv. (2026) · CC BY-NC 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 셀: Li₃InCl₆(LIC) 고체 전해질 + 음극 쪽 LPSC 층, Li-In 음극, 0.2 C·25 °C·50 MPa, 7.64 mg cm⁻².<br><b>A</b> 첫 충방전. 위 화살표 = 4.4 V 이상 평탄부 비율(53.5% vs 61.8%). <b>B</b> 충전 후 XPS 깊이별 O⁻/O₂²⁻ : 격자 O²⁻ 비(100 s ≈ 30 nm, 200 s ≈ 60 nm). <b>C·D</b> 첫 충전 중 전압별 in-situ EIS. <b>E·F</b> 같은 데이터의 DRT 지도(가로 log τ, 세로 전압, 빨강 = 큰 저항). τ 10⁻²–10⁻¹ s ≈ R<sub>ct</sub>, &gt;10⁻¹ s ≈ R<sub>d</sub>.</div>
+<div class="tbl"><table><tr><th>첫 사이클</th><th>LRMO</th><th>W-LRMO@Spinel</th></tr>
+<tr><td>ICE</td><td class="mono">68%</td><td class="mono hl">72%</td></tr>
+<tr><td>O⁻/O₂²⁻ 비 (30 nm)</td><td class="mono">16%</td><td class="mono hl">30%</td></tr>
+<tr><td>O⁻/O₂²⁻ 비 (60 nm)</td><td class="mono">19%</td><td class="mono hl">32%</td></tr>
+<tr><td>R<sub>ct</sub>·R<sub>d</sub> 급증 시작</td><td class="mono">4.5 V</td><td class="mono">4.55 V, 완만</td></tr></table></div>
+<p><b>해석</b> · 고전압 평탄부가 길면서 ICE가 높다는 것은, 더 많은 산소가 산화되었는데 그중 O₂로 비가역 손실된 몫은 오히려 적다는 뜻입니다. 활성 산소(O⁻/O₂²⁻)가 벌크에서 거의 2배 남아 있는 것이 이를 뒷받침해요. 두 시료 모두 깊을수록 활성 산소 비율이 높아, <b>계면 쪽 산소가 가장 불안정</b>하다는 점도 보여 줍니다.</p>
+<p class="note">LIC는 ≈4.00 V부터 산화되지만 LIC/C 대조 셀의 방전 기여는 LRMO 셀의 약 2%로 무시 가능하다고 저자들이 확인(fig. S9–S10). 4W·8W 비교에서 6 wt%가 최적.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4</div>
+<h3>100사이클 뒤: LIC 분해와 산소 정공 손실이 갈린다</h3>
+<figure><button type="button" data-z="img/lr4.jpg" data-c="원본 그대로 · Ying et al., Science Advances (2026) · CC BY-NC 4.0"><img src="img/lr4.jpg" width="1400" height="1980" alt="Fig. 4: In 3d XPS and O K-edge sXAS" loading="lazy"></button><figcaption>Fig. 4 원본 · Ying et al., Sci. Adv. (2026) · CC BY-NC 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>A–C</b> In 3d XPS. 파랑 = LIC, 빨강 = In₂O₃(산소와 반응한 LIC 분해물), C는 표준 스펙트럼. <b>D·E</b> O K-edge sXAS <b>PEY</b>(표면 수 nm): t₂g(~529.7 eV)↑·e<sub>g</sub>(~532.5 eV)↓가 클수록 표면 산소 산화가 큼. <b>F·G</b> <b>PFY</b>(~100–200 nm = 벌크): 두 피크 사이 ~531.3 eV(분홍 띠) 흡수 = O 2p 정공(Li–O–Li 배위). 빨강 = 150번째 사이클 4.7 V.</div>
+<div class="tbl"><table><tr><th>노화 지표</th><th>LRMO</th><th>W-LRMO@Spinel</th></tr>
+<tr><td>In₂O₃ 비율 (100th, 4.7 V)</td><td class="mono">11.1%</td><td class="mono hl">6.7%</td></tr>
+<tr><td>DRT R<sub>ct</sub> 피크 (100th)</td><td class="mono">≈70 Ω</td><td class="mono hl">≈50 Ω</td></tr>
+<tr><td>DRT R<sub>d</sub> 피크 (100th)</td><td class="mono">143 Ω</td><td class="mono hl">123 Ω</td></tr>
+<tr><td>격자 산소 비율 (O 1s, 100th)</td><td class="mono">13%</td><td class="mono hl">19%</td></tr>
+<tr><td>PFY O 2p 정공 (150th)</td><td>첫 사이클 대비 뚜렷이 감소</td><td>높게 유지</td></tr></table></div>
+<p><b>해석</b> · 표면(PEY)에서는 스피넬 쪽 e<sub>g</sub> 감소가 작아 <b>표면 산소 산화 자체가 억제</b>되고, 그 결과 방출 O₂가 LIC를 산화시키는 양(In₂O₃)도 줄어듭니다. 벌크(PFY)에서는 150사이클 뒤에도 정공이 유지되어 <b>음이온 산화환원 활성이 살아 있음</b>을 보여 줘요. 표면은 덜 일하게, 벌크는 오래 일하게 — 두 처리의 역할 분담이 스펙트럼으로 구분되는 것이 이 그림의 핵심입니다. 단면 SEM(fig. S24)에서도 LRMO만 LIC 계면을 따라 큰 공극·균열이 보였어요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 3 · Fig. 5 (그림 생략, 수치만)</div>
+<h3>수명·율속·고전압·파우치</h3>
+<div class="tbl"><table><tr><th>조건</th><th>LRMO</th><th>W-LRMO@Spinel</th></tr>
+<tr><td>0.1 C 용량, 4.6 V·25 °C</td><td class="mono">178.8</td><td class="mono">212.5 mAh g⁻¹</td></tr>
+<tr><td>2 C 용량</td><td class="mono">38.2</td><td class="mono hl">110.5 mAh g⁻¹</td></tr>
+<tr><td>0.5 C 500사이클 유지율</td><td>더 낮음</td><td class="mono hl">80%</td></tr>
+<tr><td>1 C 1000사이클 유지율</td><td>—</td><td class="mono">74.4% (125.9 mAh g⁻¹)</td></tr>
+<tr><td>평균 전압 강하 (첫 200사이클)</td><td class="mono">0.55 mV/cyc</td><td class="mono">0.44 mV/cyc</td></tr>
+<tr><td>4.8 V·25 °C, 0.1 C / 1 C</td><td>—</td><td class="mono">268.0 / 161.5 mAh g⁻¹</td></tr>
+<tr><td>4.8 V·40 °C, 0.1 C</td><td>—</td><td class="mono">278.2 mAh g⁻¹</td></tr></table></div>
+<div class="box"><span class="lab">파우치 실증 (Si 음극, 건식 필름)</span><p>5 × 5.5 cm, 양극 로딩 19.96 mg cm⁻², 60 °C·0.1 C에서 ICE 89.9%, 총 125.2 mAh, 4.55 mAh cm⁻², 양극 기준 225.9 mAh g⁻¹, 0.5 C 158.4 mAh g⁻¹. <b>543 Wh kg⁻¹는 활물질 질량 기준</b>(셀 전체 기준 아님). 0.333 C 100사이클 유지율 60% — 저자들은 낮은 구속압에서 고로딩 Si 음극의 기계적 열화를 원인으로 봄.</p></div>
+<p class="note">4.8 V에서는 0.2 C 143사이클에서 80%. 1 C ≡ 200 mA g⁻¹.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>코팅-소성-수세 한 흐름 → 벌크 W 도핑(리벳) + Li 결손 표면의 in-situ 스피넬(방수막)(Fig. 1) → 활성 산소 2배 보존·저항 상승 지연(Fig. 2) → 표면 산소 산화와 LIC 산화 억제, 벌크 정공 유지(Fig. 4) → 500사이클 80%</p>
+<ul>
+<li><b>할라이드 전해질 계면</b>: LIC 열화의 상당 부분이 "양극에서 나온 O₂"에 의한 산화(In₂O₃)라는 정량 근거. 고전압 양극–할라이드 계면 설계에서 전해질 자체 안정성뿐 아니라 양극 산소 방출을 함께 봐야 함</li>
+<li><b>공정 관점</b>: 전구체 단계 도핑 대신 완성 입자 후처리(700 °C + 수세)라 입자 크기를 유지. 다만 수세 공정은 기존 Ni-rich 수세와 달리 표면 재구성까지 의도한 것이라 조건 창(6 wt%, 4W·8W 열세)이 좁음</li>
+<li><b>진단 기법</b>: sXAS PEY/PFY로 표면·벌크 산소 산화를 분리해 보는 방식은 사내 고전압 양극 열화 분석에도 그대로 적용 가능</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 셀 실험 대부분이 펠릿·50 MPa·Li-In 음극. 파우치는 60 °C 시험이고 100사이클 60%로 수명은 Si 음극에 막혀 있음. 543 Wh kg⁻¹은 활물질 기준. 전하 보상·스피넬 형성 메커니즘은 간접 근거(ICP·XANES·FFT) 중심이고, 리벳 효과는 단일 W 치환 PDOS 계산에 기댐.</p>
+<a class="btn" href="https://doi.org/10.1126/sciadv.aei9538">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 3면 ================= -->
+<section class="paper" id="p3">
+<span class="ptag">3면 · 필독 · Si 음극 전고체</span>
+<h2 class="ptitle">µSi 겉의 5 nm Li–Si 껍질, 압력만으로 만든 리튬 저장고</h2>
+<p class="cite">Wang Z., Zhu X., Zhu R., Dou, Zhang, Lu &amp; Wu, <i>Advanced Science</i> (2026.11.02), e78198 · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경</div>
+<h3>카본 없는 µSi 음극의 세 가지 약점</h3>
+<p>황화물 ASSB에서 도전재·바인더 없이 µSi만 쓰는 "fully active" 음극은 활물질 비율을 최대로 높이고, 카본과 전해질의 부반응도 없앱니다. 그러나 ① µSi 자체의 낮은 전자·이온 전도도(느린 반응), ② 부피 팽창이 만드는 계면 균열, ③ Si 전위에서 황화물(LPSC)이 환원 분해되어 생기는 절연성 SEI(낮은 CE) 문제가 남아요.</p>
+<div class="box"><span class="lab">이미 알려진 처방: 표면 사전 리튬화</span><p>Li–Si 합금은 이온·전자 혼합 전도체이고, 약간 부푼 상태라 완충층이 되며, 담긴 Li가 사이클 중 손실을 메울 수 있습니다. 관건은 이 층을 <b>얇고 균일하게, 간단한 공정으로</b> 만드는 것.</p></div>
+<div class="read"><b>핵심 질문</b> · 용액·전기화학 공정 없이 Li 박과 µSi를 눌러서 각 입자에 연속적인 Li–Si 껍질을 만들 수 있는가? 그 껍질이 실제로 "꺼내 쓸 수 있는" 리튬 저장고로 작동하는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">아이디어 · Fig. 2 · Fig. 3 (그림 생략, 수치만)</div>
+<h3>Li 박 위에 µSi를 놓고 100 MPa로 누르면</h3>
+<ol class="steps">
+<li>Cu(~10 µm) / 초박 Li(~20 µm) / µSi 층을 쌓아 <b>100 MPa 냉간 압착</b> → Li와 Si의 자발적 계면 반응으로 표면 사전 리튬화.</li>
+<li><b>0.5 h 분쇄</b>로 Li–Si 껍질을 가진 입자(µSi@LiSi)를 고르게 분산. Li : Si 질량비 ≈ 1 : 10.</li>
+</ol>
+<div class="tbl"><table><tr><th>구조 확인</th><th>µSi</th><th>µSi@LiSi</th></tr>
+<tr><td>HRTEM 표면 비정질층</td><td class="mono">~2 nm (SiOₓ)</td><td class="mono hl">~5 nm (Li–Si)</td></tr>
+<tr><td>XRD</td><td>결정 Si</td><td>결정 Si + Li₁₅Si₄</td></tr>
+<tr><td>Raman Si 피크</td><td class="mono">520.6 cm⁻¹</td><td class="mono">524.1 cm⁻¹ (압축 변형)</td></tr>
+<tr><td>Si 2p XPS</td><td class="mono">Si–Si 99.0 · Si–O 103.2 eV</td><td class="mono">+ Li–Si 98.5 · Li–Si–O 101.0 eV</td></tr></table></div>
+<p class="note">⁷Li ssNMR 0 ppm 부근 Li–Si 신호가 압착 1→10분으로 갈수록 커짐. XPS 깊이 분석에서 Li–Si 성분이 표면에서 우세하다가 깊어지면 Si–Si에 역전 → 코어–셸 구조. 입자 4개 영역 TEM으로 균일성 확인.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 4</div>
+<h3>껍질의 Li는 정말 꺼내 쓸 수 있고, 전도도는 10⁵배</h3>
+<figure><button type="button" data-z="img/si4.jpg" data-c="Fig. 4 전체 · Wang et al., Advanced Science (2026) · CC BY 4.0"><img src="img/si4.jpg" width="1400" height="1048" alt="Fig. 4: Li extraction, symmetric cells, DC polarization conductivities" loading="lazy"></button><figcaption>Fig. 4 · Wang et al., Adv. Sci. (2026) · CC BY 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> µSi@LiSi | LPSC | Li 반쪽 셀을 충전(탈리튬)해 껍질에서 나오는 Li 용량 측정. <b>b</b> µSi@LiSi 대칭셀 0.2 mA cm⁻²·0.2 mAh cm⁻². <b>c</b> 전류 밀도를 계단식으로 올린 대칭셀(빨강 전압, 파랑 전류, 1 h 고정). <b>d</b> 리튬 석출 도식. <b>e</b> SS 블로킹 셀 DC 분극 → 전자 전도도. <b>f</b> Li-In/LPSC 블로킹 셀 → 이온 전도도. <b>g</b> 두 값 비교(로그 축).</div>
+<div class="tbl"><table><tr><th>항목</th><th>µSi</th><th>µSi@LiSi</th></tr>
+<tr><td>전자 전도도 σₑ (S cm⁻¹)</td><td class="mono">4.10×10⁻⁵</td><td class="mono hl">4.39</td></tr>
+<tr><td>이온 전도도 σᵢ (S cm⁻¹)</td><td class="mono">2.56×10⁻⁸</td><td class="mono hl">1.23×10⁻⁵</td></tr>
+<tr><td>껍질 Li 이론 / 실측 용량</td><td colspan="2" class="mono">0.579 / 0.57 mAh (Li 0.15 mg)</td></tr>
+<tr><td>대칭셀 수명</td><td colspan="2" class="mono">4000 h, 과전압 200 → 250 mV</td></tr>
+<tr><td>대칭셀 최대 전류</td><td colspan="2" class="mono">1.6 mA cm⁻² (Li 0.22 mg ≈ 0.85 mAh로 증량)</td></tr></table></div>
+<p><b>해석</b> · 넣은 Li의 거의 전부(0.57/0.579)가 전기화학적으로 빠져나온다는 것이 "저장고"의 직접 증거입니다. 전도도 값은 Li 함량에 따라 달라진다고 저자들이 밝혔고(여기선 0.15 mg), 껍질은 사이클 중 코어 Si와 계속 합금화되는 <b>고정 껍질이 아닌 동적 계면</b>으로 봐야 한다고 해요.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 5</div>
+<h3>NCM83 풀셀: ICE +5%p, 50사이클 49.7% → 200사이클 89.2%</h3>
+<figure><button type="button" data-z="img/si5.jpg" data-c="Fig. 5 전체 · Wang et al., Advanced Science (2026) · CC BY 4.0"><img src="img/si5.jpg" width="1400" height="1032" alt="Fig. 5: full-cell voltage profiles, dQ/dV, cycling and rate" loading="lazy"></button><figcaption>Fig. 5 · Wang et al., Adv. Sci. (2026) · CC BY 4.0 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 셀: NCM83 | LPSC | µSi(@LiSi), N/P 1.2, 30 °C, 구속압 100 MPa. <b>a</b> 첫 충방전과 ICE 표. <b>b</b> dQ/dV(H1→M, M→H2, H2→H3). <b>c</b> 0.1 C 수명(NCM 10.178 mg cm⁻²). <b>d</b> 0.5 C 1000사이클(10.64 mg cm⁻²). <b>e·f</b> 율속. <b>g</b> 문헌 비교 레이더(정성 지표).</div>
+<div class="tbl"><table><tr><th>풀셀</th><th>µSi</th><th>µSi@LiSi</th></tr>
+<tr><td>첫 방전 용량 (0.1 C)</td><td class="mono">179.0</td><td class="mono">182.6 mAh g⁻¹</td></tr>
+<tr><td>ICE</td><td class="mono">76.9%</td><td class="mono hl">82.1%</td></tr>
+<tr><td>0.1 C 수명</td><td class="mono">49.7% @50</td><td class="mono hl">89.2% @200 (평균 CE 99.8%)</td></tr>
+<tr><td>0.5 C 수명</td><td>—</td><td class="mono">61.7% @1000</td></tr>
+<tr><td>율속 0.1/0.2/0.5/1 C</td><td>훨씬 낮음</td><td class="mono">166.5/148.7/121.3/96.3</td></tr>
+<tr><td>R<sub>ct</sub> 사이클 전 → 후</td><td class="mono">420.7 → 895.8 Ω</td><td class="mono hl">23.4 → 305.2 Ω</td></tr>
+<tr><td>GITT D<sub>Li⁺</sub> (cm² s⁻¹)</td><td class="mono">7.9×10⁻¹⁰</td><td class="mono">1.7×10⁻⁹</td></tr></table></div>
+<p class="note">초록은 182.55 mAh g⁻¹·89.2%, 서론은 89.22%로 표기. 100사이클 후 AFM 표면 거칠기 513 vs 246 nm(Fig. 7). 사후 XPS에서 µSi는 Li₃P(130.3 eV)·Li₂S(160.5 eV)가 강하고 µSi@LiSi는 미량.</p>
+<p><b>해석</b> · ICE 증가는 껍질 Li가 첫 사이클 손실을 메운 몫, 수명 차이는 균열 억제(µSi는 전기화학적 소결 후 두꺼운 막이 갈라짐)와 LPSC 환원 억제가 함께 작용한 결과로 저자들은 설명합니다. DRT에서 차이가 주로 0.1–10 s(계면 전하 이동) 구간에 나타나, 개선이 음극 쪽 계면에서 왔다는 점도 분리해 보여 줘요.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>Li 박 + µSi 냉간 압착 → 입자마다 ~5 nm Li–Si 껍질(Fig. 2·3) → 꺼내 쓸 수 있는 Li 저장고 + 혼합 전도체(Fig. 4) → ICE 82.1%, 200사이클 89.2%(Fig. 5) → 균열·LPSC 환원 억제(Fig. 7)</p>
+<ul>
+<li><b>사전 리튬화 공정 후보</b>: 용액·전기화학 단계 없이 압착 + 분쇄만으로 표면 리튬화. 건식 전극 공정과 결합 가능성을 검토할 만함(단, 분위기·Li 박 취급 조건은 본문에 제한적)</li>
+<li><b>Li 보충량 설계</b>: Li : Si ≈ 1 : 10에서 꺼낸 용량이 이론치와 거의 같음 → N/P·ICE 손실분에 맞춰 Li 투입량을 계산식으로 정할 수 있는 근거</li>
+<li><b>평가 조건 주의</b>: 구속압 100 MPa, 양극 로딩 ~10 mg cm⁻²(NCM83). 사내 목표 압력·로딩에서 같은 효과가 나는지 재확인 필요</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 100 MPa 구속압·펠릿 셀·30 °C 조건뿐이고 파우치 실증 없음. 양극 로딩이 낮아 면적 용량이 실용 수준보다 작음. 0.5 C 1000사이클 61.7%는 여전히 큰 감소. 문헌 비교(Fig. 5g)는 "안전성·환경성" 같은 정성 점수를 포함. 껍질이 사이클 중 코어와 섞인 뒤의 거동은 정량되지 않음.</p>
+<a class="btn" href="https://doi.org/10.1002/advs.78198">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<footer>
+Battery Newsletter · 개인 열람용 비상업 뉴스레터. Figure는 각 논문의 Creative Commons 라이선스에 따라 출처를 밝혀 인용했습니다 — 1면 CC BY 4.0(Article in Press PDF에서 Figure 영역만 잘라냄, 내용 변경 없음), 2면 CC BY-NC 4.0(원본 그대로), 3면 CC BY 4.0(원본 그대로). 2·3면 원문은 PubMed Central 공개본으로 읽었습니다. 조회 수는 출판사 페이지 표시값(2026-11-10 기준). 그래프에서 읽은 값은 근사치로 표시했습니다.
+</footer>
+
+</div>
+
+<div id="zoom" role="dialog" aria-modal="true" aria-label="확대한 그림">
+<button class="x" type="button" aria-label="닫기">✕</button>
+<img alt="확대한 그림">
+<div class="zc"></div>
+</div>
+<script>
+(function(){
+  var z=document.getElementById('zoom'), zi=z.querySelector('img'), zc=z.querySelector('.zc');
+  document.querySelectorAll('figure button[data-z]').forEach(function(b){
+    b.addEventListener('click',function(){
+      zi.src=b.getAttribute('data-z'); zc.textContent=b.getAttribute('data-c')||'';
+      var w=Math.max(window.innerWidth*1.8, 900); zi.style.width=w+'px';
+      z.classList.add('on'); document.body.style.overflow='hidden';
+      zi.onload=function(){ z.scrollTop=0; z.scrollLeft=0; };
+    });
+  });
+  function close(){z.classList.remove('on'); document.body.style.overflow='';}
+  z.querySelector('.x').addEventListener('click',close);
+  z.addEventListener('click',function(e){ if(e.target===z) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+/* 긴 페이지 → 카드 한 장씩 좌우로 넘기는 덱. 내용은 위 HTML 그대로 두고 여기서 재배치만 한다. */
+(function(){
+  var ISSUE='Battery Newsletter No.3';
+  var wrap=document.querySelector('.wrap'); if(!wrap) return;
+  var slides=[];
+  function mk(d){var s=document.createElement('section');s.className='slide';var i=document.createElement('div');i.className='sin';s.appendChild(i);for(var k in d)s.dataset[k]=d[k];slides.push(s);return i;}
+
+  var cover=wrap.querySelector('header.cover');
+  mk({label:'표지'}).appendChild(cover);
+  var sw=document.createElement('p');sw.className='swipe';sw.textContent='← 옆으로 밀어서 한 장씩 넘겨요 →';cover.appendChild(sw);
+
+  wrap.querySelectorAll('section.paper').forEach(function(p){
+    var tag=p.querySelector('.ptag'),tt=p.querySelector('.ptitle'),ci=p.querySelector('.cite');
+    var a=p.querySelector('.so a.btn');
+    var info={paper:p.id,label:tag.textContent,title:tt.textContent,cite:ci.textContent,url:a?a.href:''};
+    var first=true;
+    Array.prototype.slice.call(p.children).forEach(function(card){
+      if(!card.matches('.card,.so')) return;
+      var sl=card.querySelector('.step-label'),h=card.querySelector('h3');
+      var d=Object.assign({},info,{card:(sl?sl.textContent:'')+' · '+(h?h.textContent:'')});
+      var inner=mk(d);
+      if(first){[tag,tt,ci].forEach(function(e){inner.appendChild(e)});first=false;}
+      else{var m=document.createElement('div');m.className='mini';m.textContent=info.label+' · '+info.title;inner.appendChild(m);}
+      inner.appendChild(card);
+    });
+  });
+  var ft=wrap.querySelector('footer'); if(ft) slides[slides.length-1].firstChild.appendChild(ft);
+
+  var deck=document.createElement('main');deck.className='deck';
+  slides.forEach(function(s){deck.appendChild(s)});
+  wrap.replaceWith(deck);
+  document.documentElement.classList.add('deckmode');
+
+  var top=document.createElement('div');top.className='topbar';
+  top.innerHTML='<span class="lbl"></span><span class="cnt"></span>';
+  var prog=document.createElement('div');prog.className='prog';
+  var bot=document.createElement('div');bot.className='botbar';
+  bot.innerHTML='<button class="nav prev" type="button" aria-label="이전 카드">‹</button><a class="ask" target="_blank" rel="noopener">💬 이 카드 Claude에게 질문</a><button class="nav next" type="button" aria-label="다음 카드">›</button>';
+  document.body.prepend(prog);document.body.prepend(top);document.body.appendChild(bot);
+  var lbl=top.querySelector('.lbl'),cnt=top.querySelector('.cnt'),prev=bot.querySelector('.prev'),next=bot.querySelector('.next'),ask=bot.querySelector('.ask');
+
+  var cur=-1;
+  function askUrl(s,i){
+    var page=location.href.split('#')[0]+'#s'+(i+1);
+    var q;
+    if(!s.dataset.paper){
+      q=ISSUE+'를 읽고 질문할게.\n뉴스레터: '+page+'\n\n질문: ';
+    }else{
+      q=ISSUE+'에서 읽은 논문에 대해 질문할게. 배터리공학 박사 수준으로 답해 줘.\n'+
+        '논문: '+s.dataset.title+'\n출처: '+s.dataset.cite+'\n원문: '+s.dataset.url+'\n'+
+        '보고 있던 카드: '+s.dataset.card+'\n뉴스레터: '+page+'\n\n질문: ';
+    }
+    return 'https://claude.ai/new?q='+encodeURIComponent(q);
+  }
+  function update(i){
+    if(i===cur) return; cur=i; var s=slides[i];
+    lbl.textContent=s.dataset.label+(s.dataset.card?' · '+s.dataset.card.split(' · ')[0]:'');
+    cnt.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    ask.href=askUrl(s,i);
+    ask.textContent=s.dataset.paper?'💬 이 카드 Claude에게 질문':'💬 Claude에게 질문';
+    try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:instant?'auto':'smooth'});
+    update(i);
+  }
+  var t;
+  deck.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){update(Math.round(deck.scrollLeft/deck.clientWidth));},60);});
+  prev.addEventListener('click',function(){go(cur-1)});
+  next.addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('zoom').classList.contains('on')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  cover.querySelectorAll('a[href^="#p"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); var id=a.getAttribute('href').slice(1);
+      for(var k=0;k<slides.length;k++){ if(slides[k].dataset.paper===id){go(k);break;} }
+    });
+  });
+  window.addEventListener('resize',function(){deck.scrollLeft=cur*deck.clientWidth;});
+  var m=/^#s(\d+)$/.exec(location.hash), start=m?parseInt(m[1],10)-1:0;
+  requestAnimationFrame(function(){go(start,true);});
+})();
+</script>
+</body>
+</html>
