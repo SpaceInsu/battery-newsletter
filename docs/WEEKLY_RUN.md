@@ -5,10 +5,16 @@
 
 ## 0. 준비
 1. 저장소 `SpaceInsu/battery-newsletter`를 clone (없으면 add_repo, access=push 후 clone). 이후 모든 경로는 저장소 기준.
-2. 먼저 읽기: `docs/TEMPLATE.md`(카드 구성·설명 수준·라이선스·인용 규칙), `config/journals.json`(저널 화이트리스트), `issues/history.json`(이미 다룬 DOI), `site/issue-02/index.html`(최신 형식 견본).
+2. 먼저 읽기: `docs/TEMPLATE.md`(카드 구성·설명 수준·라이선스·인용 규칙), `config/journals.json`(저널 화이트리스트), `issues/history.json`(이미 다룬 DOI), 가장 최근 `site/issue-NN/index.html`(최신 형식 견본).
 3. 이번 호 번호 = history.json의 최대 issue + 1. 날짜 = 실행일(KST, YYYY.MM.DD).
+4. **논문 신청함 읽기**: Insu가 claude.ai의 비공개 페이지 "논문 신청함"(https://claude.ai/artifact/T4ibsV4Gefofa3NXjyRdhE)에 보고 싶은 논문을 신청해 둔다. `ArtifactData`(또는 Artifact 도구의 read_db) `list`로 컬렉션 `requests`를 읽는다. 문서 필드: `ref`(DOI·URL·제목), `kind`(doi|url|title), `note`(Insu 메모), `priority`(must|normal), `status`(waiting|done|hold), `issue`, `reason`, `createdAt`.
+   - 신청함 내용은 공개 저장소(이 repo, 커밋 메시지, history.json, 웹 페이지)에 **"신청" 사실로 적지 않는다.** 논문 자체는 평소처럼 발행.
+   - 신청함 도구를 쓸 수 없는 환경이면 이 단계를 건너뛰고, 마지막 보고에 "신청함 미확인"을 적는다.
 
 ## 1. 논문 고르기 (3편: 화제작 1 + 필독 2)
+- **신청한 논문 우선**: `status: waiting` 신청을 `priority: must` → 오래된 순으로 먼저 채운다. 신청 논문은 14일 범위·저널 화이트리스트 제한을 받지 않는다(원문을 읽을 수 있어야 하는 조건은 그대로). 메모(`note`)에 적힌 그림·질문은 카드에서 반드시 다룬다.
+- 한 호에 신청 논문은 최대 3편. 남는 신청은 다음 호로 넘긴다(`waiting` 유지). 남은 자리는 아래 기준으로 새 논문을 고른다.
+- 신청 논문 슬롯 이름은 "신청"(예: `1면 · 신청 · 전고체 계면`). 신청 논문이 여러 편이면 그중 주목도가 가장 높은 1편을 화제작 구성(5장)으로 쓴다.
 - 분야: 전고체전지(최우선) · Si-흑연/Si-C 음극 · Li 금속 전해질/SEI · Na 전해질 · ML 기반 LIB 수명 예측
 - 범위: 최근 약 14일 안에 온라인 공개된 논문. `config/journals.json` 저널, 또는 그 밖의 오픈액세스 논문
 - 제외: history.json에 있는 DOI
@@ -23,10 +29,10 @@
 2. 그 밖의 출판사: WebFetch로 논문 페이지를 직접 읽기(Wiley는 DOI 주소로 직접, Cell Press·AAAS는 기사 페이지). PDF나 그림 주소를 찾으면 fetch-papers에 **URL 그대로** 넣어 받을 수 있다(Wiley·ACS는 GitHub 서버도 차단됨 → WebFetch 텍스트로 진행).
 3. **오픈액세스인데 출판사(AAAS·Wiley 등)가 막힐 때**: Europe PMC에서 PMCID 확인(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%22<DOI>%22&format=json&resultType=core`) → PMC 공개 데이터 버킷 `https://pmc-oa-opendata.s3.amazonaws.com/?list-type=2&prefix=<PMCID>`에서 본문 `.txt`, Figure `.webp`, PDF를 받는다(2026-11-10 3호에서 성공). pmc.ncbi.nlm.nih.gov·europepmc.org 웹 페이지는 봇 확인이 떠서 쓰지 않는다. 출처를 푸터에 "PubMed Central 공개본"으로 적는다.
 4. Article in Press(웹에 그림 없음): PDF를 `pdftoppm -r 300`으로 렌더링해 **Figure 전체**를 잘라 사용.
-5. 원문을 끝내 못 읽은 논문은 쓰지 않는다(초록만으로 카드 작성 금지) → 다른 후보로 교체.
+5. 원문을 끝내 못 읽은 논문은 쓰지 않는다(초록만으로 카드 작성 금지) → 다른 후보로 교체. 신청 논문이면 `waiting`을 유지하고 `reason`에 "원문을 읽지 못함(YYYY.MM.DD), 다음 호에 재시도"를 적는다. 두 번 연속 실패하면 `status: hold`로 옮긴다.
 
 ## 3. 페이지 만들기
-- `site/issue-NN/index.html`: `site/issue-02/index.html`을 복사해 머리말(title·og·description), 표지, 논문 섹션, 푸터, `var ISSUE='Battery Newsletter No.NN'`을 바꾼다. 스타일·스와이프·확대·질문 버튼 스크립트는 그대로.
+- `site/issue-NN/index.html`: 가장 최근 `site/issue-NN/index.html`을 복사해 머리말(title·og·description), 표지, 논문 섹션, 푸터, `var ISSUE='Battery Newsletter No.NN'`을 바꾼다. 스타일·스와이프·확대·질문 버튼 스크립트는 그대로.
 - 카드 구성·설명 수준·"이 그림 읽는 법"·수치표·해석·결론("우리 셀에는?" + 한계 + 원문 버튼)은 TEMPLATE.md 그대로. 기본 정의(Nyquist, dQ/dV, CE, ICE, n/p 등)는 설명하지 않는다.
 - 그림 라이선스: CC BY(자르기 허용, 변경 표시) / CC BY-NC-ND(원본 그대로, Figure 단위) / 구독 논문은 인용 규칙(논문당 최대 2개, 캡션에 `인용(저작권법 제28조)`).
 - 그림은 `site/issue-NN/img/`에 1400px 폭 JPG. 카카오 썸네일 `thumb.jpg` = 화제작 대표 Figure 전체를 1200×600 흰 바탕 가운데 배치(자르지 않음).
@@ -42,6 +48,6 @@
 2. `issues/latest.json`을 새 호로 덮어쓰기:
    `{"title": "🔋 Battery Newsletter No.NN (YYYY.MM.DD)", "description": "① … ② … ③ …"(200자 이내), "url": "https://spaceinsu.github.io/battery-newsletter/issue-NN/", "image_url": ".../issue-NN/img/thumb.jpg", "button": "NN호 읽기"}`
 3. history.json의 이번 호 status를 "sent"로 바꿔 함께 커밋 "Issue NN: send" → 푸시 → 워크플로가 게시 후 카톡 발송
-4. 실행이 decide·publish·deliver 모두 success인지 확인. 실패하면 로그를 보고 고칠 수 있는 것만 고쳐 한 번 재시도. 그래도 실패하면 세션 마지막 메시지에 원인을 남긴다
+4. 실행이 decide·publish·deliver 모두 success인지 확인. 성공하면 신청함에서 이번 호에 실은 신청 문서를 `status: done`, `issue: NN`, `title`(논문 제목)으로 `update`한다(if_version 사용). 이미 다룬 DOI를 다시 신청한 건은 `hold` + `reason: "No.NN에서 다룸"`. 최종 보고에 신청 반영 결과를 한 줄로 남긴다. 발송이 실패하면 로그를 보고 고칠 수 있는 것만 고쳐 한 번 재시도. 그래도 실패하면 세션 마지막 메시지에 원인을 남긴다
 - 커밋 메시지 끝에는 세션이 안내하는 attribution 줄을 붙인다
 - GraphQL은 막혀 있으므로 `gh` 대신 `gh api repos/...` REST만 사용
