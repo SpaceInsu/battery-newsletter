@@ -21,8 +21,9 @@
 작업 공간에서 출판사 사이트가 막히는 경우가 많다. 순서대로 시도:
 1. **Nature 계열**: `gh api -X POST repos/SpaceInsu/battery-newsletter/actions/workflows/fetch-papers.yml/dispatches -f ref=main -f 'inputs[ids]=<ID1>,<ID2>'` (ID = s41467-… 형태). 실행 완료 후 `git clone --depth 1 -b fetch/<run_id> …`로 받는다. 받은 뒤 `inputs[ids]=cleanup`으로 한 번 더 실행해 임시 브랜치 삭제.
 2. 그 밖의 출판사: WebFetch로 논문 페이지를 직접 읽기(Wiley는 DOI 주소로 직접, Cell Press·AAAS는 기사 페이지). PDF나 그림 주소를 찾으면 fetch-papers에 **URL 그대로** 넣어 받을 수 있다(Wiley·ACS는 GitHub 서버도 차단됨 → WebFetch 텍스트로 진행).
-3. Article in Press(웹에 그림 없음): PDF를 `pdftoppm -r 300`으로 렌더링해 **Figure 전체**를 잘라 사용.
-4. 원문을 끝내 못 읽은 논문은 쓰지 않는다(초록만으로 카드 작성 금지) → 다른 후보로 교체.
+3. **오픈액세스인데 출판사(AAAS·Wiley 등)가 막힐 때**: Europe PMC에서 PMCID 확인(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%22<DOI>%22&format=json&resultType=core`) → PMC 공개 데이터 버킷 `https://pmc-oa-opendata.s3.amazonaws.com/?list-type=2&prefix=<PMCID>`에서 본문 `.txt`, Figure `.webp`, PDF를 받는다(2026-11-10 3호에서 성공). pmc.ncbi.nlm.nih.gov·europepmc.org 웹 페이지는 봇 확인이 떠서 쓰지 않는다. 출처를 푸터에 "PubMed Central 공개본"으로 적는다.
+4. Article in Press(웹에 그림 없음): PDF를 `pdftoppm -r 300`으로 렌더링해 **Figure 전체**를 잘라 사용.
+5. 원문을 끝내 못 읽은 논문은 쓰지 않는다(초록만으로 카드 작성 금지) → 다른 후보로 교체.
 
 ## 3. 페이지 만들기
 - `site/issue-NN/index.html`: `site/issue-02/index.html`을 복사해 머리말(title·og·description), 표지, 논문 섹션, 푸터, `var ISSUE='Battery Newsletter No.NN'`을 바꾼다. 스타일·스와이프·확대·질문 버튼 스크립트는 그대로.
