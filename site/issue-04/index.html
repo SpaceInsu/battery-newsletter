@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battery Newsletter No.4</title>
+<meta name="description" content="이번 주의 배터리 논문 3편 — 0.3 MPa 상온 황화물 Li 금속 전고체, 나노유체 캐스팅 박막 Li 음극, 비불소 희석제 MTBE Na 금속 LHCE">
+<meta property="og:title" content="🔋 Battery Newsletter No.4">
+<meta property="og:description" content="0.3 MPa 황화물 ASSLMB · 나노유체로 만든 20 µm 이하 Li · PFAS 없는 Na LHCE">
+<meta property="og:image" content="img/thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DDE5E0;--card:#F4F7F5;--ink:#1D2A24;--sub:#33443C;--mute:#4F6159;--acc:#1E6B52;--acc2:#A44A12;--box:#FFFFFF;--read:#E7EFEA;--dark:#1D2A24}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--card:#18221D;--ink:#E6EEE9;--sub:#C4D2CA;--mute:#93A69C;--acc:#6CC3A0;--acc2:#F0A36B;--box:#202C26;--read:#1F3029;--dark:#0B110E}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 64px}
+header.cover{background:var(--dark);color:#fff;border-radius:22px;padding:28px 22px;margin-bottom:22px}
+.kicker{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC;letter-spacing:.02em}
+.kicker span{white-space:nowrap}.kicker{flex-wrap:wrap;row-gap:2px}
+h1{font-family:'Gowun Dodum',serif;font-weight:400;font-size:34px;line-height:1.3;margin:14px 0 8px}
+.cover p{color:#C9DDD3;font-size:15px;margin:0 0 16px}
+.toc{display:flex;flex-direction:column;gap:10px}
+.toc a{display:block;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none}
+.toc .row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC}
+.toc b{display:block;font-size:16px;margin-top:4px;line-height:1.45}
+.toc span.s{display:block;font-size:13px;color:#C9DDD3;margin-top:4px;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+section.paper{margin-top:30px}
+.ptag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:4px 12px}
+.ptitle{font-family:'Gowun Dodum',serif;font-weight:400;font-size:27px;line-height:1.35;margin:10px 0 4px}
+.cite{font-size:13px;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border-radius:20px;padding:22px 20px;margin-top:14px}
+.card h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;line-height:1.4;margin:4px 0 10px}
+.step-label{font-size:12px;font-weight:700;color:var(--acc)}
+.card p{margin:0 0 10px;color:var(--sub);font-size:15.5px}
+.box{background:var(--box);border-radius:12px;padding:14px 16px;margin:12px 0}
+.box .lab{display:block;font-size:12.5px;font-weight:700;color:var(--acc);margin-bottom:4px}
+.box .warn{display:block;font-size:12.5px;font-weight:700;color:var(--acc2);margin-bottom:4px}
+.box p:last-child{margin-bottom:0}
+.read{background:var(--read);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;line-height:1.65}
+ol.steps{margin:6px 0 0;padding-left:20px}
+ol.steps li{margin-bottom:8px;color:var(--sub);font-size:15px}
+figure{margin:12px 0;background:#fff;border-radius:12px;padding:8px}
+figure button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;color:#4F6159;margin-top:6px;line-height:1.45}
+.tap{font-size:11.5px;color:#4F6159}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:300px}
+th,td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(127,140,133,.25)}
+th:first-child,td:first-child{text-align:left}
+td.mono,th.mono{font-family:'IBM Plex Mono',monospace}
+.hl{color:var(--acc);font-weight:700}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.so{background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;margin-top:14px}
+.so h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;margin:4px 0 10px}
+.so p,.so li{color:#E4F1EB;font-size:15px}
+.so ul{padding-left:18px;margin:6px 0}
+.so .lim{font-size:13px;color:#CDE6DB}
+.btn{display:inline-block;margin-top:10px;background:#fff;color:#134636;font-weight:700;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700;margin:10px 0}
+.flow span.c{padding:7px 10px;border-radius:8px;background:#F6E3D3;color:#8A3C0C}
+.flow span.k{padding:7px 10px;border-radius:8px;background:#3A3F3C;color:#fff}
+.flow span.y{padding:7px 10px;border-radius:8px;background:#F2D06B;color:#5A4A0A}
+.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.bar .t{width:62px;flex:none;font-weight:700}
+.bar .g{flex:1;height:14px;background:rgba(127,140,133,.25);border-radius:7px;overflow:hidden}
+.bar .g i{display:block;height:100%;background:var(--acc)}
+.bar .v{width:52px;text-align:right;font-family:'IBM Plex Mono',monospace}
+footer{margin-top:36px;font-size:12px;color:var(--mute);line-height:1.6}
+a{color:var(--acc)}
+#zoom{position:fixed;inset:0;background:rgba(10,16,13,.92);display:none;z-index:10;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoom.on{display:block}
+#zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
+#zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
+#zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+/* ---- 좌우 스와이프 카드 ---- */
+html.deckmode,html.deckmode body{height:100%;overflow:hidden}
+.topbar,.botbar{position:fixed;left:0;right:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:0 12px}
+.topbar{top:0;height:44px;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--mute)}
+.topbar .lbl{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar .cnt{font-family:'IBM Plex Mono',monospace;flex:none}
+.prog{position:fixed;top:44px;left:0;height:3px;background:var(--acc);z-index:5;transition:width .25s}
+.botbar{bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom);justify-content:space-between}
+.nav{width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;font-weight:700;flex:none;cursor:pointer}
+.nav:disabled{opacity:.3}
+.ask{flex:1;max-width:320px;height:48px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.deck{position:fixed;top:47px;bottom:64px;left:0;right:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;overscroll-behavior-y:contain}
+.sin{max-width:680px;margin:0 auto;padding:12px 16px 28px}
+.sin header.cover{margin-bottom:0}
+.sin>.card:first-of-type,.sin>.so{margin-top:10px}
+.mini{font-size:12.5px;font-weight:700;color:var(--acc);margin:2px 0 0}
+.req{display:block;margin-top:12px;padding:12px 16px;border-radius:14px;border:1px dashed rgba(159,210,188,.55);color:#9FD2BC;font-size:14px;font-weight:700;text-decoration:none;text-align:center}
+.swipe{margin:16px 0 0;font-size:13px;color:#9FD2BC;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+<div class="kicker"><span>BATTERY NEWSLETTER</span><span class="mono">No.4 · 2026.11.13</span></div>
+<h1>이번 주의 3편</h1>
+<p>각 논문은 배경·아이디어 → 그림 읽기 → 결론 순서입니다. 그림을 누르면 원본 크기로 확대돼요(두 손가락으로 확대 가능).</p>
+<nav class="toc">
+<a href="#p1"><div class="row"><span>1면 · 화제작 · 전고체 Li 금속</span><span class="mono">Nat. Commun.</span></div><b>0.3 MPa 상온 황화물 ASSLMB — "막는 전해질 + 받아 주는 집전체"</b><span class="s">LPSCl에 poly(thioctic acid)를 공유결합으로 심어 Li creep을 막고, 다공성 탄소 집전체로 응력을 아래로 뺐다. NCM811 2.4 mAh cm⁻², 0.3 MPa에서 150사이클 73.4%.</span></a>
+<a href="#p2"><div class="row"><span>2면 · 필독 · Li 금속 음극 공정</span><span class="mono">Nat. Commun.</span></div><b>용융 Li을 "나노유체"로 만들어 Cu에 펴 바른 20 µm 이하 Li</b><span class="s">LiFSI를 녹인 Li에 넣어 생긴 무기 나노입자가 젖음각을 낮춤. 800 nm까지 캐스팅, N/P 0.55 Ni92 파우치 498 Wh kg⁻¹·1,142 Wh L⁻¹, 100사이클 81.3%.</span></a>
+<a href="#p3"><div class="row"><span>3면 · 필독 · Na 금속 전해액</span><span class="mono">Adv. Sci.</span></div><b>불소 없는 희석제 MTBE로 만든 Na용 LHCE</b><span class="s">THF/NaFSI에 MTBE를 1:3으로 섞어 자유 THF 58 → 25.5%, AGG 74%. PFAS 희석제 없이 Na||NFPP 고로딩 600사이클.</span></a>
+</nav>
+<a class="req" href="https://claude.ai/artifact/T4ibsV4Gefofa3NXjyRdhE" target="_blank" rel="noopener">다음 호에 보고 싶은 논문 신청하기 →</a>
+</header>
+
+<!-- ================= 1면 ================= -->
+<section class="paper" id="p1">
+<span class="ptag">1면 · 화제작 · 전고체 Li 금속</span>
+<h2 class="ptitle">0.3 MPa에서 도는 황화물 Li 금속 전고체</h2>
+<p class="cite">Lee H., Sung J., Park S., … Lee Y. J., Moon J. &amp; Park S., <i>Nature Communications</i> (2026.11.07, Article in Press) · POSTECH · 중앙대 · KBSI · SMU · Open Access (CC BY-NC-ND 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 1</div>
+<h3>저압에서 Li가 SE 쪽으로 밀고 들어가는 문제를 두 방향에서 막는다</h3>
+<p>상온·저압(~0.1 MPa)에서 ASSLMB가 어려운 이유는 Li 확산이 느린 상태에서 <b>석출 응력이 Li|SE 계면에 쌓이고</b>, 그 응력이 취성 황화물의 입계·기공을 따라 Li creep·균열을 만들기 때문입니다. 저압 연구는 대부분 stripping 접촉 유지(탄소 층, 합금)나 LTO·~1 mAh cm⁻² 저용량으로 우회했고, 충전 시작부터 Li를 <b>석출</b>해야 하는 NCM 계열 풀셀에서 &gt;2 mAh cm⁻²는 미해결로 남아 있었습니다.</p>
+<figure><button type="button" data-z="img/ss1.jpg" data-c="Fig. 1 전체 · Lee et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · 원본 그대로(크기만 조정)"><img src="img/ss1.jpg" width="1400" height="770" alt="Fig. 1: Li plating schematic with Ni foil versus poly(TA)-LPSCl and porous carbon matrix" loading="lazy"></button><figcaption>Fig. 1 · Lee et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<ol class="steps">
+<li><b>막는 쪽(SE)</b>: thioctic acid(TA) 5 wt%를 LPSCl과 볼밀 → 150 MPa 냉간 성형 → 80 °C·500 MPa 열간 가압. TA의 S–S 고리가 열로 열리며 촉매 없이 poly(TA)로 중합되고, 말단이 <b>PS₄³⁻와 thioester·disulfide로 공유결합</b>. 판상 poly(TA) 도메인이 입계 빈틈을 메워 Li 침투 경로를 국부적으로 절연</li>
+<li><b>받아 주는 쪽(집전체)</b>: 평판 Ni 박 대신 <b>다공성 탄소 매트릭스(PCM, 탄소천)</b>. 석출 응력이 SE 쪽이 아니라 집전체 기공 쪽(아래)으로 완화되고, Li가 그 빈 공간을 채움</li>
+</ol>
+<div class="read"><b>핵심 질문</b> · 저압 실패를 "전해질 기계 강도" 하나로 보지 않고, SE가 버티는 응력 상한과 집전체가 흡수하는 체적을 <b>동시에</b> 설계하면 &gt;2 mAh cm⁻² 상온 저압 운전이 가능한가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 3 (+ Fig. 2)</div>
+<h3>CCD 대신 "임계 석출 분극(CPP)"으로 본 SE의 버팀</h3>
+<figure><button type="button" data-z="img/ss3.jpg" data-c="Fig. 3 전체 · Lee et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · 원본 그대로(크기만 조정)"><img src="img/ss3.jpg" width="1400" height="1065" alt="Fig. 3: Li symmetric cycling, CCD, critical plating polarization, operando XCT" loading="lazy"></button><figcaption>Fig. 3 · Lee et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> Li||Li 대칭셀(1 mA cm⁻², 1 mAh cm⁻², <b>13 MPa</b>). 위 bare LPSCl은 inset에서 soft → hard short. <b>b</b> 계단식 전류 증가 CCD(오른쪽 축 = 전류밀도). <b>c</b> 임계 전류에서의 분극을 옴 성분(회색·주황)과 석출 성분(분홍)으로 분해 → 석출 성분 = CPP. <b>d·e</b> 3사이클 전후 operando XCT 단면, bare는 가장자리에 Li 침투 균열, 5% TA는 어두운 poly(TA) 도메인만 보이고 균열 없음.</div>
+<div class="tbl"><table><tr><th>지표</th><th>bare LPSCl</th><th>5% TA</th></tr>
+<tr><td>이온전도도 (Fig. 2e)</td><td class="mono">2.67 mS cm⁻¹</td><td class="mono">1.71 mS cm⁻¹</td></tr>
+<tr><td>대칭셀 수명 (13 MPa)</td><td class="mono">14사이클 후 soft short</td><td class="mono hl">&gt;8,000 h</td></tr>
+<tr><td>CCD</td><td class="mono">1.6 mA cm⁻²</td><td class="mono hl">2.8 mA cm⁻²</td></tr>
+<tr><td>CPP → σ₀,max</td><td class="mono">≈0 mV</td><td class="mono hl">27.9 mV → ≈207 MPa</td></tr></table></div>
+<p class="note">TA 3 wt%는 결국 단락, 10 wt%는 0.85 mS cm⁻¹로 분극 증가 후 단락 → 5 wt%가 최적. PEG 혼합 LPSCl은 첫 사이클 전에 실패(Li⁺ 용매화가 PS₄³⁻ 골격을 깸).</p>
+<div class="box"><span class="lab">CPP가 왜 쓸모 있는가</span><p>석출 과전압이 Li 쪽에 걸어 주는 정수압 상한을 σ₀,max ≈ −FΔΦ/V<sub>m</sub><sup>Li</sup>로 환산. 총 과전압에서 벌크 저항에 의한 옴 강하를 빼야 계면이 실제로 견딘 석출 구동력이 나옵니다. 같은 CCD라도 "균열 없이 버틴 석출 응력"을 비교할 수 있게 해 주는 지표예요.</p></div>
+<p><b>해석</b> · 공유결합 근거는 Fig. 2의 NMR입니다. poly(TA) 카복실 C1(183 ppm)이 LPSCl 존재 시 4 ppm 저자기장 이동(thioester), C6(62 ppm)는 4 ppm 고자기장 이동(thiol–disulfide 교환), ³¹P{¹H} HETCOR에서 PS₄³⁻(83 ppm)와 고분자 ¹H 사이 상관 피크. 재미있는 점은 나노압입에서 5% TA가 bare보다 <b>더 무르다</b>는 것 — 저자들은 강성이 아니라 연성·응력 완화가 균열 저항을 준다고 해석합니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4</div>
+<h3>0.3 MPa에서는 SE만으로 부족 — 응력을 집전체 쪽으로 빼야 한다</h3>
+<figure><button type="button" data-z="img/ss4.jpg" data-c="Fig. 4 전체 · Lee et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · 원본 그대로(크기만 조정)"><img src="img/ss4.jpg" width="1400" height="1321" alt="Fig. 4: Ni foil vs PCM symmetric cells, critical areal capacity, FEA stress, operando pressure" loading="lazy"></button><figcaption>Fig. 4 · Lee et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 모두 5% TA 전해질. <b>a</b> 0.3 MPa 대칭셀(0.2 mA cm⁻², 0.2 mAh cm⁻²): 검정 Ni 박은 약 30 h 안에 단락(그래프 근사치), 빨강 PCM은 1,000 h. <b>b</b> 한 번에 계속 석출해 단락까지의 용량(CAC). <b>c</b> 막대 = CPP로 환산한 최대 정수압(왼쪽 축), 네모 = CAC(오른쪽 축). <b>d·e</b> 유한요소 응력장(노란 화살표 = 응력 완화 방향)과 계면 von Mises 응력, 점선 0.3 MPa. <b>f·g</b> 부피 구속 Li||NCM811 셀(0.43 MPa로 시작)의 operando 압력.</div>
+<div class="tbl"><table><tr><th>0.3 MPa 지표</th><th>Ni 박</th><th>PCM</th></tr>
+<tr><td>대칭셀 수명</td><td>조기 단락</td><td class="mono hl">1,000 h</td></tr>
+<tr><td>CAC</td><td class="mono">0.82 mAh cm⁻²</td><td class="mono hl">5.85 mAh cm⁻²</td></tr>
+<tr><td>석출 과전압 상한</td><td>—</td><td class="mono">−0.51 V → 4,086 MPa(이론)</td></tr>
+<tr><td>계면 응력 (FEA)</td><td>≈0.2–0.3 MPa로 고르게 축적(근사치)</td><td>≈0–0.5 MPa 이상 주기적 분포(국부 완화점)</td></tr>
+<tr><td>구속셀 압력 추이</td><td>사이클마다 누적 상승</td><td>초기값 부근으로 내려와 안정</td></tr></table></div>
+<p><b>해석</b> · 평판 집전체에서는 Li가 갈 곳이 SE 입계뿐이라 응력 완화 방향이 위(SE)로 향하고, PCM에서는 기공이 σ<sub>back</sub> = 0인 자유면을 제공해 아래로 향합니다. Fig. 5 operando XCT에서 PCM 쪽 기공 부피가 석출 시 줄고 탈리 시 회복되는 것이 이 "기공 가역 사용"의 직접 증거예요. 단, PCM만 쓰고 bare LPSCl이면 기존 미세 기공에서 균열이 시작돼 양방향 성장이 남는다고 저자들은 설명합니다(둘 다 있어야 함).</p>
+<p class="note">숫자 하나 짚기: 같은 식으로 27.9 mV → 207 MPa는 V<sub>m</sub> ≈ 13.0 cm³ mol⁻¹, 0.51 V → 4,086 MPa는 V<sub>m</sub> ≈ 12.0 cm³ mol⁻¹에 해당합니다(우리 계산). 원문 값을 그대로 옮겼고, 수 GPa는 Li 항복강도와 비교할 물리량이라기보다 상대 지표로 보는 게 안전합니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 6</div>
+<h3>NCM811 풀셀: 0.3 MPa·상온, 2.4 mAh cm⁻²</h3>
+<figure><button type="button" data-z="img/ss6.jpg" data-c="Fig. 6 전체 · Lee et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · 원본 그대로(크기만 조정)"><img src="img/ss6.jpg" width="1400" height="1457" alt="Fig. 6: rate, dQ/dV, long-term cycling, high loading, stack pressure dependence, literature comparison" loading="lazy"></button><figcaption>Fig. 6 · Lee et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 모두 PCM 집전체, 0.3 MPa, 25 °C(1 C = 200 mAh g⁻¹, 2.5–4.25 V). <b>a·b</b> 율속. <b>c</b> 첫 사이클 dQ/dV: 5% TA는 H1+M, M, M+H2, H2+H3가 분리되고 bare는 뭉개짐 — 2전극이라 양극 화학이 아니라 Li 쪽 분극 차이로 읽으라고 저자들이 명시. <b>d</b> 1.4 mAh cm⁻², 0.3 C 장기. <b>e</b> 2.4 mAh cm⁻²(0.24 mA cm⁻²). <b>f</b> 스페이서 두께로 바꾼 압력별 100사이클 유지율. <b>g</b> 상온·&gt;1.5 mAh cm⁻² ASSLMB 문헌과 압력–사이클 비교.</div>
+<div class="tbl"><table><tr><th>조건</th><th>결과</th></tr>
+<tr><td>율속 후 0.3 C 복귀</td><td class="mono">152.4 mAh g⁻¹</td></tr>
+<tr><td>1.4 mAh cm⁻², 0.3 C</td><td class="mono hl">300사이클 78.8% (bare: 10사이클 내 실패)</td></tr>
+<tr><td>2.4 mAh cm⁻², 0.1 C</td><td class="mono hl">150사이클 73.4%</td></tr>
+<tr><td>55 °C, 0.3 MPa, 1.25 mA cm⁻²</td><td class="mono">50사이클 95.7% (초기 115.7 mAh g⁻¹)</td></tr>
+<tr><td>100사이클 유지율 vs 압력 (Fig. 6f)</td><td class="mono">0.17 MPa 73.1% · 0.19 80.4% · ≈0.31 82.4% · 0.50 88.1%</td></tr></table></div>
+<p><b>해석</b> · 0.19 MPa까지는 유지율이 크게 떨어지지 않고 0.17 MPa에서 꺾입니다. bare 전해질 셀은 제작 단계부터 기계적 단락이 잦아 대부분 첫 사이클에 단락됐다고 보고했어요. 각 조건 5셀 이상 시험, 대표 셀은 "평균 또는 약간 위" 성능이라고 밝힌 점도 참고할 만합니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>poly(TA)–PS₄³⁻ 공유결합으로 SE가 버티는 석출 응력 상한을 높이고(Fig. 2·3) → 그래도 0.3 MPa에서 남는 응력은 PCM 기공으로 아래로 뺀다(Fig. 4·5) → 0.3 MPa 상온 NCM811 2.4 mAh cm⁻² 150사이클(Fig. 6)</p>
+<ul>
+<li><b>평가 지표</b>: 저압 Li 금속 평가에서 CCD만 보지 말고 옴 성분을 뺀 CPP와 CAC를 함께 기록하면, 전해질 개질과 집전체 개질의 효과를 분리해 볼 수 있음</li>
+<li><b>음극 구조 설계</b>: 저압 모듈 목표라면 "더 단단한 SE"보다 Li가 들어갈 자유면(다공 집전체·호스트)을 음극 쪽에 두는 것이 응력 방향을 바꾸는 레버. 구속셀 operando 압력 측정은 셀 단위에서 바로 따라 할 수 있는 검증법</li>
+<li><b>SE 첨가제 선택</b>: Li⁺ 용매화 고분자(PEG)는 황화물 골격을 깨서 오히려 역효과. 황화물과 공유결합하되 Li⁺와는 약하게 상호작용하는 고분자(이황화물 고리 개환형)가 후보 기준</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 음극은 100 µm Li 박(2.4 mAh cm⁻² 양극 대비 N/P ≈ 8.6, 우리 계산)에 Mg–LPSCl 계면층까지 넣은 Li 과잉 구성이라 Li 재고 손실은 가려짐. 압력은 코인셀 스페이서로 추정한 값(~0.3 MPa)이고 셀 제작은 500 MPa 열간 가압에 의존. 0.1 C 저율, 150사이클 73.4%로 실용 수명과는 거리. poly(TA) 중합도·잔류 단량체는 정량 못함(MALDI-TOF로 &lt;40만 제시). Article in Press 단계.</p>
+<a class="btn" href="https://doi.org/10.1038/s41467-026-79393-w">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 2면 ================= -->
+<section class="paper" id="p2">
+<span class="ptag">2면 · 필독 · Li 금속 음극 공정</span>
+<h2 class="ptitle">용융 Li을 나노유체로 — Cu 위 20 µm 이하 Li</h2>
+<p class="cite">Wu W., Wu Q., Liu W., … Passerini S., Wang J. &amp; Yang C., <i>Nature Communications</i> (2026.11.07, Article in Press) · SIAT(중국과학원 선전) · SUSTech · Sun Yat-sen · KIT/HIU · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 1</div>
+<h3>얇은 Li를 못 만드는 이유는 압연이 아니라 "젖음"</h3>
+<p>3 mAh cm⁻² 양극에 N/P 1.5면 Li가 22 µm 필요하고, 400 Wh kg⁻¹·1,000 Wh L⁻¹ 목표면 ≤20 µm가 사실상 필수라는 것이 저자들의 계산입니다. 압출·압연은 20 µm 아래에서 찢어지고 들러붙고, 증착은 비싸고 느립니다. 남는 길은 Cu 위 <b>용융 캐스팅</b>인데, 용융 Li은 표면장력이 크고 Cu에 잘 젖지 않아(Fig. 1b) 평평한 박막이 안 됩니다. 기존 해법은 Li–M 합금, LiCuₓ 골격 등 조성을 바꾸는 쪽이었어요.</p>
+<figure><button type="button" data-z="img/li1.jpg" data-c="Fig. 1 전체 · Wu et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라냄"><img src="img/li1.jpg" width="1400" height="794" alt="Fig. 1: wetting of molten Li vs nanofluid on Cu, Young and Wenzel-Cassie models, DFT energies" loading="lazy"></button><figcaption>Fig. 1 · Wu et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<ol class="steps">
+<li><b>나노유체화</b>: 용융 Li에 무기 나노입자를 분산(LLZTO 300 nm로 원리 확인). 입자가 Li 표면의 반결합 상태를 약화 → γ<sub>L</sub>↓, Cu와 결합이 많아짐 → γ<sub>SL</sub>↓ → Young 각 θ<sub>Y</sub>↓ (Fig. 1g–i)</li>
+<li><b>실제 각 θ<sub>WC</sub></b>: 거친 면·입자 크기 R·입자 밀도 구배 n까지 넣은 Wenzel–Cassie 확장식으로 해석(Fig. 1f, j)</li>
+<li><b>공정 버전</b>: 입자를 따로 넣지 않고 Li:LiFSI = 95:5(질량)를 250 °C에서 교반 → FSI⁻의 S–F, S=O, N–S가 순차 절단되며 LiF·Li₂O·Li₂S·Li₃N 나노입자(대부분 수십 nm, &lt;200 nm)가 <b>in situ 생성</b> → 어플리케이터 롤로 Cu에 캐스팅</li>
+</ol>
+<div class="tbl"><table><tr><th>DFT (Fig. 1g–i, 그림 표기값)</th><th>Li / Li|Cu</th><th>LLZTO / Li@LLZTO|Cu</th></tr>
+<tr><td>표면 에너지</td><td class="mono">196.0</td><td class="mono">161.6</td></tr>
+<tr><td>계면 에너지</td><td class="mono">−9.8</td><td class="mono">−53.5</td></tr>
+<tr><td>Young 접촉각 θ<sub>Y</sub></td><td class="mono">84.9°</td><td class="mono hl">69.0° (−15.9°)</td></tr></table></div>
+<p class="note">저자들도 DFT는 이상화된 모델이라 "기전의 확증이 아닌 보조 근거"라고 명시. 250 °C 실측 접촉각(Supplementary)에서도 Li@LiFSI가 bare Li보다 낮았다고 보고.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 4</div>
+<h3>800 nm까지 — 대신 µm당 용량은 줄어든다</h3>
+<figure><button type="button" data-z="img/li4.jpg" data-c="Fig. 4 전체 · Wu et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라냄"><img src="img/li4.jpg" width="1400" height="1322" alt="Fig. 4: fabrication schematic, FIB-SEM of 10, 5, 2 µm and 800 nm foils, areal capacity, literature thickness comparison" loading="lazy"></button><figcaption>Fig. 4 · Wu et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> 용융 → 반응 → 펴 바르기 공정과 Li 기지 안 LiF·Li₂S·Li₃N·Li₂O 분포 개념도. <b>b–e</b> FIB-SEM 단면(노란 선 = Li|Cu 경계) ≈10, 5, 2 µm, 800 nm. <b>f·g</b> 두께별 박리(탈리튬) 곡선과 면적 용량. <b>h</b> 방법별 문헌 최소 두께 비교(빨강 = 이 연구).</div>
+<div class="tbl"><table><tr><th>두께</th><th>2 µm</th><th>5</th><th>10</th><th>15</th><th>20</th><th>30</th></tr>
+<tr><td>측정 용량 (mAh cm⁻²)</td><td class="mono">0.3</td><td class="mono">0.7</td><td class="mono">1.4</td><td class="mono">2.1</td><td class="mono">2.5</td><td class="mono">3.8</td></tr>
+<tr><td>순수 Li 이론값</td><td class="mono">0.41</td><td class="mono">1.0</td><td class="mono">2.1</td><td class="mono">3.1</td><td class="mono">4.1</td><td class="mono">6.2</td></tr></table></div>
+<p class="note">이론값은 0.206 mAh cm⁻² µm⁻¹로 우리가 계산. 저자들은 같은 두께 bare Li 대비 약 30% 낮다고 썼고(비활성 반응 생성물 포함), 이론값과 비교하면 30–40% 낮습니다. 2 µm 박은 20 cm × 12 cm 네 지점에서 1.8–2.2 µm로 균일, 박리 시험에서 탈착 없음.</p>
+<p><b>해석</b> · 같은 Li 두께에 실제로 쓸 수 있는 Li가 줄어든다는 뜻이라, 이 논문의 N/P는 모두 측정 용량 기준입니다(예: 20 µm = 2.5 mAh cm⁻² → 4.6 mAh cm⁻² Ni92와 N/P 0.55). AFM 영률은 Li@LiFSI 32.8 GPa vs bare Li 24.7 GPa로 나노입자가 기계적 보강도 한다고 보고했어요. 압연으로 Li@LiFSI를 밀면 &gt;100 µm 불균일 박만 나온다는 대조 실험도 있습니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 5</div>
+<h3>N/P &lt; 1 파우치: 498 Wh kg⁻¹, 1,142 Wh L⁻¹</h3>
+<figure><button type="button" data-z="img/li5.jpg" data-c="Fig. 5 전체 · Wu et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라냄"><img src="img/li5.jpg" width="1400" height="1114" alt="Fig. 5: anode-poor pouch cells with LFP, NCM811 and Ni92, energy density comparisons" loading="lazy"></button><figcaption>Fig. 5 · Wu et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 모두 30 °C 파우치. <b>a</b> 10 µm Li || LFP(N/P 0.70), 별표 = 80% 지점과 250사이클 63.0%. <b>b</b> NCM811 3.4 mAh cm⁻²에 0/5/10/20 µm(속 빈 기호 = CE). <b>c</b> 20 µm || Ni92 4.6 mAh cm⁻²(0.1 C 충전/0.5 C 방전). <b>d</b> 문헌 고로딩 Li||NCM 파우치와 Wh kg⁻¹(주황)·Wh L⁻¹(분홍)·양극 질량 비율(파랑). <b>e·f</b> 사이클 수 vs 에너지, 색 = N/P 영역. <b>g</b> 문헌 셀의 Li를 20/10/5 µm로 바꿨을 때 추정 Wh L⁻¹ 상승폭.</div>
+<div class="tbl"><table><tr><th>셀 (전해액 LE1)</th><th>N/P</th><th>결과</th></tr>
+<tr><td>10 µm || LFP 2.0 mAh cm⁻²</td><td class="mono">0.70</td><td class="mono">≈210사이클 80%(근사치), 250사이클 63.0%</td></tr>
+<tr><td>20 µm || NCM811 3.4</td><td class="mono">0.74</td><td class="mono">150사이클 70.9%</td></tr>
+<tr><td>20 µm || Ni92 4.6</td><td class="mono">0.55</td><td class="mono hl">100사이클 81.3%</td></tr>
+<tr><td>Ni92 셀 에너지</td><td colspan="2" class="mono hl">498 Wh kg⁻¹ · 1,142 Wh L⁻¹ · 양극 63.6 wt% · 전해액 1.5 g Ah⁻¹</td></tr>
+<tr><td>NCM811, Li 20 → 5 µm</td><td colspan="2" class="mono">420 → 426 Wh kg⁻¹(+1.4%), 964 → 1,040 Wh L⁻¹(+7.9%)</td></tr></table></div>
+<p><b>해석</b> · Li를 얇게 하는 이득은 Wh kg⁻¹보다 <b>Wh L⁻¹</b>에서 훨씬 큽니다(Li 밀도가 낮아서). 사후 분석(Fig. 6)에서는 50→200사이클 동안 SEI의 무기 성분 비율이 4.2 → 15.7%로 늘고, 10 µm 음극이 200사이클 뒤 2–3 µm로 균일하게 얇아졌습니다. bare Li는 같은 조건에서 유기물 위주 SEI. 저자들은 사전에 박힌 LiF·Li₃N 등이 TFSI⁻·NO₃⁻ 흡착(E<sub>ads</sub>)을 유리하게 해 음이온 유래 SEI를 키운다고 해석해요.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>용융 Li에 염을 녹여 무기 나노입자를 in situ로 만들면 표면·계면 에너지가 함께 내려가 Cu를 적신다(Fig. 1) → 800 nm–30 µm 캐스팅(Fig. 4) → N/P 0.55 Ni92 파우치 498 Wh kg⁻¹·100사이클(Fig. 5) → 사전 무기상이 SEI를 무기물 쪽으로 끌고 감(Fig. 6)</p>
+<ul>
+<li><b>전고체 Li 음극 공급원</b>: 황화물 ASSLMB도 결국 20 µm 이하 Li(또는 Li 저장층)가 필요. 이 공정은 Cu 위 일체형 박을 롤로 만든다는 점에서 전고체용 Li 공급 후보가 될 수 있지만, 액체 SEI 이점은 고체 계면에서 그대로 성립하지 않으니 Li|SE 계면에서 따로 검증해야 함</li>
+<li><b>설계값 환산</b>: 첨가 Li 박은 "두께 = 용량"이 아님. µm당 약 0.12–0.14 mAh cm⁻²(이 논문 측정치로 우리 계산)처럼 실측 용량으로 N/P를 잡아야 셀 설계가 맞음</li>
+<li><b>성능 비교 읽기</b>: 문헌 셀의 Li만 얇게 바꾼 추정(Fig. 5g)은 수명을 고정한 가정 — 실제로는 N/P가 낮을수록 수명이 줄어든다는 것을 Fig. 5b가 보여 줌</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 기본 전해액이 DOL/DME 에테르계(LE1)로, Ni92 4.3 V 셀에도 같은 전해액을 썼다고 명시 — 고전압 산화 안정성 논의는 부족. LFP "250사이클 안정"은 63.0% 유지율 기준. Ni92 셀은 0.1 C 충전, 100사이클. 나노입자 함량은 5 wt%(LiFSI 투입량) 기준으로 생성물 정량은 XPS/ToF-SIMS 수준. DFT 에너지는 정성 근거. Article in Press 단계.</p>
+<a class="btn" href="https://doi.org/10.1038/s41467-026-79376-x">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 3면 ================= -->
+<section class="paper" id="p3">
+<span class="ptag">3면 · 필독 · Na 금속 전해액</span>
+<h2 class="ptitle">불소 없는 희석제 MTBE로 만든 Na용 LHCE</h2>
+<p class="cite">Qu H., Li H., Wang J., … Passerini S. &amp; Zhang H., <i>Advanced Science</i> e78680 (2026.11.04) · Harbin Univ. of Sci. &amp; Tech. · KIT/HIU · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 1</div>
+<h3>LHCE의 희석제는 왜 거의 다 PFAS인가</h3>
+<p>Na 금속에는 카보네이트보다 환원 안정한 에테르가 쓰이고, 그중 THF는 DME보다 약하게 용매화해 탈용매화 장벽이 낮고 FSI⁻가 내부 껍질에 들어오기 쉽습니다. 문제는 1 M에서도 <b>배위하지 않은 자유 THF</b>가 상당량 남아 Na와 반응(개환 중합 등)해 유기물 위주 SEI를 만들고, &gt;4.0 V에서 Al 부식도 생긴다는 것. HCE는 점도·비용, 기존 LHCE는 TTE·BTFE·OTE 같은 <b>불소계(PFAS) 희석제</b>에 의존해 규제·전도도 문제가 있습니다.</p>
+<figure><button type="button" data-z="img/na1.jpg" data-c="Fig. 1 전체 · Qu et al., Advanced Science (2026) · CC BY 4.0 · 원본 그대로"><img src="img/na1.jpg" width="1400" height="1201" alt="Fig. 1: solvation schematic LCE, HCE, LHCE; ESP of THF and MTBE; binding energies; Raman and FTIR" loading="lazy"></button><figcaption>Fig. 1 · Qu et al., Adv. Sci. (2026) · CC BY 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<ol class="steps">
+<li><b>1단계</b>: NaFSI/THF를 1 M(LCE) → 4 M(HCE)로 올려 SSIP → CIP 전환</li>
+<li><b>2단계</b>: 비불소 에테르 <b>MTBE</b>(산소 1개 + 부피 큰 tert-butyl)로 다시 1 M까지 희석 → THF:MTBE = 1:3(v/v) "LHCE 13"</li>
+<li><b>근거</b>: ESP 최솟값 THF −34.01 vs MTBE −30.58 kcal mol⁻¹, Na⁺ 결합에너지 −1.44 vs −0.50 eV. 용매끼리 결합(THF–MTBE −0.17, THF–THF −0.14, MTBE–MTBE −0.16 eV)은 비슷해 거의 이상 혼합</li>
+</ol>
+<div class="read"><b>핵심 질문</b> · 비용매화 불소 희석제 없이, "약하게라도 용매화하는" 비불소 공용매로 국부 고농도 구조를 만들 수 있는가? MTBE는 0.32 mPa s, 0.74 g mL⁻¹, 약 1,000 $ ton⁻¹(원문 인용값).</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>MTBE는 "완전히 비활성"이 아니다 — 일부는 내부 껍질에 들어간다</h3>
+<figure><button type="button" data-z="img/na2.jpg" data-c="Fig. 2 전체 · Qu et al., Advanced Science (2026) · CC BY 4.0 · 원본 그대로"><img src="img/na2.jpg" width="1400" height="1016" alt="Fig. 2: MD snapshots, RDF, solvation cluster distribution, 23Na and 19F NMR, Raman deconvolution" loading="lazy"></button><figcaption>Fig. 2 · Qu et al., Adv. Sci. (2026) · CC BY 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> MD 스냅숏과 대표 클러스터. <b>b·c</b> RDF(실선)와 배위수(점선), 위 숫자 = FSI⁻:THF 평균 배위비. <b>d</b> 클러스터 종류별 비율(파랑 LCE, 빨강 LHCE 13). <b>e</b> ²³Na NMR 고자기장 이동 = Na⁺–FSI⁻ 상호작용↑. <b>f</b> ¹⁹F NMR 저자기장 이동. <b>g</b> FSI⁻ Raman 대역을 SSIP·CIP·AGG로 분해.</div>
+<div class="tbl"><table><tr><th>지표</th><th>LCE</th><th>HCE</th><th>LHCE 13</th></tr>
+<tr><td>자유 THF (MD)</td><td class="mono">58.00%</td><td>—</td><td class="mono hl">25.53%</td></tr>
+<tr><td>FSI⁻ : THF 배위비</td><td class="mono">1.42 : 1</td><td>—</td><td class="mono hl">2.34 : 1</td></tr>
+<tr><td>Na–O(THF) 배위수</td><td class="mono">2.48</td><td>—</td><td class="mono">1.62</td></tr>
+<tr><td>CIP+AGG / AGG (Raman)</td><td class="mono">74% / 23%</td><td class="mono">94% / 58%</td><td class="mono hl">AGG 74%</td></tr>
+<tr><td>Na⁺–3FSI⁻–1THF–1MTBE</td><td class="mono">0</td><td>—</td><td class="mono">13.22%</td></tr>
+<tr><td>t<sub>Na⁺</sub></td><td>—</td><td class="mono">0.53</td><td class="mono">0.59</td></tr></table></div>
+<p><b>해석</b> · 배위된 THF "비율"은 42 → 74.47%로 늘었는데 배위수는 2.48 → 1.62로 줄어든 역설은, MTBE가 전체 THF 양을 줄였기 때문입니다. 저자들은 부피 큰 MTBE가 외곽 껍질을 차지해 내부 껍질을 "압축"하며 FSI⁻를 밀어 넣는다고 봐요(Na⁺–THF 거리 2.19 Å로 단축). BTFE형 LHCE의 "완전 비용매 희석제"와 달리 <b>희석제가 일부 배위에 참여</b>하는 구조라는 점이 이 논문의 차별점입니다. THF:MTBE 1:9는 염 해리가 떨어져 분극·OCV 이상, 3:1은 자유 THF 부반응이 남았습니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4 (+ Fig. 3·5)</div>
+<h3>낮은 i₀, 적은 H₂, NaF가 안쪽에 쌓인 SEI</h3>
+<figure><button type="button" data-z="img/na4.jpg" data-c="Fig. 4 전체 · Qu et al., Advanced Science (2026) · CC BY 4.0 · 원본 그대로"><img src="img/na4.jpg" width="1400" height="1405" alt="Fig. 4: Tafel plots, in situ DEMS H2, XPS depth of SEI in LHCE 13 and LCE, schematic" loading="lazy"></button><figcaption>Fig. 4 · Qu et al., Adv. Sci. (2026) · CC BY 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> Na||Na Tafel, 숫자 = 교환전류밀도 i₀(그림·본문 표기 단위 A cm⁻² 그대로). <b>b</b> Na||Na 첫 사이클들의 in situ DEMS H₂ 신호. <b>c·d</b> 10사이클 후 Na 표면 SEI XPS(0 s / Ar⁺ 50 s 스퍼터), 같은 세로 스케일에서 LHCE 13의 S·N·F 신호가 훨씬 큼. <b>e</b> 정리 도식.</div>
+<div class="tbl"><table><tr><th>지표</th><th>LCE</th><th>HCE</th><th>LHCE 13</th></tr>
+<tr><td>i₀ (Tafel)</td><td class="mono">0.073</td><td class="mono">0.054</td><td class="mono">0.027</td></tr>
+<tr><td>Na||Na 과전압, 1 mA cm⁻² (Fig. 3a)</td><td class="mono">~100 mV</td><td class="mono">30 → 80 mV</td><td class="mono hl">27 mV, 700 h</td></tr>
+<tr><td>R<sub>ct</sub> (20사이클 후)</td><td class="mono">117.8 Ω</td><td>—</td><td class="mono">17.5 Ω</td></tr>
+<tr><td>Na||Al@Sn 평균 CE</td><td>불안정</td><td>120사이클 후 요동</td><td class="mono hl">99%, 400사이클</td></tr>
+<tr><td>Na||NFPP ~12 mg cm⁻² (Fig. 5c)</td><td class="mono">17사이클</td><td>≈450사이클부터 감소(근사치)</td><td class="mono hl">600사이클, 101.9 mAh g⁻¹</td></tr>
+<tr><td>CEI 두께 (TEM, Fig. 6)</td><td class="mono">~11.3 nm</td><td>—</td><td class="mono">~4.4 nm</td></tr></table></div>
+<p><b>해석</b> · 눈여겨볼 점은 LHCE 13의 i₀가 가장 <b>낮다</b>는 것입니다. 초록은 "탈용매화 가속"을 말하지만, 본문은 낮은 i₀가 부반응을 늦추고 핵생성 과전압을 키워(107.6 vs LCE 75.3 mV) 임계 핵 반경을 줄이고 핵 밀도를 높인다고 설명하며, 전체 분극이 낮은 이유는 높은 t<sub>Na⁺</sub>·낮은 농도 분극·무기 SEI라고 정리합니다. DEMS 첫 사이클 H₂는 LCE가 약 2배. 스퍼터 후 NaF 피크가 커지고 S–F(미분해 FSI⁻)가 줄어 안쪽이 무기물인 구배형 SEI(F 14 → 16 at%, C 19 → 15 at%)로 해석했습니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>Na⁺에 약하게 붙고 부피 큰 비불소 에테르(MTBE)로 THF/NaFSI를 희석(Fig. 1) → 자유 THF↓, AGG↑, 희석제 일부가 내부 껍질 참여(Fig. 2) → FSI⁻ 유래 구배형 무기 SEI·H₂↓·낮은 i₀로 균일 석출(Fig. 3·4) → 고로딩 NFPP 600사이클(Fig. 5)</p>
+<ul>
+<li><b>PFAS 규제 대응</b>: LHCE 희석제를 비불소 에테르로 바꿀 때의 판단 기준으로 "Na⁺(Li⁺) 결합에너지는 낮고 용매–용매 결합은 비슷한가(이상 혼합)"와 "Raman AGG 비율"을 함께 보는 틀이 유용</li>
+<li><b>Li 금속 전해액으로의 연결</b>: 같은 논리(약한 공용매로 자유 용매 제거)는 Li–에테르계에도 적용 가능하지만, MTBE의 산화 안정성과 Li 금속 위 거동은 이 논문 범위 밖</li>
+<li><b>지표 읽기</b>: i₀가 낮아진 전해액이 더 잘 돌 수 있다는 사례 — 계면 저항(R<sub>ct</sub>)과 i₀, 핵생성 과전압을 분리해서 보는 습관이 필요</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 양극은 3.8 V 상한 NFPP라 고전압 산화 안정성은 검증되지 않음. 파우치는 양극 3.6 mg cm⁻² 저로딩, Na 과잉(N/P 미기재). 양극 화학식이 초록(Na₄Fe₃(PO₄)₂P₂O₇)과 본문(Na₃Fe₂(PO₄)₂P₂O₇)에서 다르게 적혀 있음. i₀ 단위(A cm⁻²)는 원문 표기 그대로. MTBE 자체의 휘발성(일반 물성상 끓는점 약 55 °C)·인화성 평가 없음.</p>
+<a class="btn" href="https://doi.org/10.1002/advs.78680">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<footer>
+Battery Newsletter · 개인 열람용 비상업 뉴스레터. Figure는 각 논문의 Creative Commons 라이선스에 따라 출처를 밝혀 인용했습니다 — 1면 CC BY-NC-ND 4.0(Article in Press PDF에 실린 Figure 이미지를 원본 그대로, 크기만 조정), 2면 CC BY 4.0(Article in Press PDF에서 Figure 영역만 잘라냄, 내용 변경 없음), 3면 CC BY 4.0(원본 그대로). 3면 원문은 PubMed Central 공개본으로 읽었습니다. 1·2면은 Article in Press라 최종본에서 수치·그림이 바뀔 수 있습니다. 그래프에서 읽은 값은 근사치로, 우리가 따로 계산한 값은 "우리 계산"으로 표시했습니다.
+</footer>
+
+</div>
+
+<div id="zoom" role="dialog" aria-modal="true" aria-label="확대한 그림">
+<button class="x" type="button" aria-label="닫기">✕</button>
+<img alt="확대한 그림">
+<div class="zc"></div>
+</div>
+<script>
+(function(){
+  var z=document.getElementById('zoom'), zi=z.querySelector('img'), zc=z.querySelector('.zc');
+  document.querySelectorAll('figure button[data-z]').forEach(function(b){
+    b.addEventListener('click',function(){
+      zi.src=b.getAttribute('data-z'); zc.textContent=b.getAttribute('data-c')||'';
+      var w=Math.max(window.innerWidth*1.8, 900); zi.style.width=w+'px';
+      z.classList.add('on'); document.body.style.overflow='hidden';
+      zi.onload=function(){ z.scrollTop=0; z.scrollLeft=0; };
+    });
+  });
+  function close(){z.classList.remove('on'); document.body.style.overflow='';}
+  z.querySelector('.x').addEventListener('click',close);
+  z.addEventListener('click',function(e){ if(e.target===z) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+/* 긴 페이지 → 카드 한 장씩 좌우로 넘기는 덱. 내용은 위 HTML 그대로 두고 여기서 재배치만 한다. */
+(function(){
+  var ISSUE='Battery Newsletter No.4';
+  var wrap=document.querySelector('.wrap'); if(!wrap) return;
+  var slides=[];
+  function mk(d){var s=document.createElement('section');s.className='slide';var i=document.createElement('div');i.className='sin';s.appendChild(i);for(var k in d)s.dataset[k]=d[k];slides.push(s);return i;}
+
+  var cover=wrap.querySelector('header.cover');
+  mk({label:'표지'}).appendChild(cover);
+  var sw=document.createElement('p');sw.className='swipe';sw.textContent='← 옆으로 밀어서 한 장씩 넘겨요 →';cover.appendChild(sw);
+
+  wrap.querySelectorAll('section.paper').forEach(function(p){
+    var tag=p.querySelector('.ptag'),tt=p.querySelector('.ptitle'),ci=p.querySelector('.cite');
+    var a=p.querySelector('.so a.btn');
+    var info={paper:p.id,label:tag.textContent,title:tt.textContent,cite:ci.textContent,url:a?a.href:''};
+    var first=true;
+    Array.prototype.slice.call(p.children).forEach(function(card){
+      if(!card.matches('.card,.so')) return;
+      var sl=card.querySelector('.step-label'),h=card.querySelector('h3');
+      var d=Object.assign({},info,{card:(sl?sl.textContent:'')+' · '+(h?h.textContent:'')});
+      var inner=mk(d);
+      if(first){[tag,tt,ci].forEach(function(e){inner.appendChild(e)});first=false;}
+      else{var m=document.createElement('div');m.className='mini';m.textContent=info.label+' · '+info.title;inner.appendChild(m);}
+      inner.appendChild(card);
+    });
+  });
+  var ft=wrap.querySelector('footer'); if(ft) slides[slides.length-1].firstChild.appendChild(ft);
+
+  var deck=document.createElement('main');deck.className='deck';
+  slides.forEach(function(s){deck.appendChild(s)});
+  wrap.replaceWith(deck);
+  document.documentElement.classList.add('deckmode');
+
+  var top=document.createElement('div');top.className='topbar';
+  top.innerHTML='<span class="lbl"></span><span class="cnt"></span>';
+  var prog=document.createElement('div');prog.className='prog';
+  var bot=document.createElement('div');bot.className='botbar';
+  bot.innerHTML='<button class="nav prev" type="button" aria-label="이전 카드">‹</button><a class="ask" target="_blank" rel="noopener">💬 이 카드 Claude에게 질문</a><button class="nav next" type="button" aria-label="다음 카드">›</button>';
+  document.body.prepend(prog);document.body.prepend(top);document.body.appendChild(bot);
+  var lbl=top.querySelector('.lbl'),cnt=top.querySelector('.cnt'),prev=bot.querySelector('.prev'),next=bot.querySelector('.next'),ask=bot.querySelector('.ask');
+
+  var cur=-1;
+  function askUrl(s,i){
+    var page=location.href.split('#')[0]+'#s'+(i+1);
+    var q;
+    if(!s.dataset.paper){
+      q=ISSUE+'를 읽고 질문할게.\n뉴스레터: '+page+'\n\n질문: ';
+    }else{
+      q=ISSUE+'에서 읽은 논문에 대해 질문할게. 배터리공학 박사 수준으로 답해 줘.\n'+
+        '논문: '+s.dataset.title+'\n출처: '+s.dataset.cite+'\n원문: '+s.dataset.url+'\n'+
+        '보고 있던 카드: '+s.dataset.card+'\n뉴스레터: '+page+'\n\n질문: ';
+    }
+    return 'https://claude.ai/new?q='+encodeURIComponent(q);
+  }
+  function update(i){
+    if(i===cur) return; cur=i; var s=slides[i];
+    lbl.textContent=s.dataset.label+(s.dataset.card?' · '+s.dataset.card.split(' · ')[0]:'');
+    cnt.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    ask.href=askUrl(s,i);
+    ask.textContent=s.dataset.paper?'💬 이 카드 Claude에게 질문':'💬 Claude에게 질문';
+    try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:instant?'auto':'smooth'});
+    update(i);
+  }
+  var t;
+  deck.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){update(Math.round(deck.scrollLeft/deck.clientWidth));},60);});
+  prev.addEventListener('click',function(){go(cur-1)});
+  next.addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('zoom').classList.contains('on')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  cover.querySelectorAll('a[href^="#p"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); var id=a.getAttribute('href').slice(1);
+      for(var k=0;k<slides.length;k++){ if(slides[k].dataset.paper===id){go(k);break;} }
+    });
+  });
+  window.addEventListener('resize',function(){deck.scrollLeft=cur*deck.clientWidth;});
+  var m=/^#s(\d+)$/.exec(location.hash), start=m?parseInt(m[1],10)-1:0;
+  requestAnimationFrame(function(){go(start,true);});
+})();
+</script>
+</body>
+</html>
