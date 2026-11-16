@@ -18,14 +18,15 @@ UA = "BatteryNewsletter/1.0 (https://github.com/SpaceInsu/battery-newsletter; ma
 SINCE = (datetime.date.today() - datetime.timedelta(days=DAYS)).isoformat()
 
 # 분야 키워드(제목 기준). 너무 넓은 'battery' 하나만 쓰면 놓치는 글이 있어 몇 개를 함께 쓴다.
-KEY = re.compile(r"batter|lithium|\bli[- ]?ion|\bli\b|sodium[- ]ion|\bna[- ]ion|potassium[- ]ion|zinc[- ]ion|"
+KEY = re.compile(r"batter|lithium|\bli[- ]?ion|li\+|sodium[- ]ion|\bna[- ]ion|potassium[- ]ion|zinc[- ]ion|"
                  r"electrolyte|cathode|anode|solid[- ]state|interphase|\bsei\b|\bcei\b|dendrite|"
                  r"li metal|lithium metal|anode[- ]free|sulfide|argyrodite|halide|garnet|llzo|"
                  r"nickel[- ]rich|layered oxide|lfp|lifepo|silicon anode|li[- ]s\b|lithium[- ]sulfur|"
-                 r"electrode|intercalation|cycling|fast[- ]charg", re.I)
+                 r"intercalation|fast[- ]charg", re.I)
 # 배터리 단어가 없으면서 이런 주제면 제외(태양전지·전기분해 등에서 cathode/electrolyte가 섞여 들어옴)
 OFFTOPIC = re.compile(r"perovskite|solar|photovolta|electrocatal|electrolysis|water splitting|co2 reduction|co₂|"
-                      r"hydrogen evolution|oxygen evolution|nitrate reduction|fuel cell|uranium|light[- ]emitting", re.I)
+                      r"hydrogen evolution|oxygen evolution|nitrate reduction|fuel cell|uranium|light[- ]emitting|\bleds?\b|laser|niobate|"
+                      r"photodiode|transistor|neuromorph|textile|cytochrome|enzyme|drug|tumou?r|catalytic", re.I)
 # 이름 검색이 엉뚱한 저널을 잡는 경우가 있어 ISSN을 고정
 ISSN = {"Science": ["0036-8075", "1095-9203"], "Joule": ["2542-4351"], "Chem": ["2451-9294"], "Matter": ["2590-2385"],
         "Energy & Environmental Science": ["1754-5692", "1754-5706"], "PNAS": ["0027-8424", "1091-6490"],
