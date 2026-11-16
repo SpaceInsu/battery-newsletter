@@ -4,7 +4,7 @@
 GitHub 서버(인터넷이 열려 있음)에서 돌아가므로, Claude 쪽에서 웹 페이지를 열 필요가 없다.
   1) Crossref: 화이트리스트 저널(+Nature Communications)의 최근 N일 논문 목록 → 제목 키워드로 배터리 분야만
   2) Europe PMC: DOI별 오픈액세스 여부·PMCID·라이선스
-  3) Altmetric(무료 공개 API): 화제성 점수 (실패해도 계속)
+  3) 화제성: Nature 계열은 기사 metrics 페이지의 'Accesses'(조회수). 그 밖의 저널은 0으로 두고 Claude가 판단
   4) issues/history.json 에 있는 DOI는 제외
 결과: out/discover/candidates.json, candidates.md
 사용: python3 scripts/discover.py [일수=14]
@@ -23,6 +23,13 @@ KEY = re.compile(r"batter|lithium|\bli[- ]?ion|\bli\b|sodium[- ]ion|\bna[- ]ion|
                  r"li metal|lithium metal|anode[- ]free|sulfide|argyrodite|halide|garnet|llzo|"
                  r"nickel[- ]rich|layered oxide|lfp|lifepo|silicon anode|li[- ]s\b|lithium[- ]sulfur|"
                  r"electrode|intercalation|cycling|fast[- ]charg", re.I)
+# 배터리 단어가 없으면서 이런 주제면 제외(태양전지·전기분해 등에서 cathode/electrolyte가 섞여 들어옴)
+OFFTOPIC = re.compile(r"perovskite|solar|photovolta|electrocatal|electrolysis|water splitting|co2 reduction|co₂|"
+                      r"hydrogen evolution|oxygen evolution|nitrate reduction|fuel cell|uranium|light[- ]emitting", re.I)
+# 이름 검색이 엉뚱한 저널을 잡는 경우가 있어 ISSN을 고정
+ISSN = {"Science": ["0036-8075", "1095-9203"], "Joule": ["2542-4351"], "Chem": ["2451-9294"], "Matter": ["2590-2385"],
+        "Energy & Environmental Science": ["1754-5692", "1754-5706"], "PNAS": ["0027-8424", "1091-6490"],
+        "Nature": ["0028-0836", "1476-4687"], "Nature Communications": ["2041-1723"], "Science Advances": ["2375-2548"]}
 EXCLUDE = re.compile(r"\b(correction|erratum|retraction|author correction|publisher correction)\b", re.I)
 
 
@@ -77,9 +84,16 @@ def epmc(dois):
     return res
 
 
-def altmetric(doi):
-    j = get("https://api.altmetric.com/v1/doi/" + doi, tries=1)
-    return round(j.get("score", 0), 1) if j else 0
+def nature_accesses(art_id):
+    """Nature 기사 metrics 페이지에서 Accesses 숫자."""
+    try:
+        req = urllib.request.Request(f"https://www.nature.com/articles/{art_id}/metrics",
+                                     headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0"})
+        h = urllib.request.urlopen(req, timeout=40).read().decode("utf-8", "ignore")
+        m = re.search(r"([\d,]+)\s*</[^>]+>\s*<[^>]+>\s*Accesses", h) or re.search(r"([\d,]+)\s*Accesses", h)
+        return int(m.group(1).replace(",", "")) if m else 0
+    except Exception as e:
+        print(f"  ! metrics {art_id} → {e}"); return 0
 
 
 def main():
@@ -90,15 +104,16 @@ def main():
 
     cands = []
     for name in names:
-        issns = issn_for(name)
+        issns = ISSN.get(name) or issn_for(name)
         if not issns:
             print(f"- {name}: ISSN 못 찾음"); continue
         ws = works(issns)
         keep = 0
         for w in ws:
-            title = " ".join(w.get("title") or [""]).strip()
+            title = re.sub(r"\s+", " ", " ".join(w.get("title") or [""])).strip()
             doi = w.get("DOI", "").lower()
-            if not title or doi in seen or EXCLUDE.search(title) or not KEY.search(title):
+            if not title or doi in seen or EXCLUDE.search(title) or not KEY.search(title) \
+                    or (OFFTOPIC.search(title) and not re.search(r"batter", title, re.I)):
                 continue
             lic = [l.get("URL", "") for l in w.get("license", [])]
             date = "-".join(str(x) for x in (w.get("published", {}).get("date-parts", [[None]])[0] or []) if x)
@@ -115,19 +130,20 @@ def main():
         e = info.get(c["doi"], {})
         c["pmcid"] = e.get("pmcid"); c["epmc_license"] = e.get("license")
         c["open_access"] = bool(c["cc_license"] or e.get("oa"))
-        c["altmetric"] = altmetric(c["doi"])
         # 다음 단계(Fetch papers)에 넣을 값: Nature는 기사 ID, 나머지는 DOI
         m = re.match(r"10\.1038/(s\d{5}-\d{3}-\d{5}-\w)", c["doi"])
         c["fetch_id"] = m.group(1) if m else c["doi"]
-        time.sleep(0.2)
-    cands.sort(key=lambda c: (-c["altmetric"], c["journal"]))
+        c["accesses"] = nature_accesses(c["fetch_id"]) if m else 0
+        if m: time.sleep(0.5)
+    rank = {n: i for i, n in enumerate(names)}
+    cands.sort(key=lambda c: (-c["accesses"], rank[c["journal"]], c["date"]))
 
     (OUT / "candidates.json").write_text(json.dumps({"since": SINCE, "days": DAYS, "count": len(cands),
                                                      "candidates": cands}, ensure_ascii=False, indent=1))
-    lines = [f"# 후보 논문 ({SINCE} 이후 {DAYS}일, {len(cands)}편) — Altmetric 높은 순",
-             "", "| # | Altm. | 저널 | 날짜 | OA | PMCID | 제목 | fetch_id |", "|---|---|---|---|---|---|---|---|"]
+    lines = [f"# 후보 논문 ({SINCE} 이후 {DAYS}일, {len(cands)}편) — 조회수(Nature 계열)→저널 순",
+             "", "| # | 조회수 | 저널 | 날짜 | OA | PMCID | 제목 | fetch_id |", "|---|---|---|---|---|---|---|---|"]
     for i, c in enumerate(cands, 1):
-        lines.append(f"| {i} | {c['altmetric']} | {c['journal']} | {c['date']} | {'OA' if c['open_access'] else '구독'} | "
+        lines.append(f"| {i} | {c['accesses'] or ''} | {c['journal']} | {c['date']} | {'OA' if c['open_access'] else '구독'} | "
                      f"{c['pmcid'] or ''} | {c['title'][:110].replace('|', '/')} | {c['fetch_id']} |")
     (OUT / "candidates.md").write_text("\n".join(lines) + "\n")
     print(f"총 후보 {len(cands)}편 → {OUT}/candidates.md")
