@@ -57,11 +57,16 @@ def issn_for(name):
     return items[0].get("ISSN", []) if items else []
 
 
-def works(issns):
+# Elsevier(Cell Press)·RSC는 Crossref에 출판일(published)을 늦게/안 넣는 경우가 많아 DOI 등록일(created)로 거른다
+BY_CREATED = {"Joule", "Chem", "Matter", "Energy & Environmental Science"}
+
+
+def works(issns, by_created=False):
     out, cursor = [], "*"
-    filt = ",".join([f"issn:{i}" for i in issns] + [f"from-pub-date:{SINCE}", "type:journal-article"])
+    since = f"from-created-date:{SINCE}" if by_created else f"from-pub-date:{SINCE}"
+    filt = ",".join([f"issn:{i}" for i in issns] + [since, "type:journal-article"])
     while cursor and len(out) < 3000:
-        j = get("https://api.crossref.org/works?rows=500&select=DOI,title,container-title,published,license,author,is-referenced-by-count"
+        j = get("https://api.crossref.org/works?rows=500&select=DOI,title,container-title,published,created,license,author,is-referenced-by-count"
                 f"&filter={filt}&cursor={urllib.parse.quote(cursor)}")
         m = (j or {}).get("message", {})
         items = m.get("items", [])
@@ -90,7 +95,7 @@ def nature_accesses(art_id):
         req = urllib.request.Request(f"https://www.nature.com/articles/{art_id}/metrics",
                                      headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0"})
         h = urllib.request.urlopen(req, timeout=40).read().decode("utf-8", "ignore")
-        m = re.search(r"([\d,]+)\s*</[^>]+>\s*<[^>]+>\s*Accesses", h) or re.search(r"([\d,]+)\s*Accesses", h)
+        m = re.search(r"<dt>\s*([\d,]+)\s*</dt>\s*<dd>\s*Article Accesses", h)
         return int(m.group(1).replace(",", "")) if m else 0
     except Exception as e:
         print(f"  ! metrics {art_id} → {e}"); return 0
@@ -107,7 +112,7 @@ def main():
         issns = ISSN.get(name) or issn_for(name)
         if not issns:
             print(f"- {name}: ISSN 못 찾음"); continue
-        ws = works(issns)
+        ws = works(issns, name in BY_CREATED)
         keep = 0
         for w in ws:
             title = re.sub(r"\s+", " ", " ".join(w.get("title") or [""])).strip()
@@ -116,7 +121,8 @@ def main():
                     or (OFFTOPIC.search(title) and not re.search(r"batter", title, re.I)):
                 continue
             lic = [l.get("URL", "") for l in w.get("license", [])]
-            date = "-".join(str(x) for x in (w.get("published", {}).get("date-parts", [[None]])[0] or []) if x)
+            dp = (w.get("published") or w.get("created") or {}).get("date-parts", [[None]])[0] or []
+            date = "-".join(f"{x:02d}" if i else str(x) for i, x in enumerate(dp) if x)
             au = w.get("author") or []
             cands.append({"doi": doi, "title": re.sub(r"<[^>]+>", "", title), "journal": name, "publisher": pub[name],
                           "date": date, "first_author": (au[0].get("family") if au else ""),
