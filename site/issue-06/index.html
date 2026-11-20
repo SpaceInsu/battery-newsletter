@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battery Newsletter No.6</title>
+<meta name="description" content="이번 주의 배터리 논문 4편(알리미 1편 포함) — Ag–C 무음극 저온 활성화, Na 할라이드 탄산염 비정질화, LLZTO Co 고용과 소결 분위기, LMR‖µSi 분리막과 Li 석출">
+<meta property="og:title" content="🔋 Battery Newsletter No.6">
+<meta property="og:description" content="4편 · Ag–C 무음극 5 °C · Na 할라이드 1 mS · LLZTO Co · µSi roll-over">
+<meta property="og:image" content="img/thumb.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DDE5E0;--card:#F4F7F5;--ink:#1D2A24;--sub:#33443C;--mute:#4F6159;--acc:#1E6B52;--acc2:#A44A12;--box:#FFFFFF;--read:#E7EFEA;--dark:#1D2A24}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--card:#18221D;--ink:#E6EEE9;--sub:#C4D2CA;--mute:#93A69C;--acc:#6CC3A0;--acc2:#F0A36B;--box:#202C26;--read:#1F3029;--dark:#0B110E}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 64px}
+header.cover{background:var(--dark);color:#fff;border-radius:22px;padding:28px 22px;margin-bottom:22px}
+.kicker{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC;letter-spacing:.02em}
+.kicker span{white-space:nowrap}.kicker{flex-wrap:wrap;row-gap:2px}
+h1{font-family:'Gowun Dodum',serif;font-weight:400;font-size:34px;line-height:1.3;margin:14px 0 8px}
+.cover p{color:#C9DDD3;font-size:15px;margin:0 0 16px}
+.toc{display:flex;flex-direction:column;gap:10px}
+.toc a{display:block;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff;text-decoration:none}
+.toc .row{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#9FD2BC}
+.toc b{display:block;font-size:16px;margin-top:4px;line-height:1.45}
+.toc span.s{display:block;font-size:13px;color:#C9DDD3;margin-top:4px;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+section.paper{margin-top:30px}
+.ptag{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:4px 12px}
+.ptitle{font-family:'Gowun Dodum',serif;font-weight:400;font-size:27px;line-height:1.35;margin:10px 0 4px}
+.cite{font-size:13px;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border-radius:20px;padding:22px 20px;margin-top:14px}
+.card h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;line-height:1.4;margin:4px 0 10px}
+.step-label{font-size:12px;font-weight:700;color:var(--acc)}
+.card p{margin:0 0 10px;color:var(--sub);font-size:15.5px}
+.box{background:var(--box);border-radius:12px;padding:14px 16px;margin:12px 0}
+.box .lab{display:block;font-size:12.5px;font-weight:700;color:var(--acc);margin-bottom:4px}
+.box .warn{display:block;font-size:12.5px;font-weight:700;color:var(--acc2);margin-bottom:4px}
+.box p:last-child{margin-bottom:0}
+.read{background:var(--read);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;line-height:1.65}
+ol.steps{margin:6px 0 0;padding-left:20px}
+ol.steps li{margin-bottom:8px;color:var(--sub);font-size:15px}
+figure{margin:12px 0;background:#fff;border-radius:12px;padding:8px}
+figure button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;color:#4F6159;margin-top:6px;line-height:1.45}
+.tap{font-size:11.5px;color:#4F6159}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:300px}
+th,td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(127,140,133,.25)}
+th:first-child,td:first-child{text-align:left}
+td.mono,th.mono{font-family:'IBM Plex Mono',monospace}
+.hl{color:var(--acc);font-weight:700}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.so{background:var(--acc);color:#fff;border-radius:20px;padding:22px 20px;margin-top:14px}
+.so h3{font-family:'Gowun Dodum',serif;font-weight:400;font-size:22px;margin:4px 0 10px}
+.so p,.so li{color:#E4F1EB;font-size:15px}
+.so ul{padding-left:18px;margin:6px 0}
+.so .lim{font-size:13px;color:#CDE6DB}
+.btn{display:inline-block;margin-top:10px;background:#fff;color:#134636;font-weight:700;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700;margin:10px 0}
+.flow span.c{padding:7px 10px;border-radius:8px;background:#F6E3D3;color:#8A3C0C}
+.flow span.k{padding:7px 10px;border-radius:8px;background:#3A3F3C;color:#fff}
+.flow span.y{padding:7px 10px;border-radius:8px;background:#F2D06B;color:#5A4A0A}
+.bar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.bar .t{width:62px;flex:none;font-weight:700}
+.bar .g{flex:1;height:14px;background:rgba(127,140,133,.25);border-radius:7px;overflow:hidden}
+.bar .g i{display:block;height:100%;background:var(--acc)}
+.bar .v{width:52px;text-align:right;font-family:'IBM Plex Mono',monospace}
+footer{margin-top:36px;font-size:12px;color:var(--mute);line-height:1.6}
+a{color:var(--acc)}
+#zoom{position:fixed;inset:0;background:rgba(10,16,13,.92);display:none;z-index:10;overflow:auto;-webkit-overflow-scrolling:touch}
+#zoom.on{display:block}
+#zoom img{display:block;max-width:none;height:auto;background:#fff;border-radius:8px;margin:72px 12px 56px}
+#zoom .x{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#1D2A24;font-size:20px;font-weight:700}
+#zoom .zc{position:fixed;bottom:10px;left:12px;right:12px;color:#C9DDD3;font-size:12px;text-align:center}
+/* ---- 좌우 스와이프 카드 ---- */
+html.deckmode,html.deckmode body{height:100%;overflow:hidden}
+.topbar,.botbar{position:fixed;left:0;right:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:0 12px}
+.topbar{top:0;height:44px;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--mute)}
+.topbar .lbl{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.topbar .cnt{font-family:'IBM Plex Mono',monospace;flex:none}
+.prog{position:fixed;top:44px;left:0;height:3px;background:var(--acc);z-index:5;transition:width .25s}
+.botbar{bottom:0;height:64px;padding-bottom:env(safe-area-inset-bottom);justify-content:space-between}
+.nav{width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;font-weight:700;flex:none;cursor:pointer}
+.nav:disabled{opacity:.3}
+.ask{flex:1;max-width:320px;height:48px;border-radius:999px;background:var(--acc);color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.deck{position:fixed;top:47px;bottom:64px;left:0;right:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;overscroll-behavior-y:contain}
+.sin{max-width:680px;margin:0 auto;padding:12px 16px 28px}
+.sin header.cover{margin-bottom:0}
+.sin>.card:first-of-type,.sin>.so{margin-top:10px}
+.mini{font-size:12.5px;font-weight:700;color:var(--acc);margin:2px 0 0}
+.req{display:block;margin-top:12px;padding:12px 16px;border-radius:14px;border:1px dashed rgba(159,210,188,.55);color:#9FD2BC;font-size:14px;font-weight:700;text-decoration:none;text-align:center}
+.swipe{margin:16px 0 0;font-size:13px;color:#9FD2BC;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+<div class="kicker"><span>BATTERY NEWSLETTER</span><span class="mono">No.6 · 2026.11.20</span></div>
+<h1>이번 주의 4편</h1>
+<p>1~3면은 평소처럼 고른 화제작·필독, 4면은 지난 7일간 받은 <b>Google 학술검색 알리미</b>(Meng · Yuzhang Li · Jang Wook Choi · McDowell 알림, 메일 20통 · 고유 논문 95편)에서 고른 1편입니다. 이번 주는 출판사 원문 접근이 막혀 <b>공개본(PDF·PubMed Central)으로 끝까지 읽은 논문만</b> 실었어요. 알리미는 조건(지정 저널 + 분야 + 원문)을 모두 맞춘 논문이 1편뿐이라 억지로 채우지 않았습니다.</p>
+<nav class="toc">
+<a href="#p1"><div class="row"><span>1면 · 화제작 · 무음극 전고체 저온</span><span class="mono">공개 2일 1,048 조회</span></div><b>Ag–C 무음극 파우치, 5 °C에서 무너지는 이유와 "45 °C 한 번 충전" 처방</b><span class="s">저온에선 Li–Ag 합금화가 멈춰 Li가 Ag–C 층 안에서 터져 나옴. 첫 충전만 45 °C로 하면 5 °C에서 250사이클 87% — 고정 5 °C 대비 용량 약 3배.</span></a>
+<a href="#p2"><div class="row"><span>2면 · 필독 · Na 할라이드 고체전해질</span><span class="mono">1,396 조회</span></div><b>소다회(Na₂CO₃)로 Na₂ZrCl₆를 비정질화 — 1.02 mS cm⁻¹, $7.61/kg</b><span class="s">탄산염 음이온이 장거리 질서를 끊고 Na 자리를 비틀어 30배. NMR T₁·nPDF로 "어느 상이 이온을 나르나"를 분리. NaCrO₂ 850사이클.</span></a>
+<a href="#p3"><div class="row"><span>3면 · 필독 · 산화물 전고체 공정</span><span class="mono">Adv. Sci.</span></div><b>같은 Co, 다른 분위기 — Ar 소결은 LLZTO 격자로, 공기 소결은 입계 LCO로</b><span class="s">LCO/LLZO 복합양극이 FAST(Ar) 뒤 꼭 공기 재소성을 거쳐야 하는 이유를 Co 고용도 차이(2.5~5배)와 전도도 변화로 설명.</span></a>
+<div style="margin:14px 2px 4px;font-size:12.5px;font-weight:700;color:#9FD2BC">🔔 알리미에서 고른 1편</div>
+<a href="#p4"><div class="row"><span>4면 · 알리미 · µSi 음극 셀 설계</span><span class="mono">Adv. Sci.</span></div><b>LMR‖µSi 셀의 roll-over, 범인은 분리막 젖음과 국부 Li 석출</b><span class="s">N/P 2.27인데도 Celgard 셀은 µSi 위에 Li 금속. 3전극으로 음극 전위 drift를 잡았고, FEC:DMFSA 전해액에선 분리막 차이가 거의 사라짐.</span></a>
+</nav>
+<a class="req" href="https://claude.ai/artifact/T4ibsV4Gefofa3NXjyRdhE" target="_blank" rel="noopener">다음 호에 보고 싶은 논문 신청하기 →</a>
+</header>
+
+<!-- ================= 1면 ================= -->
+<section class="paper" id="p1">
+<span class="ptag">1면 · 화제작 · 무음극 전고체 저온</span>
+<h2 class="ptitle">Ag–C 무음극 파우치, 저온 실패의 원인은 "합금화가 늦어서"</h2>
+<p class="cite">Kim H., Kunze S., Yoon K., … Lee Y.-G., Ku J. H. &amp; Lim J., <i>Nature Communications</i> (2026.11.18, Article in Press) · 서울대 화학부 · 삼성종합기술원(SAIT) · NSRRC · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 1</div>
+<h3>1,000사이클 Ag–C 무음극, 그런데 기록은 전부 45 °C 이상</h3>
+<p>Ag–C 중간층(탄소 골격 + Ag 나노입자)은 MIEC로 작동해 Li를 집전체 쪽으로 보내고 Li 금속을 고체전해질과 떼어 놓습니다. 파우치에서 1,000사이클 이상이 보고됐지만 모두 <b>T &gt; 45 °C</b>였고, 저온에서 이 층이 어떻게 동작하는지는 비어 있었어요. 이 논문은 실제 <b>12 mAh 단층 파우치</b>(4 MPa)에서 온도만 바꿔 원인을 추적합니다.</p>
+<figure><button type="button" data-z="img/ag1.jpg" data-c="Fig. 1 전체 · Kim et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ag1.jpg" width="1400" height="918" alt="Fig. 1: anodeless pouch cell cross-section and first-cycle profiles at 45, 25 and 5 °C" loading="lazy"></button><figcaption>Fig. 1 · Kim et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="tbl"><table><tr><th>첫 사이클 방전 (0.2 C, 4 MPa)</th><th class="mono">45 °C</th><th class="mono">25 °C</th><th class="mono">5 °C</th></tr>
+<tr><td>풀 파우치 (c)</td><td class="mono">200</td><td class="mono">175</td><td class="mono hl">50</td></tr>
+<tr><td>양극 반쪽셀 (d)</td><td colspan="3">온도에 따라 줄지만 안정(5 °C 2사이클 134)</td></tr>
+<tr><td>Ag–C 반쪽셀 (e)</td><td colspan="3">5 °C에서 핵생성 과전압 급증 · 용량 급감</td></tr></table></div>
+<p class="note">단위 mAh g⁻¹. 셀: NCM + LPSC + C 슬러리 양극 21 mg cm⁻²(4.3 mAh cm⁻²) | 자립형 LPSC 시트 | Ag:C = 1:34(질량) Ag–C | 집전체, WIP 500 MPa 압착.</p>
+<ol class="steps">
+<li><b>범인 찾기</b>: 반쪽셀로 나눠 보니 양극이 아니라 <b>Ag–C 음극 쪽</b>이 5 °C 실패의 원인</li>
+<li><b>가설</b>: Ag–C 층의 Li 수송은 Coble creep(나노 확산 크리프)으로 진행되고 Li–Ag 합금이 이를 돕는데, 합금화 자체가 온도에 민감하다</li>
+<li><b>처방</b>: 첫 충전만 45 °C로 해서 합금을 미리 만들어 두면(alloy activation protocol, AAP) 이후 5 °C에서도 길이 열려 있다</li>
+</ol>
+<div class="read"><b>핵심 질문</b> · 저온 실패가 "Li가 SE를 뚫어서"가 아니라 "중간층 안에서 Li가 못 움직여서"라면, 소재를 바꾸지 않고 <b>화성 조건만</b>으로 해결되는가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>45 °C는 빠르게, 5 °C는 거의 안 — 파우치 안의 Ag를 실시간으로</h3>
+<figure><button type="button" data-z="img/ag2.jpg" data-c="Fig. 2 전체 · Kim et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ag2.jpg" width="1400" height="1101" alt="Fig. 2: operando Ag K-edge QEXAFS and ex situ XRD at 45, 25 and 5 °C" loading="lazy"></button><figcaption>Fig. 2 · Kim et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 열 = 온도(주황 45 · 초록 25 · 보라 5 °C). <b>a–c</b> QEXAFS 측정 중 전압(동그라미 = 스펙트럼 위치). <b>d–f</b> Ag K-edge(25.5 keV, 1초에 1스펙트럼) — post-edge 진동이 약해질수록 Ag–Ag 이웃 감소. <b>g–i</b> FT-EXAFS, 2.76 Å 부근이 Ag–Ag. <b>j</b> 그 피크 높이를 100 mAh g⁻¹까지 추적. <b>k·l</b> 200 mAh g⁻¹까지 충전 직후 해체한 Ag–C의 XRD와 검출된 상.</div>
+<div class="tbl"><table><tr><th>충전 끝 상태</th><th>Ag–Ag 피크 감쇠 (j)</th><th>XRD 상 (k·l)</th></tr>
+<tr><td class="mono">45 °C</td><td>빠름</td><td class="hl">δ + Li₃Ag (Li-rich만)</td></tr>
+<tr><td class="mono">25 °C</td><td>중간</td><td>β, γ₃, Li₃Ag, γ₂, δ 공존</td></tr>
+<tr><td class="mono">5 °C</td><td>미미</td><td>금속 Ag(38.6°) 강하게 남음 → 합금 거의 없음</td></tr></table></div>
+<p><b>해석</b> · 온도가 합금화의 <b>속도와 깊이</b>를 모두 정합니다. 45 °C에서 준안정 γ₂가 안 보이는 건 δ + Li₃Ag로 불균등화가 진행됐다는 뜻. 같은 실험을 800 nm Ag 박막으로 하면 상 분포가 다른데(SI), 탄소가 Ag 사이를 끊어 놓은 복합층에선 합금화가 국부 미세환경에 크게 좌우된다는 근거입니다.</p>
+<div class="box"><span class="warn">읽을 때 주의</span><p>Li는 산란이 약해 Ag–Li 경로가 EXAFS에서 분리되지 않습니다. 저자들도 j는 합금 분율의 정량값이 아니라 "Ag 금속다운 질서가 사라지는 정도"의 정성 지표라고 못박았어요. 상 정보는 해체 직후 ex situ XRD에서 나옵니다.</p></div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4 (+ Fig. 3)</div>
+<h3>첫 충전만 45 °C — 5 °C 250사이클 87%</h3>
+<figure><button type="button" data-z="img/ag4.jpg" data-c="Fig. 4 전체 · Kim et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ag4.jpg" width="1400" height="1333" alt="Fig. 4: fixed-temperature vs alloy activation protocol, cross-sections and 250-cycle data at 5 °C" loading="lazy"></button><figcaption>Fig. 4 · Kim et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · 청록 = FTP(처음부터 5 °C), 빨강 = AAP(첫 충전 45 °C → 이후 5 °C). <b>b·c</b> 1·2사이클 전압. <b>d·e</b> AAP 후 5 °C 충전 단면(CCP-SEM 모자이크 + EDS: 빨강 C, 노랑 Ag). <b>f</b> 5 °C 장기, 오른쪽 축은 셀 용량(mAh).</div>
+<div class="tbl"><table><tr><th>5 °C 지표 (0.2 C)</th><th>FTP</th><th>AAP</th></tr>
+<tr><td>1사이클 방전</td><td class="mono">48</td><td class="mono hl">~173</td></tr>
+<tr><td>2사이클 방전</td><td class="mono">—</td><td class="mono">~135 (양극 반쪽셀 134)</td></tr>
+<tr><td>250사이클 유지율</td><td class="mono">FTP 용량 = AAP의 33%</td><td class="mono hl">87%</td></tr>
+<tr><td>충전 후 Li층 두께</td><td class="mono">6.0–11.2 µm 불균일 (Fig. 3)</td><td class="mono">~10 µm 균일</td></tr></table></div>
+<p class="note">용량 단위 mAh g⁻¹. 87%는 형성 1사이클 뒤 250사이클 기준. AAP 2사이클 용량 하락은 저온 양극 임피던스 때문(음극 열화 아님). 45 °C 방전 상태에서 시작하는 변형 AAP도 수명 개선 → "Ag–C 안에 숨은 Li 저장고" 효과는 배제(SI). 8 MPa로 압력을 올려도 저온 개선 없음(SI) — 전기화학적으로 생기는 정수압(&gt;1 GPa 추정)에 비해 스택 압력은 작다는 설명.</p>
+<p><b>해석</b> · Fig. 3의 5 °C 단면은 세 가지 실패를 보여 줍니다: ① Li가 집전체가 아니라 <b>Ag–C 층 내부</b>에서 핵생성·압출되며 탄소 골격을 쪼갬, ② 탄소층 내 면내 균열·박리, ③ Li층–탄소층 접착 상실. 이 손상이 방전 때 Li 회수를 막아 CE가 낮아지죠. AAP 셀은 같은 5 °C 충전에서도 층이 온전하고, 충·방전 상태 XRD에 γ₃·γ₂·Li₃Ag ↔ γ₃·β가 가역적으로 오갑니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ③ · Fig. 5</div>
+<h3>합금이 확산 장벽을 낮춰 온도 손실을 상쇄한다</h3>
+<figure><button type="button" data-z="img/ag5.jpg" data-c="Fig. 5 전체 · Kim et al., Nature Communications (2026) · CC BY 4.0 · Article in Press PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ag5.jpg" width="1400" height="1311" alt="Fig. 5: schematic of Ag–C interlayer dynamics, Arrhenius transport model and DFT diffusion barriers" loading="lazy"></button><figcaption>Fig. 5 · Kim et al., Nat. Commun. (2026) · CC BY 4.0 · PDF에서 Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>b</b> 왼쪽 FTP, 오른쪽 AAP를 첫 충전 → 방전 → 재충전 순으로. 빨강 = Li, 보라 = Li–Ag 합금, 청록 = Ag. <b>c</b> J<sub>Li</sub> ∝ ε̇ ∝ D<sub>Li</sub> ∝ exp(−E<sub>a</sub>/k<sub>B</sub>T). <b>d</b> DFT(NEB) 확산 장벽. <b>e</b> 정성 그림 — 절대 확산계수·전지수인자는 계산하지 않음.</div>
+<div class="tbl"><table><tr><th>상</th><th class="mono">E<sub>a</sub> (eV, Fig. 5d)</th><th>45 → 5 °C 감속 (단순 계산)</th></tr>
+<tr><td>Li 금속</td><td class="mono">0.75</td><td class="mono hl">약 51배</td></tr>
+<tr><td>Li₂Ag</td><td class="mono">0.20</td><td class="mono">약 2.9배</td></tr>
+<tr><td>Li₃Ag</td><td class="mono">0.12</td><td class="mono">약 1.9배</td></tr>
+<tr><td>Li₄Ag</td><td class="mono">0.09</td><td class="mono">약 1.6배</td></tr></table></div>
+<p class="note">오른쪽 열은 뉴스레터가 그림의 장벽 값에 exp(−E<sub>a</sub>/k<sub>B</sub>T)만 대입해 본 근사치(전지수인자 동일 가정)이며, 논문이 제시한 수치가 아닙니다.</p>
+<p><b>해석</b> · Ag–C 층을 지나는 Li 플럭스가 양극에서 오는 Li⁺ 플럭스(전류로 고정)를 따라가지 못하면 Li가 층 안에 쌓였다가 국부적으로 압출됩니다. 미합금 상태에서 Li 수송이 Li 금속 수준의 장벽을 따르면 저온 페널티가 수십 배지만, 합금이 먼저 만들어져 있으면 한 자릿수 배에 그친다는 그림이에요. 저자들도 DFT는 단순화된 조성 집합이라 실제 Ag–C 계를 재현하지 못한다고 명시합니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>5 °C 풀셀 50 mAh g⁻¹ → 반쪽셀로 Ag–C가 원인(Fig. 1) → 저온에서 Li–Ag 합금화 정체(Fig. 2) → 층 내부 Li 압출·균열·박리(Fig. 3) → 첫 충전 45 °C로 합금을 미리 형성 → 5 °C 250사이클 87%(Fig. 4) → 합금의 낮은 확산 장벽으로 설명(Fig. 5)</p>
+<ul>
+<li><b>화성 온도 = 공정 변수</b>: Ag–C(또는 다른 합금형 중간층) 셀은 첫 충전 온도가 이후 전 수명의 저온 성능을 정할 수 있음. 화성 공정 설계·출하 조건 검토 대상</li>
+<li><b>저온 평가 프로토콜 점검</b>: "처음부터 저온"인 고정 온도 시험은 실제 사용(상온 화성 후 저온 운전)보다 중간층을 과소평가할 수 있음. 시험 조건에 화성 이력을 명시할 것</li>
+<li><b>압력으로는 안 된다</b>: 4 → 8 MPa로 올려도 저온 개선 없음. 저압 운전 목표와 충돌하지 않는 해법이라는 점이 실무적으로 유리</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 최저 5 °C까지만(영하 미검증), 0.2 C 저율, 12 mAh 단층 파우치. 활성화된 합금이 장기 보관·완전 방전·열 이력 뒤에도 유지되는지는 다루지 않음. EXAFS는 정성 지표, 메커니즘 정량은 단순화된 DFT에 의존. 산업 공동저자(SAIT) 논문으로 셀 사양 일부는 SI에만 있음.</p>
+<a class="btn" href="https://doi.org/10.1038/s41467-026-79291-1">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 2면 ================= -->
+<section class="paper" id="p2">
+<span class="ptag">2면 · 필독 · Na 할라이드 고체전해질</span>
+<h2 class="ptitle">소다회로 Na₂ZrCl₆를 비정질화 — 1.02 mS cm⁻¹</h2>
+<p class="cite">Guo X., Chen M., Burrow J., … Hu Y.-Y., Cheng Y.-T., Meng Y. S. &amp; Wang H., <i>Nature Communications</i> (2026.11.16, Article in Press) · Univ. of Louisville · UChicago · Florida State Univ. · ORNL · Open Access (CC BY-NC-ND 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 3</div>
+<h3>싼 Zr 할라이드의 약점은 전도도</h3>
+<p>Na 할라이드 고체전해질은 산화물 양극과 잘 맞지만, 희토·Nb/Ta 없이 싼 <b>Na₂ZrCl₆(NZC)</b>는 10⁻⁵ S cm⁻¹ 수준에 머뭅니다. 양이온 도핑·O²⁻/S²⁻/F⁻ 치환으로 10⁻⁴대까지 왔지만 10⁻³을 넘기면서 값도 싸게 하기는 어려웠어요.</p>
+<ol class="steps">
+<li><b>조성</b>: (2−x)NaCl–xNa₂CO₃–ZrCl₄를 볼밀(NZC-yCO, y = 100x). NaCl 일부를 <b>소다회 Na₂CO₃</b>로 대체 → CO₃²⁻ 다원자 음이온 도입</li>
+<li><b>구조</b>: CO₃²⁻가 장거리 결정성을 깨 비정질 혼합음이온 매트릭스(+ NaCl·Na₂CO₃ 나노결정)를 만들고, 국부 Na 배위는 유지하되 일그러진·저배위 Na 자리를 만듦</li>
+<li><b>결과</b>: 볼케이노형 — y = 100에서 최대, 그 이상은 NaCl 부산물 증가로 하락</li>
+</ol>
+<figure><button type="button" data-z="img/na3.jpg" data-c="Fig. 3 전체 · Guo et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · Article in Press PDF의 Figure 영역 원본 그대로(크기만 조정)"><img src="img/na3.jpg" width="1400" height="1525" alt="Fig. 3: ionic conductivity, activation energy, electronic conductivity and mechanical properties of NZC-yCO" loading="lazy"></button><figcaption>Fig. 3 · Guo et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="tbl"><table><tr><th>25 °C</th><th>NZC</th><th>NZC-100CO</th></tr>
+<tr><td>이온전도도</td><td class="mono">3.2×10⁻⁵</td><td class="mono hl">1.02×10⁻³ S cm⁻¹ (~30배)</td></tr>
+<tr><td>활성화 에너지</td><td class="mono">0.4 eV</td><td class="mono">0.293 eV</td></tr>
+<tr><td>전자전도도</td><td class="mono">10⁻¹¹ 수준</td><td class="mono">6.21×10⁻¹¹ S cm⁻¹</td></tr>
+<tr><td>탄성률 / 경도</td><td class="mono">8.5 / 0.34 GPa</td><td class="mono">13.0 / 0.48 GPa</td></tr>
+<tr><td>원료비 추정</td><td class="mono">$8.48/kg</td><td class="mono hl">$7.61/kg</td></tr></table></div>
+<p class="note">NZC 전도도는 본문 측정값 3.2×10⁻⁵, 서론 비교에는 문헌값 2×10⁻⁵로 적혀 있어 원문에 두 값이 함께 있음. 탄성률은 황화물(20–32 GPa)보다 낮고 다른 할라이드(14–17 GPa)와 비슷. 크리프 변형이 뚜렷(SI).</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 2</div>
+<h3>이온을 나르는 건 비정질 상 — NMR T₁로 분리</h3>
+<figure><button type="button" data-z="img/na2.jpg" data-c="Fig. 2 전체 · Guo et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · Article in Press PDF의 Figure 영역 원본 그대로(크기만 조정)"><img src="img/na2.jpg" width="1400" height="1617" alt="Fig. 2: 23Na NMR, TGA, XPS and neutron PDF of NZC and NZC-100CO" loading="lazy"></button><figcaption>Fig. 2 · Guo et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> ²³Na SS-NMR, 아래(NZC) → 위(y = 100). <b>b</b> TGA. <b>c·d</b> XPS C 1s·Zr 3d·Cl 2p(위 NZC-100CO, 아래 NZC) — 바뀌는 건 C 1s(290.5 eV 탄산염)뿐. <b>e·f</b> 중성자 PDF, f는 1.0–3.2 Å 확대.</div>
+<div class="tbl"><table><tr><th>증거</th><th>관찰</th><th>의미</th></tr>
+<tr><td>²³Na 위치 (a)</td><td>NZC 팔면체(0.1, −6.3 ppm)·프리즘(−11.4) 소멸, <b>−8.8 ppm</b> 새 신호 + NaCl 7.3 ppm</td><td>Na–Zr–Cl–CO₃ 국부 환경; 90 wt% 비정질 + 10 wt% NaCl</td></tr>
+<tr><td>²³Na T₁ (Table 1)</td><td class="mono">비정질 0.0039 s vs NaCl 1.29 s</td><td class="hl">빠른 Na⁺ 운동은 비정질 상</td></tr>
+<tr><td>VT-NMR (SI)</td><td>T₁ 최소 ~35 °C</td><td class="mono">1/τc ≈ 5×10⁸ s⁻¹</td></tr>
+<tr><td>nPDF (e·f)</td><td>8 Å 이후 감쇠, C–O 1.26 Å, Na–Cl 2.83 Å 폭넓어짐</td><td>장거리 질서 소실·결합 길이 분포 확대</td></tr>
+<tr><td>¹³C MAS (SI)</td><td class="mono">171 ppm</td><td>탄산염이 골격 안에 편입</td></tr></table></div>
+<p><b>해석</b> · 핵심은 "부산물 NaCl이 섞여 있는데 어느 상이 전도하나"를 T₁ 두 자릿수 차이로 가른 점입니다. 200 °C 6 h 후열처리로 결정성을 올리면 임피던스가 크게 늘어(SI) 무질서가 전도의 원인이라는 해석을 뒷받침해요.</p>
+<div class="box"><span class="warn">공정 관점 주의</span><p>TGA에서 <b>180–230 °C에 10 wt%</b> 감량(탄산염 분해). 비정질성이 성능의 근원이라 열처리·건조 온도 창이 좁습니다.</p></div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 4</div>
+<h3>NaCrO₂ 셀 850사이클, 평균 CE 99.97%</h3>
+<figure><button type="button" data-z="img/na4.jpg" data-c="Fig. 4 전체 · Guo et al., Nature Communications (2026) · CC BY-NC-ND 4.0 · Article in Press PDF의 Figure 영역 원본 그대로(크기만 조정)"><img src="img/na4.jpg" width="1400" height="1103" alt="Fig. 4: all-solid-state Na cells with NZC-100CO catholyte, rate, cycling and cost comparison" loading="lazy"></button><figcaption>Fig. 4 · Guo et al., Nat. Commun. (2026) · CC BY-NC-ND 4.0 · 원본 그대로 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> Na–Sn | Na₃PS₄(음극 쪽 anolyte) | NZC-CO | NaCrO₂ 복합양극. <b>b·c</b> 첫 사이클 전압·dQ/dV(주황 NZC-100CO, 검정 NZC). <b>d</b> EIS 전후. <b>e</b> 율속. <b>g</b> 0.3 C 장기(하늘색 = CE). <b>h</b> 원료비–전도도 지도.</div>
+<div class="tbl"><table><tr><th>지표 (25 °C)</th><th>NZC</th><th>NZC-100CO</th></tr>
+<tr><td>첫 방전 (0.1 C)</td><td class="mono">105</td><td class="mono hl">117</td></tr>
+<tr><td>첫 CE (NZC는 그림 표기)</td><td class="mono">95.8%</td><td class="mono">97%</td></tr>
+<tr><td>충방전 전압 차 (b, 그림 표기)</td><td class="mono">0.313 V</td><td class="mono">0.121 V</td></tr>
+<tr><td>율속 0.1/0.5/1 C</td><td>—</td><td class="mono">115 / 99.8 / 85.3</td></tr>
+<tr><td>0.3 C 장기</td><td class="mono">~60</td><td class="mono hl">850사이클 85 (78%)</td></tr>
+<tr><td>안정창 vs Na⁺/Na–Sn</td><td class="mono">1.2–3.9 V</td><td class="mono">1.3–3.8 V</td></tr></table></div>
+<p class="note">용량 단위 mAh g⁻¹, 1 C = 120 mA g⁻¹, 2.0–3.4 V. 양극 5.05 mg cm⁻²(0.606 mAh cm⁻²). 3.8 V vs Na–Sn ≈ 4.1 V vs Na⁺/Na.</p>
+<p><b>해석</b> · NZC 셀은 dQ/dV가 넓은 한 쌍(2.94/2.68 V)으로 뭉개지고, NZC-100CO 셀은 NaCrO₂ 고유의 세 쌍이 날카롭게 살아납니다. 저자들은 저항 감소를 catholyte 전도도 + 크리프로 인한 접촉 유지 두 가지로 설명해요.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>싼 Zr 할라이드는 전도도가 낮음 → Na₂CO₃로 CO₃²⁻ 도입·비정질화(Fig. 2) → 비정질 상의 빠른 Na⁺ 운동으로 30배, E<sub>a</sub> 0.293 eV(Fig. 3) → 부드럽고 크리프하는 catholyte로 850사이클(Fig. 4)</p>
+<ul>
+<li><b>Li 할라이드로의 질문</b>: 같은 "다원자 음이온 + 비정질화" 전략이 Li₂ZrCl₆ 계열에서도 통할지는 이 논문 범위 밖이지만, 원료비를 낮추며 전도도를 올리는 축으로 검토할 만함</li>
+<li><b>분석법 차용</b>: 비정질+결정 혼합 전해질에서 상별 이온 동역학을 ²³Na(⁷Li) T₁·VT-NMR로 분리하는 방식은 우리 황화물/할라이드 평가에도 바로 적용 가능</li>
+<li><b>catholyte 기계 물성</b>: 탄성률·크리프를 전도도와 같이 스펙에 넣는 관점</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 저로딩(0.6 mAh cm⁻²)·저전압(3.4 V 컷) 셀. 할라이드 환원 안정성 때문에 Na₃PS₄ anolyte와 Na–Sn 음극이 필요. 4.1 V vs Na⁺/Na 산화 한계로 고전압 층상 산화물엔 여유가 작음. 180 °C대 탄산염 분해로 공정 온도 제약, 수분 안정성은 다루지 않음. 원료비는 원료 가격 모델 추정치.</p>
+<a class="btn" href="https://doi.org/10.1038/s41467-026-79386-9">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 3면 ================= -->
+<section class="paper" id="p3">
+<span class="ptag">3면 · 필독 · 산화물 전고체 공정</span>
+<h2 class="ptitle">같은 Co, 다른 분위기 — LLZTO 안으로 들어가느냐, 입계에 남느냐</h2>
+<p class="cite">Ahmed J., Barr J. A., Qin Z., Domgans A., Kim K., Tsai C.-L., Schierholz R., … Wood B. C., Wan L. F., … Hausen F. &amp; Eichel R.-A., <i>Advanced Science</i> e78649 (2026.11.09) · Forschungszentrum Jülich · RWTH Aachen · LLNL · Washington State Univ. · Open Access (CC BY 4.0)</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 2</div>
+<h3>FAST로 만든 LCO/LLZO 양극은 왜 공기 재소성이 꼭 필요할까</h3>
+<p>LCO/LLZO 공소결 복합양극은 고온에서 Co가 LLZO로 확산해 열화합니다. 그런데 공기 소결 셀은 계면이 깨끗하고 오래 가는 반면, FAST/SPS(Ar·진공) 셀은 분리막이 <b>파랗게</b> 물들고 900–1050 °C 공기 재소성을 거쳐야 셀로 쓸 수 있어요. 저자들은 원인을 <b>분위기 → Co 원자가 → 고용도</b>로 봤습니다.</p>
+<figure><button type="button" data-z="img/ga2.jpg" data-c="Fig. 2 전체 · Ahmed et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ga2.jpg" width="1400" height="1530" alt="Fig. 2: sintering in air vs Ar, pellet colours, XRD, LiCoO2 fraction and lattice parameters" loading="lazy"></button><figcaption>Fig. 2 · Ahmed et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<ol class="steps">
+<li><b>모델 실험</b>: Co<sub>x</sub>:LLZTO(Li₆.₆La₃Zr₁.₆Ta₀.₄O₁₂, x = 0–0.1)를 970 °C 10 h, 공기 vs Ar 소결(상대밀도 85–90%)</li>
+<li><b>색</b>: 공기 = 카키(Co³⁺), Ar = 파랑(Co²⁺) (<b>b</b>)</li>
+<li><b>XRD</b>: 공기는 x &gt; 0.01부터 LCO 이차상 → 고용 한계 0.01–0.03, Ar은 x = 0.1까지 이차상 없음 (<b>c–e</b>). 격자상수는 거의 그대로 (<b>f</b>)</li>
+<li><b>이유</b>: Co²⁺(HS 74.5 pm)는 Li⁺(76 pm)와 크기가 비슷해 Li 자리에 잘 들어감. DFT 형성에너지 Co²⁺@Li −0.92, Co³⁺@Zr −1.31, Co³⁺@Li −0.44, Co³⁺@La −0.48 eV/Co</li>
+</ol>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 4</div>
+<h3>입자 중심 Co 농도: Ar이 2.5~5배</h3>
+<figure><button type="button" data-z="img/ga4.jpg" data-c="Fig. 4 전체 · Ahmed et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ga4.jpg" width="1400" height="1352" alt="Fig. 4: EDS point analysis and kernel density estimates of Co content in air- and Ar-sintered Co0.1:LLZTO" loading="lazy"></button><figcaption>Fig. 4 · Ahmed et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a·b</b> x = 0.1 시료의 SEM과 EDS 점분석 위치(빨간 십자 = 입자 중심). <b>c·d</b> 정량표. <b>e</b> 두 점의 스펙트럼 겹침, 6.9 keV가 Co Kα. <b>f</b> 26점 분포(KDE) — 파랑 공기, 주황 Ar.</div>
+<div class="tbl"><table><tr><th>입자 중심 Co (at%, Table 2)</th><th>공기</th><th>Ar</th></tr>
+<tr><td class="mono">x = 0.03</td><td class="mono">0.05 ± 0.03</td><td class="mono">0.12 ± 0.02</td></tr>
+<tr><td class="mono">x = 0.05</td><td class="mono">0.10 ± 0.03</td><td class="mono">0.32 ± 0.06</td></tr>
+<tr><td class="mono">x = 0.1</td><td class="mono">0.09 ± 0.02</td><td class="mono hl">0.42 ± 0.04</td></tr>
+<tr><td>26점 평균 (f, x = 0.1)</td><td class="mono">~0.1 (x ≈ 0.02)</td><td class="mono">~0.44 (x ≈ 0.08)</td></tr></table></div>
+<p><b>해석</b> · 공기에선 x ≈ 0.02에서 포화되고 나머지는 LCO·Li₀.₅La₂Co₀.₅O₄로 <b>입계·기공 표면</b>에 분리됩니다(Fig. 3 Raman 매핑). Ar에선 대부분 격자로 들어가요. 덧붙여 Raman 693 cm⁻¹ 발광 신호는 <b>공기 소결에서만</b> 나타나, 이를 부분 환원 Co에 귀속한 선행 연구(Scheld et al.)와 반대 결론을 냅니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 6</div>
+<h3>Ar: 이온전도 3~4배 감소 / 공기: 전자전도 최대 100배 증가</h3>
+<figure><button type="button" data-z="img/ga6.jpg" data-c="Fig. 6 전체 · Ahmed et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/ga6.jpg" width="1400" height="669" alt="Fig. 6: Nyquist plots, Arrhenius plots and DC electronic conductivity of Cox:LLZTO" loading="lazy"></button><figcaption>Fig. 6 · Ahmed et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> −20 °C Nyquist. <b>b·c</b> 공기·Ar 시료의 온도별 총전도도. <b>d·e</b> 25 °C DC 전자전도도 vs 인가 전압. <b>f</b> 4 V에서 총전도도(채운 원)·전자전도도(빈 원)를 x에 대해 — 그림이 작으니 확대해서 보세요. 수치는 아래 Table 3.</div>
+<div class="tbl"><table><tr><th>25 °C (Table 3)</th><th>공기 x=0</th><th>공기 x=0.1</th><th>Ar x=0</th><th>Ar x=0.1</th></tr>
+<tr><td>σ<sub>total</sub> (S cm⁻¹)</td><td class="mono">1.69e-4</td><td class="mono">2.14e-4</td><td class="mono">8.11e-5</td><td class="mono hl">2.49e-5</td></tr>
+<tr><td>E<sub>a</sub> (eV)</td><td class="mono">0.47</td><td class="mono">0.38</td><td class="mono">0.49</td><td class="mono">0.52</td></tr>
+<tr><td>σ<sub>e</sub> @4 V</td><td class="mono">1.18e-8</td><td class="mono hl">1.75e-6</td><td class="mono">5.87e-8</td><td class="mono">8.97e-9</td></tr></table></div>
+<p class="note">Ar 시료는 x = 0.03에서 이미 1.92e-5(E<sub>a</sub> 0.57 eV)로 떨어지고, 입자 내 Co가 0.12 → 0.42 at%로 늘어도 더 내려가지 않음. 상대밀도 86–89%로 통상(&gt;93%)보다 낮아 절대값은 보수적으로 볼 것.</p>
+<p><b>해석</b> · 0.42 at% Co는 Li 자리의 약 1%만 대체하는 양이라 단순 "자리 막힘"으로는 3~4배 감소를 설명하기 어렵습니다. 저자들은 Co²⁺와 보상 Li 공공의 결합 같은 결함 상호작용을 의심하지만 미해결로 남겨 둬요. 공기 쪽 전자전도 증가는 격자 Co가 아니라 <b>입계 LCO 양</b>을 따라갑니다(LCO 자체 ~10⁻³ S cm⁻¹).</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>공소결 분위기가 Co 원자가를 정함(Fig. 2) → Ar에선 Co²⁺가 Li 자리로 2.5~5배 더 고용(Fig. 4) → 이온전도 저하 / 공기에선 입계 LCO로 전자전도 상승(Fig. 6) → FAST 양극의 공기 재소성은 Co²⁺ 산화·입계 분리로 이온전도를 일부 되찾는 과정이라는 해석</p>
+<ul>
+<li><b>산소분압도 조성 변수</b>: 산화물 코팅·고온 공정에서 분위기가 도펀트 고용도를 바꾼다는 점은 황화물 셀의 양극 코팅(LiNbO₃ 등) 열처리 조건에도 같은 질문을 던짐</li>
+<li><b>빠른 QC 신호</b>: 소결체 색(파랑/카키)과 532 vs 785 nm Raman 발광 비교는 Co 상태를 가늠하는 저비용 지표</li>
+<li><b>"이온 vs 전자" 두 축을 같이</b>: 이차상이 이온전도는 그대로 두고 전자전도만 키울 수 있음 — 전해질 평가에 DC 분극을 기본 포함</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 셀 데이터 없음(Co를 미리 섞은 분말 모델 시스템이라 실제 LCO|LLZO 계면 확산과 다름). 상대밀도 낮음. DFT는 Ta 없는 LLZO, 실험 농도보다 높은 Co 셀. x ≤ 0.01은 EDS 검출 한계 아래. 이온전도 저하 메커니즘은 미해결.</p>
+<a class="btn" href="https://doi.org/10.1002/advs.78649">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<!-- ================= 4면 ================= -->
+<section class="paper" id="p4">
+<span class="ptag">4면 · 알리미 · µSi 음극 셀 설계</span>
+<h2 class="ptitle">LMR‖µSi 셀의 roll-over, 분리막 젖음이 Li 석출을 부른다</h2>
+<p class="cite">Stan M. C., Arling B., Overhoff G. M., … Kim H.-T., Winter M., Brunklaus G. &amp; Cekic-Laskovic I., <i>Advanced Science</i> e78391 (2026.10.20) · FZ Jülich HI MS · MEET (Univ. of Münster) · LG에너지솔루션 · Open Access (CC BY 4.0) · 알림: Yuzhang Li · Matthew T. McDowell 관련 연구</p>
+
+<div class="card">
+<div class="step-label">배경·아이디어 · Fig. 2</div>
+<h3>같은 초기 거동, 60사이클 뒤 갈라지는 두 셀</h3>
+<p>Co-free LMR 양극 + 순수 µSi 음극은 고전압·고용량 조합이지만 수명이 짧습니다. 보통은 전극·전해액만 보는데, 이 논문은 <b>분리막</b>을 바꿨을 때 수명이 크게 달라지는 데서 출발해요. 셀: 1 M LiPF₆ FEC:EMC 3:7, 35 µL, <b>N/P 2.27</b>(µSi 부분 리튬화로 0.1 V 아래로 내려가지 않게 설계).</p>
+<figure><button type="button" data-z="img/si2.jpg" data-c="Fig. 2 전체 · Stan et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/si2.jpg" width="1400" height="1085" alt="Fig. 2: cycling, formation profiles, accumulated Coulombic inefficiency and voltage hysteresis with Celgard 2500 vs PAN" loading="lazy"></button><figcaption>Fig. 2 · Stan et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="tbl"><table><tr><th>분리막 (Table 1)</th><th>Celgard 2500 (PP)</th><th>전기방사 PAN</th></tr>
+<tr><td>접촉각</td><td class="mono">≈ 50°</td><td class="mono">≈ 16°</td></tr>
+<tr><td>MacMullin 수</td><td class="mono">≈ 23.3</td><td class="mono">≈ 9.1</td></tr>
+<tr><td>전해액 함침 이온전도도</td><td class="mono">0.313 mS cm⁻¹</td><td class="mono">0.817 mS cm⁻¹</td></tr>
+<tr><td>roll-over 시점 (a)</td><td class="mono hl">~60사이클</td><td class="mono">~244사이클</td></tr></table></div>
+<p class="note">초록에는 "Celgard 75사이클 이내 roll-over, PAN 약 230사이클에 80%"로, 본문에는 "60사이클 이후 / 244사이클 이상 안정"으로 적혀 있음. 첫 60사이클의 ACI 기울기(c)와 평균 전압 히스테리시스(d)는 두 셀이 같음 → 부반응 속도 차이가 아니라 <b>어느 순간 시작되는 다른 고장</b>.</p>
+<div class="read"><b>핵심 질문</b> · N/P 여유가 충분한데도 분리막 하나로 roll-over가 4배 앞당겨진다면, 그 고장의 정체는 무엇인가?</div>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ① · Fig. 3 (+ Fig. 4)</div>
+<h3>3전극으로 본 µSi 전위 drift → Li 금속 석출</h3>
+<figure><button type="button" data-z="img/si3.jpg" data-c="Fig. 3 전체 · Stan et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/si3.jpg" width="1400" height="717" alt="Fig. 3: three-electrode cell, LMR and µSi potentials with Celgard vs PAN" loading="lazy"></button><figcaption>Fig. 3 · Stan et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · Li 기준전극 3전극 셀, C/10 CCCV. <b>a</b> 셀 전압(2.0–4.4 V로 유지), <b>b</b> LMR 전위, <b>c</b> µSi 전위(검정 Celgard, 빨강 PAN) vs 시간(h). <b>d</b> 초기 65사이클 µSi 전위 확대 — 충전 끝(아래쪽 끝점)이 0 V 쪽으로 내려가는지를 봅니다.</div>
+<div class="tbl"><table><tr><th>관찰</th><th>Celgard 2500</th><th>PAN</th></tr>
+<tr><td>µSi 충전 끝 전위 (61사이클)</td><td>저전위로 계속 drift</td><td class="mono">≈ 0.213 V 유지</td></tr>
+<tr><td>LMR 전위</td><td>µSi drift를 따라 이동</td><td>변화 없음</td></tr>
+<tr><td>회수 µSi 표면 (Fig. 4, &gt;2,500 h)</td><td class="hl">Li 금속 석출물 (Li EDX 확인)</td><td>잔류 PAN 섬유(N EDX)만</td></tr>
+<tr><td>30사이클 용량</td><td colspan="2">둘 다 ≈ 224 mAh g⁻¹</td></tr></table></div>
+<p><b>해석</b> · 셀 전압은 정상 범위인데 음극 전위만 미끄러지는 <b>"숨은 plating"</b>입니다. 저자들은 PP 나노기공막의 낮은 젖음성 → 불균일 전해액 분포 → 국부 Li⁺ 수송 악화로 µSi 일부가 과리튬화된다고 봐요. PAN 섬유가 µSi 입자 사이로 얽혀 호흡(팽창·수축) 중에도 접촉을 유지한다는 해석도 덧붙입니다. 다만 초기 2사이클 GITT 저항은 차이가 없어(SI) MacMullin 수 차이만으로 설명되진 않습니다.</p>
+</div>
+
+<div class="card">
+<div class="step-label">결과 ② · Fig. 5 (+ Fig. 6)</div>
+<h3>FEC:DMFSA로 바꾸면 분리막 차이가 사라진다</h3>
+<figure><button type="button" data-z="img/si5.jpg" data-c="Fig. 5 전체 · Stan et al., Advanced Science (2026) · CC BY 4.0 · PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄(내용 변경 없음)"><img src="img/si5.jpg" width="1400" height="1069" alt="Fig. 5: cycling and rate capability with FEC:DMFSA vs FEC:EMC electrolytes for both separators" loading="lazy"></button><figcaption>Fig. 5 · Stan et al., Adv. Sci. (2026) · CC BY 4.0 · PubMed Central 공개본, Figure 영역만 잘라 냄 <span class="tap">· 눌러서 확대</span></figcaption></figure>
+<div class="read"><b>이 그림 읽는 법</b> · <b>a</b> 1 M LiPF₆ FEC:DMFSA 3:7 용량(1,000사이클 축), <b>b</b> ACI. <b>c</b> FEC:EMC, <b>d</b> FEC:DMFSA의 율속(0.05 → 5 C → 0.1 C). DMFSA = N,N-dimethylsulfamoyl fluoride(지난 5호 2면 Cu 흡착 논문의 FSA와 같은 용매).</div>
+<div class="tbl"><table><tr><th>FEC:DMFSA, 400사이클</th><th>Celgard</th><th>PAN</th></tr>
+<tr><td>방전 용량</td><td class="mono">≈ 116 mAh g⁻¹</td><td class="mono">≈ 129 mAh g⁻¹</td></tr>
+<tr><td>유지율 (3사이클 C/3 기준)</td><td class="mono">64%</td><td class="mono">70%</td></tr>
+<tr><td>ACI 누적 (b)</td><td colspan="2">거의 같음</td></tr></table></div>
+<p><b>해석</b> · DMFSA는 Li 대비 <b>1.44 · 1.07 V</b>에서 먼저 환원돼(SI CV) FEC·EMC와 경쟁하며 SEI를 바꿉니다. Fig. 6 XPS: µSi 표면 LiF/플루오로인산염 비율이 낮아지고 <b>Mn 침착(Mn 3p ≈ 48.9 eV)이 감소</b>, LMR CEI에는 S·N 함유 종(–SO₂F, N–SO₂) 생성. 즉 크로스토크와 계면 화학이 좋아지면 분리막 젖음의 영향이 가려진다는 결론이에요. FEC:EMC에서도 1 C 이하에선 두 분리막의 용량이 같고, 고율에서만 Celgard가 뒤처집니다.</p>
+</div>
+
+<div class="so">
+<div class="step-label" style="color:#CDE6DB">결론 · 우리 셀에는?</div>
+<h3>논리 한 줄</h3>
+<p>초기 거동은 같고 Celgard 셀만 ~60사이클에 roll-over(Fig. 2) → 3전극에서 µSi 전위 drift(Fig. 3) → µSi 위 Li 금속 석출 확인(Fig. 4) → DMFSA 공용매가 SEI/CEI·Mn 침착을 바꿔 분리막 의존성을 지움(Fig. 5·6)</p>
+<ul>
+<li><b>N/P만으로 plating을 막을 수 없다</b>: 국부 젖음·전해액 분포가 나쁘면 설계 여유가 있어도 음극 일부가 과리튬화. Si 고함량 셀의 분리막은 "비활성 부품"이 아님</li>
+<li><b>roll-over 조기 경보</b>: 셀 전압보다 기준전극 기반 음극 끝전위 drift가 먼저 신호를 줌 — 수명 평가 셀에 3전극 모니터링을 일부 포함할 가치</li>
+<li><b>전해액–분리막 상호작용</b>: 전해액 스크리닝 결과가 특정 분리막에서만 유효할 수 있음. 반대로 좋은 계면 화학은 분리막 공차를 넓혀 줌</li>
+</ul>
+<p class="lim"><b style="color:#fff">한계</b> · 분리막 2종 비교, 셀 형식·전극 로딩 등 세부는 SI. 젖음 vs 기계적 접촉(기공 붕괴) 효과를 분리하지 못함. DMFSA 셀도 400사이클 64–70%로 실용 수준과는 거리. LG에너지솔루션 FRL 과제 지원·공동저자 논문.</p>
+<a class="btn" href="https://doi.org/10.1002/advs.78391">원문 읽기 (Open Access)</a>
+</div>
+</section>
+
+<footer>
+Battery Newsletter · 개인 열람용 비상업 뉴스레터. Figure는 각 논문의 Creative Commons 라이선스에 따라 출처를 밝혀 인용했습니다 — 1면 CC BY 4.0(Article in Press PDF에서 Figure 영역만 잘라 냄, 내용 변경 없음), 2면 CC BY-NC-ND 4.0(Article in Press PDF의 Figure 원본 그대로, 크기만 조정), 3·4면 CC BY 4.0(PubMed Central 공개본 PDF에서 Figure 영역만 잘라 냄, 내용 변경 없음). 수치는 원문 본문·표를 우선했고, 그림에서 읽거나 뉴스레터가 계산한 값은 그렇게 표시했습니다. 원문: <a href="https://doi.org/10.1038/s41467-026-79291-1">1면</a> · <a href="https://doi.org/10.1038/s41467-026-79386-9">2면</a> · <a href="https://doi.org/10.1002/advs.78649">3면</a> · <a href="https://doi.org/10.1002/advs.78391">4면</a>
+</footer>
+
+</div>
+
+<div id="zoom" role="dialog" aria-modal="true" aria-label="확대한 그림">
+<button class="x" type="button" aria-label="닫기">✕</button>
+<img alt="확대한 그림">
+<div class="zc"></div>
+</div>
+<script>
+(function(){
+  var z=document.getElementById('zoom'), zi=z.querySelector('img'), zc=z.querySelector('.zc');
+  document.querySelectorAll('figure button[data-z]').forEach(function(b){
+    b.addEventListener('click',function(){
+      zi.src=b.getAttribute('data-z'); zc.textContent=b.getAttribute('data-c')||'';
+      var w=Math.max(window.innerWidth*1.8, 900); zi.style.width=w+'px';
+      z.classList.add('on'); document.body.style.overflow='hidden';
+      zi.onload=function(){ z.scrollTop=0; z.scrollLeft=0; };
+    });
+  });
+  function close(){z.classList.remove('on'); document.body.style.overflow='';}
+  z.querySelector('.x').addEventListener('click',close);
+  z.addEventListener('click',function(e){ if(e.target===z) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+<script>
+/* 긴 페이지 → 카드 한 장씩 좌우로 넘기는 덱. 내용은 위 HTML 그대로 두고 여기서 재배치만 한다. */
+(function(){
+  var ISSUE='Battery Newsletter No.6';
+  var wrap=document.querySelector('.wrap'); if(!wrap) return;
+  var slides=[];
+  function mk(d){var s=document.createElement('section');s.className='slide';var i=document.createElement('div');i.className='sin';s.appendChild(i);for(var k in d)s.dataset[k]=d[k];slides.push(s);return i;}
+
+  var cover=wrap.querySelector('header.cover');
+  mk({label:'표지'}).appendChild(cover);
+  var sw=document.createElement('p');sw.className='swipe';sw.textContent='← 옆으로 밀어서 한 장씩 넘겨요 →';cover.appendChild(sw);
+
+  wrap.querySelectorAll('section.paper').forEach(function(p){
+    var tag=p.querySelector('.ptag'),tt=p.querySelector('.ptitle'),ci=p.querySelector('.cite');
+    var a=p.querySelector('.so a.btn');
+    var info={paper:p.id,label:tag.textContent,title:tt.textContent,cite:ci.textContent,url:a?a.href:''};
+    var first=true;
+    Array.prototype.slice.call(p.children).forEach(function(card){
+      if(!card.matches('.card,.so')) return;
+      var sl=card.querySelector('.step-label'),h=card.querySelector('h3');
+      var d=Object.assign({},info,{card:(sl?sl.textContent:'')+' · '+(h?h.textContent:'')});
+      var inner=mk(d);
+      if(first){[tag,tt,ci].forEach(function(e){inner.appendChild(e)});first=false;}
+      else{var m=document.createElement('div');m.className='mini';m.textContent=info.label+' · '+info.title;inner.appendChild(m);}
+      inner.appendChild(card);
+    });
+  });
+  var ft=wrap.querySelector('footer'); if(ft) slides[slides.length-1].firstChild.appendChild(ft);
+
+  var deck=document.createElement('main');deck.className='deck';
+  slides.forEach(function(s){deck.appendChild(s)});
+  wrap.replaceWith(deck);
+  document.documentElement.classList.add('deckmode');
+
+  var top=document.createElement('div');top.className='topbar';
+  top.innerHTML='<span class="lbl"></span><span class="cnt"></span>';
+  var prog=document.createElement('div');prog.className='prog';
+  var bot=document.createElement('div');bot.className='botbar';
+  bot.innerHTML='<button class="nav prev" type="button" aria-label="이전 카드">‹</button><a class="ask" target="_blank" rel="noopener">💬 이 카드 Claude에게 질문</a><button class="nav next" type="button" aria-label="다음 카드">›</button>';
+  document.body.prepend(prog);document.body.prepend(top);document.body.appendChild(bot);
+  var lbl=top.querySelector('.lbl'),cnt=top.querySelector('.cnt'),prev=bot.querySelector('.prev'),next=bot.querySelector('.next'),ask=bot.querySelector('.ask');
+
+  var cur=-1;
+  function askUrl(s,i){
+    var page=location.href.split('#')[0]+'#s'+(i+1);
+    var q;
+    if(!s.dataset.paper){
+      q=ISSUE+'를 읽고 질문할게.\n뉴스레터: '+page+'\n\n질문: ';
+    }else{
+      q=ISSUE+'에서 읽은 논문에 대해 질문할게. 배터리공학 박사 수준으로 답해 줘.\n'+
+        '논문: '+s.dataset.title+'\n출처: '+s.dataset.cite+'\n원문: '+s.dataset.url+'\n'+
+        '보고 있던 카드: '+s.dataset.card+'\n뉴스레터: '+page+'\n\n질문: ';
+    }
+    return 'https://claude.ai/new?q='+encodeURIComponent(q);
+  }
+  function update(i){
+    if(i===cur) return; cur=i; var s=slides[i];
+    lbl.textContent=s.dataset.label+(s.dataset.card?' · '+s.dataset.card.split(' · ')[0]:'');
+    cnt.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    ask.href=askUrl(s,i);
+    ask.textContent=s.dataset.paper?'💬 이 카드 Claude에게 질문':'💬 Claude에게 질문';
+    try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:instant?'auto':'smooth'});
+    update(i);
+  }
+  var t;
+  deck.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){update(Math.round(deck.scrollLeft/deck.clientWidth));},60);});
+  prev.addEventListener('click',function(){go(cur-1)});
+  next.addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('zoom').classList.contains('on')) return;
+    if(e.key==='ArrowRight') go(cur+1); else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  cover.querySelectorAll('a[href^="#p"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault(); var id=a.getAttribute('href').slice(1);
+      for(var k=0;k<slides.length;k++){ if(slides[k].dataset.paper===id){go(k);break;} }
+    });
+  });
+  window.addEventListener('resize',function(){deck.scrollLeft=cur*deck.clientWidth;});
+  var m=/^#s(\d+)$/.exec(location.hash), start=m?parseInt(m[1],10)-1:0;
+  requestAnimationFrame(function(){go(start,true);});
+})();
+</script>
+</body>
+</html>
